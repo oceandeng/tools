@@ -1,0 +1,111 @@
+/* 
+* @Author: ocean
+* @Date:   2015-06-29 10:14:28
+* @Last Modified by:   ocean
+* @Last Modified time: 2015-06-29 17:03:02
+*/
+
+'use strict';
+var ua = window.navigator.userAgent.toLowerCase();
+
+var oTools = {
+    charset: 'utf-8',
+    // 版本检测
+	isAndroid: /android/i.test(ua),
+	isIOS: /iphone|ipad|ipod/i.test(ua),
+	isWechat: /MicroMessenger/i.test(ua),
+    // 检测是否支持 touch 事件
+    clickEvent: "ontouchstart" in document.documentElement ? "touchstart" : "click",
+    // cookie
+    getcookie: function(name) {
+        var cookie_start = document.cookie.indexOf(name);
+        var cookie_end = document.cookie.indexOf(";", cookie_start);
+        return cookie_start == -1 ? '' : unescape(document.cookie.substring(cookie_start + name.length + 1, (cookie_end > cookie_start ? cookie_end : document.cookie.length)));
+    },
+    setcookie: function(cookieName, cookieValue, seconds, path, domain, secure) {
+        var expires = new Date();
+        expires.setTime(expires.getTime() + seconds);
+        document.cookie = escape(cookieName) + '=' + escape(cookieValue)
+                + (expires ? '; expires=' + expires.toGMTString() : '')
+                + (path ? '; path=' + path : '; path=/')
+                + (domain ? '; domain=' + domain : '')
+                + (secure ? '; secure' : '');
+    },
+    //删除cookie
+    unsetCookie: function(name) {
+        document.cookie = name + "= ; expires=" + new Date(0);
+    },
+    // url操作
+    getQuery: function(key) {
+        var search = window.location.search;
+        if (search.indexOf('?') != -1) {
+            var params = search.substr(1).split('&');
+            var query = {};
+            var q = [];
+            var name = '';
+
+            for (i = 0; i < params.length; i++) {
+                q = params[i].split('=');
+                name = decodeURIComponent(q[0]);
+
+                if (name.substr(-2) == '[]') {
+                    if (!query[name]) {
+                        query[name] = [];
+                    }
+                    query[name].push(q[1]);
+                } else {
+                    query[name] = q[1];
+                }
+
+            }
+            if (key) {
+                if (query[key]) {
+                    return query[key];
+                }
+
+                return null;
+            } else {
+                return query;
+            }
+        }
+    },
+    // 清空字符串空格
+    trim: function(str) {
+        return str.replace(/(^\s*)|(\s*$)/g, '');
+    },
+    // 判断是否是空对象
+    isObjectEmpty: function(obj){
+        for (i in obj){
+            return false
+        }
+        return true;
+    },
+    // 字符串长度，中英文都是1个字符
+    strlength: function(str) {
+        return (/msie/.test(navigator.userAgent.toLowerCase()) && str.indexOf('\n') !== -1) ? str.replace(/\r?\n/g, '_').length : str.length;
+    },
+    // 截取字符串，中英文都是1个字节
+    cutstr: function (str,len){
+        var str_length = 0;
+        var str_len = 0;  
+            str_cut = new String();  
+            str_len = str.length;  
+        for(var i = 0;i<str_len;i++){  
+            a = str.charAt(i);  
+            str_length++;  
+            if(escape(a).length > 4){
+                //中文字符的长度经编码之后大于4  
+                str_length++;  
+            }  
+            str_cut = str_cut.concat(a);  
+            if(str_length>=len){
+                str_cut = str_cut.concat("...");  
+                return str_cut;  
+            }  
+        }  
+        //如果给定字符串小于指定长度，则返回源字符串；  
+        if(str_length<len){  
+            return  str;  
+        }  
+    }
+}

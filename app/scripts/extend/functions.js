@@ -2,29 +2,38 @@
 * @Author: ocean
 * @Date:   2015-06-28 19:33:40
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-06-28 20:03:23
+* @Last Modified time: 2015-06-29 10:44:34
 */
 
-'use strict';
+//弹出消息框 基于zepto
+function alertmess(str){
+    var html = '<div class="mess">' + str + '</div>',
+        fullW = $(window).width(),
+        fullH = $(window).height(),
+        twidth = parseInt(fullW * 0.6);
 
-function handleTouchEvent(event){
-	// 只跟踪一次
-	if(event.touchs.length == 1){
-		var output = document.getElementById("output");
-		switch(event.type){
-			case "touchstart":
-				output.innerHTML = "Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
-				break;
-			case "touchend":
-				output.innerHTML += "<br>Touch ended (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
-				break;
-			case "touchmove":
-				event.preventDefault();
-				output.innerHTML += "<br>Touch moved (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
-				break;
-		}
-	}
+    if($('.mess').size() < 1){
+        $('body').append(html);
+
+        $('.mess').css({
+            'width' : twidth,
+            'min-height': '30px',
+            'line-height' : '30px',
+            'font-size': '16px',
+            'marginLeft' : parseInt(-twidth/2-10),
+            'background' : '#333',
+            'color' : '#fff',
+            'z-index' : 99,
+            'position' : 'fixed',
+            'left' : '50%',
+            'top' : '40%',
+            'border-radius' : '5px',
+            'text-align' : 'center',
+            'padding' : '5px 10px'
+        }).animate({'opacity' : 1});
+    
+        setTimeout(function(){
+            $('.mess').remove();
+        }, 1500);
+    }
 }
-// EventUtil.addHandler(document, "touchstart", handleTouchEvent);
-// EventUtil.addHandler(document, "touchend", handleTouchEvent);
-// EventUtil.addHandler(document, "touchmove", handleTouchEvent);
