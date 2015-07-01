@@ -1,29 +1,54 @@
-'use strict';
+// 'use strict';
 
-requirejs.config({
+require.config({
     paths: {
     	fastclick: './extend/fastclick',
     	otools: './extend/otools',
-        dialog: './extend/dialog'
+        dialog: './extend/dialog',
+        validate: './extend/validate',
+    	iscroll: './iscroll/iscroll'
     },
     shim: {
 
     }
 });
 
-require(['dialog', 'otools','fastclick'], function(){
+require(['dialog', 'otools', 'fastclick', 'iscroll'], function(){
+
 	$('#splendid').on('click', function(){
-		var html = $('#cn').html();
+		var html = $('.wrapper').html();
+
+
+		var	path = 'media/close.png';
 
 		Dialog({
-			// 'msg':'网络有些繁忙，请耐心等待！', 
-			// 'id': 'cn',
-			'msg': html,
-			'lock':true, 'width':'80%', 
-			'animation':'animated bounceIn', 
+			// 'msg':'网络有些繁忙，请耐心等待！',
+			'id': 'wrapper',
+			'type': 'popup',
+			// 'msg': html,
+			'lock':true,
+			'width':'80%',
+			'height': '80%',
+			'closeImg': path,
+			'animation':'animated bounceIn',
+			'onReady': function(){
+				// alert('big popup');
+				var myScroll;
+				(function(){
+					myScroll = new IScroll('#wrapper', {
+						scrollbars: true,
+						mouseWheel: true,
+						interactiveScrollbars: true,
+						shrinkScrollbars: 'scale',
+						fadeScrollbars: true,
+						bounce: false
+					});
+				})();
+
+			},
 			'onClose': function() {
 				// 关闭回调
-				// alert('aa');
+				// alert('close popup');
 			}
 		});
 	});
@@ -33,8 +58,23 @@ require(['dialog', 'otools','fastclick'], function(){
 	// oTools.setcookie('name', 'ocean', 3000, null, "", null);
 
 	console.log(oTools.strlength($('#en').text()));
-	console.log(oTools.strlength($('#cn').text()));	
+	console.log(oTools.strlength($('#cn').text()));
 });
+
+
+// require.js define模块DEMO
+
+// require(['definedemo'], function(define){
+// 	define.con('define demo');
+// });
+
+// define(function(){
+// 	return {
+// 		con: function(str){
+// 			console.log(str);
+// 		}
+// 	}
+// });
 
 // 监测是touch事件
 function handleTouchEvent(event){

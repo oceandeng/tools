@@ -1,8 +1,13 @@
-$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
-@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
+img{
+  width:auto !important;
+  height:auto !important;
+  max-width:100% !important;
+}
 
+@import "compass/css3";
+// @import "normalize/html5";
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -36,6 +41,7 @@ body {
     padding-bottom: 19px;
   }
 }
+
 
 /* Custom page footer */
 .footer {
@@ -89,4 +95,19 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+#cn{
+  @include text-shadow(rgba(blue, 0.2) 1px 1px 0, rgba(blue, 0.2) 2px 2px 0, rgba(blue, 0.2) 3px 3px 0);
+}
+
+#wrapper {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 90%;
+  background: #fff;
+  overflow: hidden;
+  margin:15px 5%;
 }

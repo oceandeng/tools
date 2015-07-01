@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint'],
+        // tasks: ['jshint'],
         options: {
           livereload: true
         }
@@ -48,10 +48,17 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
-      sass: {
+      // sass: {
+      //   files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
+      //   tasks: ['sass:server', 'autoprefixer']
+      // },
+      compass: {
+        options: {
+          livereload: false
+        },
         files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['sass:server', 'autoprefixer']
-      },
+        tasks: ['compass']
+      },      
       styles: {
         files: ['<%= config.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
@@ -173,7 +180,40 @@ module.exports = function (grunt) {
         }]
       }
     },
-
+    compass: {
+      options: {
+        sassDir: '<%= config.app %>/styles',
+        cssDir: '.tmp/styles',
+        imagesDir: '<%= config.app %>/images',
+        javascriptsDir: '<%= config.app %>/scripts',
+        fontsDir: '<%= config.app %>/styles/fonts',
+        importPath: 'bower_components',
+        relativeAssets: true,
+        outputStyle: 'expanded'
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= config.app %>/styles',
+          src: ['*.{scss,sass}'],
+          dest: '.tmp/styles',
+          ext: '.css'
+        }]
+      },
+      server: {
+        options: {
+          // debugInfo: true,
+          outputStyle: 'expanded'
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= config.app %>/styles',
+          src: ['*.{scss,sass}'],
+          dest: '.tmp/styles',
+          ext: '.css'
+        }]
+      }
+    },
     // Add vendor prefixed styles
     autoprefixer: {
       options: {
@@ -344,18 +384,19 @@ module.exports = function (grunt) {
         src: '{,*/}*.css'
       }
     },
-
     // Run some tasks in parallel to speed up build process
     concurrent: {
       server: [
-        'sass:server',
+        // 'sass:server',
+        'compass:server',
         'copy:styles'
       ],
       test: [
         'copy:styles'
       ],
       dist: [
-        'sass',
+        // 'sass',
+        'compass',
         'copy:styles',
         'imagemin',
         'svgmin'
@@ -414,7 +455,7 @@ module.exports = function (grunt) {
     'copy:dist',
     'rev',
     'usemin',
-    'htmlmin'
+    // 'htmlmin'
   ]);
 
   grunt.registerTask('default', [

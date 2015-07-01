@@ -22,10 +22,6 @@
     <!-- endbuild -->
   </head>
   <body>
-    <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
 
     <div class="container">
       <div class="header">
@@ -58,25 +54,32 @@
         <p id="cn">我是中文字</p>
       </div>
     </div>
+    <section id="popup">
+    </section>
+<div class="wrapper" style="display:none">
+    <div id="wrapper">
+      <div id="scroller">
+          <div class="rule-con">
+            <h2>活动规则</h2>
+            <p>1、活动期间，每个手机号仅限领一张100元加油券；</p>
+            <p>2、加油券为充值抵用券，在车旺加油卡充值满1000元可用，充值减加油券部分还可享受相应返利，举例说明：比如您需充值1000元，使用100元加油券后，则实付900元即可，900元还可享受相应返利；</p>
+            <p>3、用户须在领到加油券7日内激活，过期无效；券激活后须在15日内使用，过期无效；</p>
+            <p>4、加油券不支持提现、返利，使用本活动优惠券订单一经完成，相应充值金额及加油券不予退还；</p>
+            <p>5、活动截止到2015年12月31日，本活动最终解释权归车旺所有。</p>
+          </div>
+        </div>
+      </div>
+</div>
 
+    </div>
+  </div>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+    <script src="bower_components/zepto/zepto.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-    <script data-main="scripts/main" src="scripts/require.js"></script>
+
+    <script src="scripts/require.min.js" data-main="scripts/main"></script>
 
     <!-- build:js({app,.tmp}) scripts/custom.js -->
     <!-- <script src="scripts/extend/otools.js"></script> -->

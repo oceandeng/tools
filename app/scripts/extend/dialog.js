@@ -78,12 +78,16 @@
         }
         o = o || {};
         this.config_id = o.id || "";
+        this.config_type = o.type || "alert";
         this.config_title = o.title || "\u53cb\u60c5\u63d0\u793a";
         this.config_msg = o.msg || "";
         this.config_lock = o.lock == true ? true : false;
         this.config_lockColor = o.lockColor || "#000";
         this.config_lockOpacity = parseInt(o.lockOpacity) || 50;
         this.config_lockClose = o.lockClose == false ? false : true;
+        this.config_close_img = o.closeImg;
+        this.config_close_img_w = o.closeBtnW || "40px";
+        this.config_close_img_h = o.closeBtnH || "40px";
         this.config_position = o.position || "";
         this.config_top = o.top || "";
         this.config_right = o.right || "";
@@ -92,6 +96,18 @@
         this.config_width = o.width || "";
         this.config_height = o.height || "";
         this.config_animation = o.animation || "";
+        this.config_elem = D.getElementById(this.config_id);
+        this.config_elem_clone = D.getElementById(this.config_id).cloneNode(true);
+        this.config_elem_parent = D.getElementById(this.config_id).parentNode;
+        this.config_con_style = {
+                'background': '#fff',
+                'width': o.width,
+                'height': o.height,
+                'margin': '0 auto',
+                'min-height': '30%',
+                'border-radius': '10px',
+                'padding': '10px'
+            }
         if (isIE && isIE < 10) {
             this.config_outAnimation = "";
         } else {
@@ -160,62 +176,74 @@
             body = document.createElement("div"),
             foot = document.createElement("div"),
             page_body = document.getElementsByTagName("body")[0];
-        head_html = '', foot_html = '', elem = D.getElementById(this.config_id), flag = 0;
-        if (elem) {
-            if (elem.parentNode.getAttribute("data-type") == "dialog") {
-                flag = 2;
-            } else {
-                flag = 1;
-            }
-        }
-        if (flag == 2) {
-            page_body.appendChild(elem.parentNode);
-            this.parent = elem.parentNode;
-            this.shade = getElementsByClassName("D_shade", "div", elem.parentNode)[0];
-            this.content = D.getElementById(this.config_id);
-            this.head = getElementsByClassName("D_head", "div", elem.parentNode)[0];
-            this.body = getElementsByClassName("D_body", "div", elem.parentNode)[0];
-        }
-        if (flag == 1) {
-            elem.style.display = "block";
-            this.content = D.getElementById(this.config_id);
-        }
-        if (flag == 0) {
-            parent.setAttribute("data-type", "dialog");
-            head.className = "D_head";
-            content.className = "D_content";
-            content.id = this.config_id;
-            if (this.config_closeButton) {
-                head_html += '<a href="#" class="D_close" title="\u5173\u95ed" data-dialog-close>\u00d7</a>';
-            }
-            head_html += '<h2 class="D_title">' + this.config_title + '</h2>';
-            head.innerHTML = head_html;
-            body.innerHTML = this.config_msg;
-            body.className = "D_body";
-            if (this.config_lock) {
-                parent.appendChild(shade);
-                shade.className = "D_shade";
-            }
-            parent.appendChild(content);
-            content.appendChild(head);
-            content.appendChild(body);
-            page_body.appendChild(parent);
-            if (this.config_showButtons) {
-                foot.className = "D_foot";
-                if (this.config_submitButton) {
-                    foot_html += '<input type="button" value="' + this.config_submitButton + '" class="D_submit" data-dialog-submit />';
+        var head_html = '', 
+            foot_html = '';
+
+        switch(this.config_type){
+            case "alert":
+                parent.setAttribute("data-type", "dialog");
+                head.className = "D_head";
+                content.className = "D_content";
+                content.id = this.config_id;
+                if (this.config_closeButton) {
+                    head_html += '<div class="D_close" data-dialog-close style="width:'+ this.config_close_img_w + '; height: '+ this.config_close_img_h +'"><img src="' + this.config_close_img + '" style="max-width:100%" alt="" /></div>'
                 }
-                if (this.config_cancelButton) {
-                    foot_html += '<input type="button" value="' + this.config_cancelButton + '" class="D_cancel" data-dialog-cancel />';
+                head.innerHTML = head_html;
+                body.innerHTML = this.config_msg;
+                body.className = "D_body";
+                if (this.config_lock) {
+                    parent.appendChild(shade);
+                    shade.className = "D_shade";
                 }
-                foot.innerHTML = foot_html;
-                content.appendChild(foot);
-            }
-            this.parent = parent;
-            this.shade = shade;
-            this.content = content;
-            this.head = head;
-            this.body = body;
+                parent.appendChild(content);
+                content.appendChild(head);
+                content.appendChild(body);
+                page_body.appendChild(parent);
+                if (this.config_showButtons) {
+                    foot.className = "D_foot";
+                    if (this.config_submitButton) {
+                        foot_html += '<input type="button" value="' + this.config_submitButton + '" class="D_submit" data-dialog-submit />';
+                    }
+                    if (this.config_cancelButton) {
+                        foot_html += '<input type="button" value="' + this.config_cancelButton + '" class="D_cancel" data-dialog-cancel />';
+                    }
+                    foot.innerHTML = foot_html;
+                    content.appendChild(foot);
+                }
+                this.parent = parent;
+                this.shade = shade;
+                this.content = content;
+                this.head = head;
+                this.body = body;
+                this.closeBtn = D.querySelector('.D_close');
+                break;
+            case "loading":
+                elem.style.display = "block";
+                this.content = D.getElementById(this.config_id);
+                break;
+            case "popup":
+                parent.setAttribute("data-type", "dialog");
+                head.className = "D_head";
+                content.className = "D_content";
+                if (this.config_closeButton) {
+                    head_html += '<div class="D_close" data-dialog-close style="width:'+ this.config_close_img_w + '; height: '+ this.config_close_img_h +'"><img src="' + this.config_close_img + '" style="max-width:100%" alt="" /></div>'
+                }
+                head.innerHTML = head_html;
+                if (this.config_lock) {
+                    parent.appendChild(shade);
+                    shade.className = "D_shade";
+                }
+                body = this.config_elem;
+                parent.appendChild(content);
+                content.appendChild(head);
+                content.appendChild(body);
+                page_body.appendChild(parent);
+                this.parent = parent;
+                this.shade = shade;
+                this.content = content;
+                this.head = head;
+                this.closeBtn = D.querySelector('.D_close');
+                break;
         }
         if (this.config_outAnimation) {
             this.content.setAttribute("data-outanimation", this.config_outAnimation);
@@ -246,6 +274,22 @@
                 cursor: "move"
             });
         }
+        if(this.content){
+            setStyle(this.content, this.config_con_style);
+        }
+        if(this.head){
+            setStyle(this.head, {
+                'position': 'relative'
+            })
+        }
+        if(this.closeBtn){
+            setStyle(this.closeBtn, {
+                'position': 'absolute',
+                'top': -parseInt(this.config_close_img_w) / 2 + "px",
+                'right': -parseInt(this.config_close_img_h) / 2 + "px",
+                'z-index': 9
+            })
+        }
     };
     Dialog.prototype.position = function(e) {
         if (this.config_lock) {
@@ -268,7 +312,7 @@
         if (this.config_height) {
             setStyle(this.content, {
                 height: this.config_height,
-                overflowY: "auto"
+                // overflowY: "auto"
             });
         }
         if (this.parent && !this.config_position) {
@@ -441,6 +485,7 @@
         };
         if (elem.parentNode.getAttribute("data-type") == "dialog") {
             removeDOM(elem.parentNode);
+            this.config_elem_parent.appendChild(this.config_elem_clone);
         } else {
             elem.style.display = "none";
         }
@@ -448,29 +493,29 @@
     Dialog.prototype.reload = function() {
         this.position();
     };
-    Dialog.close = function(id) {
-        if (!id) {
-            var childs = document.getElementsByTagName("body")[0].childNodes,
-                dialog = [];
-            for (var i = 0, l = childs.length; i < l; i++) {
-                if (childs[i].nodeName == "DIV" && childs[i].getAttribute("data-type") == "dialog") {
-                    dialog.push(childs[i]);
-                }
-            }
-            for (var j = 0, le = dialog.length; j < le; j++) {
-                removeDOM(dialog[j]);
-            }
-        }
-        var elem = F$(id);
-        if (!elem) {
-            return false
-        };
-        if (elem.parentNode.getAttribute("data-type") == "dialog") {
-            removeDOM(elem.parentNode);
-        } else {
-            elem.style.display = "none";
-        }
-    };
+    // Dialog.close = function(id) {
+    //     if (!id) {
+    //         var childs = document.getElementsByTagName("body")[0].childNodes,
+    //             dialog = [];
+    //         for (var i = 0, l = childs.length; i < l; i++) {
+    //             if (childs[i].nodeName == "DIV" && childs[i].getAttribute("data-type") == "dialog") {
+    //                 dialog.push(childs[i]);
+    //             }
+    //         }
+    //         for (var j = 0, le = dialog.length; j < le; j++) {
+    //             removeDOM(dialog[j]);
+    //         }
+    //     }
+    //     var elem = F$(id);
+    //     if (!elem) {
+    //         return false
+    //     };
+    //     if (elem.parentNode.getAttribute("data-type") == "dialog") {
+    //         removeDOM(elem.parentNode);
+    //     } else {
+    //         elem.style.display = "none";
+    //     }
+    // };
 
     function removeDOM(elem) {
         var animationElem = getElementsByClassName("D_content", "div", elem)[0],
