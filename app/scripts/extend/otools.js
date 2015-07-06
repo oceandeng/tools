@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-06-29 17:03:02
+* @Last Modified time: 2015-07-02 16:44:37
 */
 
 'use strict';
@@ -107,5 +107,40 @@ var oTools = {
         if(str_length<len){  
             return  str;  
         }  
+    },
+    //随机颜色
+    randomColor: function(){
+        var col = [0, 1, 2];
+        col[0] = Math.random() * 100 + 155;
+        col[0] = col[0].toFixed();
+        col[1] = Math.random() * 100 + 155;
+        col[1] = col[1].toFixed();
+        col[2] = Math.random() * 100 + 155;
+        col[2] = col[2].toFixed();
+        var num = Math.floor(Math.random() * 3);
+        col[num] = 0;
+        return "rgba(" + col[0] + "," + col[1] + "," + col[2] + ","; 
     }
 }
+
+//html5 动画
+window.requestAnimationFrame = (function() {
+    return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        // if all else fails, use setTimeout
+        function(callback) {
+            return window.setTimeout(callback, 1000 / 60); // shoot for 60 fps
+        };
+})();
+
+window.cancelAnimationFrame = (function() {
+    return window.cancelAnimationFrame ||
+        window.webkitCancelAnimationFrame ||
+        window.mozCancelAnimationFrame ||
+        window.oCancelAnimationFrame ||
+        function(id) {
+            window.clearTimeout(id);
+        };
+})();
