@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no">
+<meta name="full-screen" content="yes">
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="0" http-equiv="expires">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="styles/photoswipe.css">
+<link rel="stylesheet" href="styles/default-skin/default-skin.css">
+<style>
+.hello-slide {
+  width: 100%;
+  max-width: 400px;
+  color: #FFF;
+  margin: 120px auto 0;
+  text-align: center;
+  
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  
+}
+h1 {
+  font-weight: normal;
+}
+.hello-slide a {
+  color: #B5AEF7 !important;
+}
+</style>
+</head>
+<body>
+<button id="btn">Open PhotoSwipe</button>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element, as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+        <div class="pswp__container">
+            <!-- don't modify these 3 pswp__item elements, data is added later on -->
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+</div>
+
+<script src="scripts/photoswipe.min.js"></script>
+<script src="scripts/photoswipe-ui-default.js"></script>
+<script>
+var openPhotoSwipe = function() {
+    var pswpElement = document.querySelectorAll('.pswp')[0];
+
+    // build items array
+    var items = [
+  //       {
+		// html: '<div class="hello-slide"><h1>Hello world <a href="http://example.com">example.com</a></h1></div>'
+		// },
+        {
+            src: 'images/one_b.jpg',
+            w: 1024,
+            h: 683
+        },
+        {
+            src: 'images/two_b.jpg',
+            w: 1024,
+            h: 683
+        },
+        {
+            src: 'images/thr_b.jpg',
+            w: 1024,
+            h: 683
+        },
+        {
+            src: 'images/four_b.jpg',
+            w: 1024,
+            h: 683
+        },
+        {
+            src: 'images/five_b.jpg',
+            w: 1024,
+            h: 683
+        }
+    ];
+    
+    // define options (if needed)
+    var options = {
+			 // history & focus options are disabled on CodePen        
+      	history: false,
+      	focus: false,
+
+        showAnimationDuration: 0,
+        hideAnimationDuration: 0
+        
+    };
+    
+    var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+    gallery.init();
+};
+
+openPhotoSwipe();
+
+document.getElementById('btn').onclick = openPhotoSwipe;
+</script>
+</body>
+</html>
