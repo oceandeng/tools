@@ -6,14 +6,15 @@ require.config({
     	otools: './extend/otools',
         dialog: './extend/dialog',
         validate: './extend/validate',
-    	iscroll: './iscroll/iscroll'
+    	iscroll: './iscroll/iscroll',
+    	loading: './extend/loading'
     },
     shim: {
 
     }
 });
 
-require(['dialog', 'otools', 'fastclick', 'iscroll'], function(){
+require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 
 	$('#splendid').on('click', function(){
 		var html = $('.wrapper').html();
@@ -59,6 +60,18 @@ require(['dialog', 'otools', 'fastclick', 'iscroll'], function(){
 
 	console.log(oTools.strlength($('#en').text()));
 	console.log(oTools.strlength($('#cn').text()));
+	
+	$(function(){
+		$('#canvas').css({
+			'border-radius':'5px',
+			'background':'rgba(0,0,0,0.8)'
+		});
+		loading({
+			"id": "canvas",
+			"height": 10
+		})
+	});
+
 });
 
 
@@ -98,3 +111,4 @@ function handleTouchEvent(event){
 // EventUtil.addHandler(document, "touchstart", handleTouchEvent);
 // EventUtil.addHandler(document, "touchend", handleTouchEvent);
 // EventUtil.addHandler(document, "touchmove", handleTouchEvent);
+

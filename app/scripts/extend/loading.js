@@ -2,12 +2,12 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:16:24
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-06-29 10:16:31
+* @Last Modified time: 2015-07-06 15:38:59
 */
 
 'use strict';
 
-var loading = (function(){
+var loading = function(arg){
 	var isEmpty = function(obj){
 		var name;
 		for(name in obj){
@@ -61,7 +61,5 @@ var loading = (function(){
 	    
 	    }
 	}
-
 	return new LoadingImg(arg);
-
-})();
+};
