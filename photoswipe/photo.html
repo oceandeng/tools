@@ -95,8 +95,6 @@
     </figure>
   </div>
 
-
-
 <!-- Root element of PhotoSwipe. Must have class pswp. -->
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
@@ -154,6 +152,7 @@
 <script src="scripts/photoswipe.js"></script>
 <script src="scripts/photoswipe-ui-default.js"></script>
 <script>
+
 var initPhotoSwipeFromDOM = function(gallerySelector) {
 
     // parse slide data (url, title, size ...) from DOM elements 
@@ -187,11 +186,9 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
                 h: parseInt(size[1], 10)
             };
 
-
-
             if(figureEl.children.length > 1) {
                 // <figcaption> content
-                item.title = figureEl.children[1].innerHTML; 
+                item.title = figureEl.children[1].innerHTML;
             }
 
             if(linkEl.children.length > 0) {
@@ -239,15 +236,12 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             if(childNodes[i].nodeType !== 1) { 
                 continue; 
             }
-
             if(childNodes[i] === clickedListItem) {
                 index = nodeIndex;
                 break;
             }
             nodeIndex++;
         }
-
-
 
         if(index >= 0) {
             // open PhotoSwipe if valid index found
@@ -308,11 +302,10 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             }
 
         };
-
         // PhotoSwipe opened from URL
         if(fromURL) {
             if(options.galleryPIDs) {
-                // parse real index when custom PIDs are used 
+                // parse real index when custom PIDs are used
                 // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
                 for(var j = 0; j < items.length; j++) {
                     if(items[j].pid == index) {
@@ -327,7 +320,6 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
         } else {
             options.index = parseInt(index, 10);
         }
-
         // exit if index not found
         if( isNaN(options.index) ) {
             return;
@@ -336,7 +328,6 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
         if(disableAnimation) {
             options.showAnimationDuration = 0;
         }
-
 
         // Pass data to PhotoSwipe and initialize it
         gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);

@@ -677,12 +677,6 @@ var _isOpen,
 	_updatePageScrollOffset = function() {
 		self.setScrollOffset(0, framework.getScrollY());		
 	};
-	
-
-
-	
-
-
 
 // Micro animation engine
 var _animations = {},
@@ -908,7 +902,6 @@ var publicMethods = {
 				// that's why we delay it untill the initial zoom transition ends
 				template.focus();
 			}
-			 
 
 			_bindEvents();
 		});
@@ -1425,7 +1418,7 @@ var _gestureStartTime,
 		return 1 -  Math.abs( yOffset / (_viewportSize.y / 2)  );
 	},
 
-	
+
 	// points pool, reused during touch events
 	_ePoint1 = {},
 	_ePoint2 = {},
@@ -1613,8 +1606,6 @@ var _gestureStartTime,
 			e.preventDefault();
 		}
 
-
-
 		_shout('pointerDown');
 
 		if(_pointerEventEnabled) {
@@ -1624,8 +1615,6 @@ var _gestureStartTime,
 			}
 			_currPointers[pointerIndex] = {x:e.pageX, y:e.pageY, id: e.pointerId};
 		}
-		
-
 
 		var startPointsList = _getTouchPoints(e),
 			numPoints = startPointsList.length;
@@ -1636,8 +1625,6 @@ var _gestureStartTime,
 
 		// init drag
 		if(!_isDragging || numPoints === 1) {
-
-			
 
 			_isDragging = _isFirstMove = true;
 			framework.bind(window, _upMoveEvents, self);
@@ -1699,8 +1686,6 @@ var _gestureStartTime,
 			_midZoomPoint.y = Math.abs(_currCenterPoint.y) - _panOffset.y;
 			_currPointsDistance = _startPointsDistance = _calculatePointsDistance(p, p2);
 		}
-
-
 	},
 
 	// Pointermove/touchmove/mousemove handler
@@ -1713,7 +1698,7 @@ var _gestureStartTime,
 			if(pointerIndex > -1) {
 				var p = _currPointers[pointerIndex];
 				p.x = e.pageX;
-				p.y = e.pageY; 
+				p.y = e.pageY;
 			}
 		}
 
@@ -1729,7 +1714,7 @@ var _gestureStartTime,
 			} else {
 				_currentPoints = touchesList;
 			}
-		}	
+		}
 	},
 	// 
 	_renderMovement =  function() {
@@ -1784,7 +1769,7 @@ var _gestureStartTime,
 				maxZoomLevel = _getMaxZoomLevel();
 
 			if ( zoomLevel < minZoomLevel ) {
-				
+
 				if(_options.pinchToClose && !_wasOverInitialZoom && _startZoomLevel <= self.currItem.initialZoomLevel) {
 					// fade out background if zooming out
 					var minusDiff = minZoomLevel - zoomLevel;
@@ -1968,7 +1953,6 @@ var _gestureStartTime,
 		if(numPoints === 1) {
 			_equalizePoints(_startPoint, touchList[0]);
 		}				
-
 
 		// pointer hasn't moved, send "tap release" point
 		if(numPoints === 0 && !_direction && !_mainScrollAnimating) {
