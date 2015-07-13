@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:16:24
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-07-06 15:38:59
+* @Last Modified time: 2015-07-13 18:22:08
 */
 
 'use strict';
@@ -28,12 +28,18 @@ var loading = function(arg){
 	        this.height = isConsist ? arg.height ? arg.height : 15 : 15;
 	        this.width = isConsist ? arg.width ? arg.width : 3 : 3;
 	        this.time = isConsist ? arg.time ? arg.time : 100 : 100;
-	        
+
 	        this.cvs = document.getElementById(arg.id);
+
+	        this.cvs.width = 160;
+	        this.cvs.height = 160;
+	        this.cvs.style.width = "80px";
+	        this.cvs.style.height = "80px";
+
 	        this.ctx = this.cvs.getContext("2d");
 	        this.ctx.width = this.height*6;
 	        this.ctx.height = this.height*6;
-	        
+
 	        this.ctx.translate(this.ctx.width/1.5, this.ctx.height/1.5);
 	        var radius = 2;
 	        this.view(radius);

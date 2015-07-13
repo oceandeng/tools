@@ -19,7 +19,6 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 	$('#splendid').on('click', function(){
 		var html = $('.wrapper').html();
 
-
 		var	path = 'media/close.png';
 
 		Dialog({
@@ -45,7 +44,6 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 						bounce: false
 					});
 				})();
-
 			},
 			'onClose': function() {
 				// 关闭回调
@@ -68,8 +66,9 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 		});
 		loading({
 			"id": "canvas",
-			"height": 10
-		})
+			"width": 5,
+			"height": 20
+		});
 	});
 
 });
