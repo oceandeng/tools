@@ -7,9 +7,11 @@ img{
 }
 
 @import "compass/css3";
-
 @import "normalize";
+@import "mixin", "variable";
+
 // @import "normalize/html5";
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -21,6 +23,7 @@ img{
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  font-family: $family;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -116,4 +119,9 @@ body {
   background: #fff;
   overflow: hidden;
   margin:15px 5%;
+}
+
+.alert,.loading{
+  @include line-height();
+  color: rgba(200, 0, 0, .8);
 }

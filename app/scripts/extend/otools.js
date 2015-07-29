@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-07-20 13:40:23
+* @Last Modified time: 2015-07-29 18:35:31
 */
 
 'use strict';
@@ -16,6 +16,10 @@ var oTools = {
 	isWechat: /MicroMessenger/i.test(ua),
     // 检测是否支持 touch 事件
     clickEvent: "ontouchstart" in document.documentElement ? "touchstart" : "click",
+    
+    $: function(s){
+        return document.querySelectorAll(s);
+    },
     // cookie
     getcookie: function(name) {
         var cookie_start = document.cookie.indexOf(name);

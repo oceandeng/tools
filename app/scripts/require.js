@@ -2051,7 +2051,6 @@ var requirejs, require, define;
         jQuery: true
     };
 
-
     /**
      * Executes the text. Normally just uses eval, but can be modified
      * to use a better, environment-specific call. Only used for transpiling

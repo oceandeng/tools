@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-07-21 10:01:15
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-07-21 10:04:03
+* @Last Modified time: 2015-07-29 11:35:10
 */
 
 'use strict';
@@ -90,7 +90,7 @@
 
 })();
 
-
+// 调用demo
 var loader = ImageLoader.getImageLoader("progress"); 
 
 loader.add('../images/road.png');

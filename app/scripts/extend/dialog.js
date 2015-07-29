@@ -7,6 +7,10 @@
         return typeof(elem) == "object" ? elem : document.getElementById(elem);
     };
 
+    function $$(elem){
+        return D.querySelectorAll(elem);
+    }
+
     function setStyle(elem, prop) {
         if (!elem) {
             return false
@@ -72,10 +76,15 @@
             o = {
                 "type": "alert",
                 "msg": "<div class='D_alert'>" + o + "</div>",
+                "width": "60%",
                 "lock": true,
                 "lockClose": false,
                 "showButtons": true,
-                "cancelButton": false
+                "cancelButton": false,
+                "contentStyle": {
+                    'background': 'rgba(255, 170, 20, 0.95)',
+                    'border-radius': '5px'
+                }
             };
         }
         o = o || {};
@@ -100,16 +109,16 @@
         this.config_width = o.width || "";
         this.config_height = o.height || "";
         this.config_animation = o.animation || "";
-        this.config_elem = D.getElementById(this.config_id);
-        this.config_elem_clone = D.getElementById(this.config_id).cloneNode(true);
-        this.config_elem_parent = D.getElementById(this.config_id).parentNode;
+        this.config_elem = this.config_id ? D.getElementById(this.config_id) : false;
+        this.config_elem_clone = this.config_elem ? D.getElementById(this.config_id).cloneNode(true) : '';
+        this.config_elem_parent = this.config_elem ? D.getElementById(this.config_id).parentNode : '';
         this.config_con_style = o.contentStyle || {
                 'background': 'rgba(255, 170, 20, 0.95)',
                 // 'background': '#fff',
                 'width': o.width,
                 'height': o.height,
                 'margin': '0 auto',
-                'min-height': '30%',
+                'min-height': '20%',
                 'padding': '10px'
             }
         if (isIE && isIE < 10) {
@@ -120,6 +129,9 @@
         this.config_fixed = o.fixed == false ? false : true;
         this.config_move = o.move == false ? false : true;
         this.config_style = o.style || "mydialog";
+        // 防止重复执行
+        if($$('.' + this.config_style).length > 0){return}
+
         this.config_time = parseInt(o.time) || "";
         this.config_closeButton = o.closeButton == false ? false : true;
         this.config_showButtons = o.showButtons == true ? true : false;
@@ -180,33 +192,23 @@
             body = document.createElement("div"),
             foot = document.createElement("div"),
             page_body = document.getElementsByTagName("body")[0];
-        var head_html = '', 
-            foot_html = '';
+        var head_html = '',
+            foot_html = '',
+            elem = D.getElementById(this.config_id);
 
         switch(this.config_type){
             case "alert":
-                parent.setAttribute("data-type", "dialog");
-                head.className = "D_head";
                 content.className = "D_content";
-                content.id = this.config_id;
-                if (this.config_closeButton) {
-                    head_html += '<div class="D_close" data-dialog-close style="width:'+ this.config_close_img_w + '; height: '+ this.config_close_img_h +'"><img src="' + this.config_close_img + '" style="max-width:100%" alt="" /></div>'
-                }
-                head.innerHTML = head_html;
-                body.innerHTML = this.config_msg;
+                body.innerHTML = "<div class='D_alert'>" + this.config_msg + "</div>";
                 body.className = "D_body";
-                if (this.config_lock) {
-                    parent.appendChild(shade);
-                    shade.className = "D_shade";
-                }
                 parent.appendChild(content);
-                content.appendChild(head);
                 content.appendChild(body);
                 page_body.appendChild(parent);
+
                 if (this.config_showButtons) {
                     foot.className = "D_foot";
                     if (this.config_submitButton) {
-                        foot_html += '<input type="button" value="' + this.config_submitButton + '" class="D_submit" data-dialog-submit />';
+                        foot_html += '<input type="button" value="' + this.config_submitButton + '" class="D_submit" data-dialog-submit/>';
                     }
                     if (this.config_cancelButton) {
                         foot_html += '<input type="button" value="' + this.config_cancelButton + '" class="D_cancel" data-dialog-cancel />';
@@ -215,11 +217,11 @@
                     content.appendChild(foot);
                 }
                 this.parent = parent;
-                this.shade = shade;
                 this.content = content;
-                this.head = head;
                 this.body = body;
-                this.closeBtn = D.querySelector('.D_close');
+                this.bCon = body.querySelector('.D_alert');
+                this.foot = foot;
+                this.fBtn = foot.querySelector('input');
                 break;
             case "loading":
                 elem.style.display = "block";
@@ -280,6 +282,30 @@
         }
         if(this.content){
             setStyle(this.content, this.config_con_style);
+        }
+        if(this.body){
+            setStyle(this.body, {
+                'text-align': 'center'
+            });
+            setStyle(this.foot, {
+                'position': 'absolute',
+                'width': '90%',
+                'padding': '0 5%',
+                'left': '0',
+                'bottom': '10px'
+            });
+            setStyle(this.fBtn, {
+                'border': 'none',
+                'width': '100%',
+                'height': '40px',
+                'line-height': '40px',
+                'text-align': 'center',
+                'color': '#fff',
+                'background': '#333'
+            });
+            setStyle(this.bCon, {
+                'padding': '20px 10px 60px 10px'
+            })
         }
         if(this.head){
             setStyle(this.head, {
@@ -407,7 +433,8 @@
         }
         if (this.config_time) {
             this.timer = setTimeout(function() {
-                that.remove();
+                that.content.style.display = 'none';
+                // that.remove();
             }, this.config_time);
         }
         on(window, "resize", function() {
@@ -484,7 +511,8 @@
             removeDOM(elem.parentNode);
             this.config_elem_parent.appendChild(this.config_elem_clone);
         } else {
-            elem.style.display = "none";
+            removeDOM(elem.parentNode);
+            // elem.style.display = "none";
         }
     };
     Dialog.prototype.reload = function() {

@@ -16,10 +16,10 @@ require.config({
 
 require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 
+// Dialog + iscroll type popup
 	$('#splendid').on('click', function(){
-		var html = $('.wrapper').html();
-
-		var	path = 'images/close.png';
+		var html = $('.wrapper').html(),
+			path = 'images/close.png';
 
 		Dialog({
 			// 'msg':'网络有些繁忙，请耐心等待！',
@@ -52,6 +52,36 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 		});
 	});
 
+// Dialog type alert
+	$('#alert').on('click', function(){
+
+// Dialog('aaaa');
+
+		Dialog({
+			'type': 'alert',
+			'msg': 'aaa',
+			'width': '60%',
+			'showButtons': true,
+			'cancelButton': false,
+			'contentStyle': {
+                'background': 'rgba(0, 0, 0, .8)',
+                'color': '#fff',
+                'margin': '0 auto',
+                'min-height': '60px',
+                'padding': '10px',
+                'border-radius': '5px'
+			}
+		});
+	});
+
+	$('#loading').on('click', function(){
+		Dialog({
+			'id': 'canvas',
+			'type': 'loading',
+			'time': 1000
+		})
+	});
+
 	console.log('\'Allo \'Allo!');
 
 	// oTools.setcookie('name', 'ocean', 3000, null, "", null);
@@ -60,6 +90,8 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 	console.log(oTools.strlength($('#cn').text()));
 	
 	$(function(){
+		$('<canvas id="canvas"></canvas>').appendTo('body');
+
 		$('#canvas').css({
 			'border-radius':'5px',
 			'background':'rgba(0,0,0,0.8)'
@@ -70,6 +102,8 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 			"height": 20
 		});
 	});
+
+
 
 });
 
