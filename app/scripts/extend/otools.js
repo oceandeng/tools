@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-07-07 15:16:12
+* @Last Modified time: 2015-07-20 13:40:23
 */
 
 'use strict';
@@ -120,6 +120,9 @@ var oTools = {
         var num = Math.floor(Math.random() * 3);
         col[num] = 0;
         return "rgba(" + col[0] + "," + col[1] + "," + col[2] + ","; 
+    },
+    $$: function(s){
+        return document.querySelector(s);
     }
 }
 
@@ -144,3 +147,6 @@ window.cancelAnimationFrame = (function() {
             window.clearTimeout(id);
         };
 })();
+
+// html5 audio
+window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext;

@@ -1,5 +1,7 @@
+'use strict';
+
 (function(G, D) {
-    isIE = /msie (\d+\.\d+)/i.test(navigator.userAgent) ? (document.documentMode || +RegExp['\x241']) : undefined;
+    var isIE = /msie (\d+\.\d+)/i.test(navigator.userAgent) ? (document.documentMode || +RegExp['\x241']) : undefined;
 
     function F$(elem) {
         return typeof(elem) == "object" ? elem : document.getElementById(elem);
@@ -41,7 +43,7 @@
         var regex = new RegExp("(^|\\s)" + className + "(\\s|$)");
         var elenemt;
         for (var i = 0; i < allTags.length; i++) {
-            elem = allTags[i];
+            var elem = allTags[i];
             if (regex.test(elem.className)) {
                 classElems.push(elem);
             };
@@ -88,6 +90,8 @@
         this.config_close_img = o.closeImg;
         this.config_close_img_w = o.closeBtnW || "40px";
         this.config_close_img_h = o.closeBtnH || "40px";
+        this.config_close_top = o.closeTop || "5px";
+        this.config_close_right = o.closeRight || "10px";
         this.config_position = o.position || "";
         this.config_top = o.top || "";
         this.config_right = o.right || "";
@@ -99,13 +103,13 @@
         this.config_elem = D.getElementById(this.config_id);
         this.config_elem_clone = D.getElementById(this.config_id).cloneNode(true);
         this.config_elem_parent = D.getElementById(this.config_id).parentNode;
-        this.config_con_style = {
-                'background': '#fff',
+        this.config_con_style = o.contentStyle || {
+                'background': 'rgba(255, 170, 20, 0.95)',
+                // 'background': '#fff',
                 'width': o.width,
                 'height': o.height,
                 'margin': '0 auto',
                 'min-height': '30%',
-                'border-radius': '10px',
                 'padding': '10px'
             }
         if (isIE && isIE < 10) {
@@ -285,8 +289,8 @@
         if(this.closeBtn){
             setStyle(this.closeBtn, {
                 'position': 'absolute',
-                'top': -parseInt(this.config_close_img_w) / 2 + "px",
-                'right': -parseInt(this.config_close_img_h) / 2 + "px",
+                'top': this.config_close_top,
+                'right': this.config_close_right,
                 'z-index': 9
             })
         }
@@ -369,15 +373,8 @@
             this.content.className += " " + this.config_animation;
             var events = ["animationend", "webkitAnimationEnd", "mozAnimationEnd", "MSAnimationEnd", "oanimationend"];
             for (var i = 0; i < events.length; i++) {
-                this.content.addEventListener(events[i], addFlash);
+                this.content.addEventListener(events[i], function(that){addFlash}, false);
             }
-
-            function addFlash() {
-                that.content.className = that.content.className.replace(that.config_animation, "");
-                for (var i = 0; i < events.length; i++) {
-                    that.content.removeEventListener(events[i], addFlash);
-                }
-            };
         }
     };
     Dialog.prototype.event = function() {
@@ -530,6 +527,13 @@
                     elem.parentNode.removeChild(elem);
                 });
             }
+        }
+    };
+
+    function addFlash() {
+        that.content.className = that.content.className.replace(that.config_animation, "");
+        for (var i = 0; i < events.length; i++) {
+            that.content.removeEventListener(events[i], addFlash);
         }
     };
 

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="blank">
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	img{
+		max-width: 100%;
+	}
+    canvas{
+        border: 1px solid #ccc;
+    }
+    body{
+        background: #ccc;
+    }
+</style>
+<script type="text/javascript" src="scripts/canvas/canvas.js"></script>
+
+</head>
+
+<body>
+
+
+    <canvas id="circle"></canvas>
+
+    <script>
+    /*******************************************************
+    *     图片圆形处理
+    ********************************************************/
+        var canvas = document.querySelector('#circle'),
+            image = new Image();
+        var ctx = canvas.getContext('2d');
+
+        canvas.width = 200;
+        canvas.height = 200;
+        canvas.style.width = 100 + 'px';
+        canvas.style.height = 100 + 'px';
+
+        image.onload = function(){
+            ctx.beginPath();
+            ctx.arc(100, 100, 100, 0, Math.PI * 2);
+            ctx.clip();
+
+            ctx.drawImage(image, 0, 0, 200, image.height * 200 / image.width);
+        }
+
+        image.src = "images/header.jpg";
+
+    </script>
+
+
+        <canvas id="container"></canvas>
+
+        <script type="text/javascript">
+
+        window.onload = function(){
+
+            var canvas = document.querySelector('#container');
+            
+            canvas.width = 1200;
+            canvas.height = 800;
+
+            var context = canvas.getContext('2d');
+
+            // 使用context绘制
+            // var skyStyle = context.createLinearGradient(0, 0, 0, canvas.height);
+            var skyStyle = context.createRadialGradient(600, 800, 600, 600, 400, 0)
+            skyStyle.addColorStop(0.0, 'black');
+            skyStyle.addColorStop(1.0, '#035');
+            context.fillStyle = skyStyle;
+
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            for(var i = 0; i < 200; i++){
+                var r = Math.random() * 5 + 5;
+                var x = Math.random() * canvas.width;
+                var y = Math.random() * canvas.height * 0.65;
+                var a = Math.random() * 360;
+
+                // drawStar(context, x, y, r, r/2.0, a);
+                canvastools.drawStar(context, x, y, r, a);
+            }
+
+        }
+
+        // function drawStar(cxt, x, y, outerR, innerR, rot){
+        //     cxt.beginPath();
+        //     for(var i = 0; i < 5; i++){
+        //         cxt.lineTo(Math.cos((18 + i * 72 - rot)/180 * Math.PI) * outerR + x,
+        //                       -Math.sin((18 + i * 72 - rot)/180 * Math.PI) * outerR + y);
+        //         cxt.lineTo(Math.cos((54 + i * 72 - rot)/180 * Math.PI) * innerR + x,
+        //                       -Math.sin((54 + i * 72 - rot)/180 * Math.PI) * innerR + y);
+        //     }
+        //     cxt.closePath();
+
+        //     cxt.fillStyle = "#fb3";
+        //     cxt.strokeStyle = "#fd5";
+        //     cxt.lineWidth = 3;
+        //     cxt.lineJoin = "round";
+
+        //     cxt.fill();
+        //     cxt.stroke();
+        // }
+
+        // function drawStar(cxt, x, y, R, rot){
+
+        //     cxt.save();            
+
+        //     cxt.translate(x, y);
+        //     cxt.rotate(rot/180 * Math.PI);
+        //     cxt.scale(R, R);
+            
+        //     starPath(cxt);
+
+        //     cxt.fillStyle = "#fb3";
+        //     // cxt.strokeStyle = "#fd5";
+        //     // cxt.lineWidth = 3;
+        //     // cxt.lineJoin = "round";
+
+        //     cxt.fill();
+        //     // cxt.stroke();
+        //     //绘制出在（x, y）, 大小位R,旋转rot度的五角星
+        //     //……
+            
+        //     cxt.restore();
+
+
+        // }
+
+        // function starPath(cxt){
+        //     cxt.beginPath();
+        //     for(var i = 0; i < 5; i++){
+        //         cxt.lineTo(Math.cos((18 + i * 72)/180 * Math.PI),
+        //                       -Math.sin((18 + i * 72)/180 * Math.PI));
+        //         cxt.lineTo(Math.cos((54 + i * 72)/180 * Math.PI) * 0.5,
+        //                       -Math.sin((54 + i * 72)/180 * Math.PI) * 0.5);
+        //     }
+        //     cxt.closePath();
+        // }
+
+
+        </script>
+
+</body>
+</html>

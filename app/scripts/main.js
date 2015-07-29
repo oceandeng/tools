@@ -19,7 +19,7 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 	$('#splendid').on('click', function(){
 		var html = $('.wrapper').html();
 
-		var	path = 'media/close.png';
+		var	path = 'images/close.png';
 
 		Dialog({
 			// 'msg':'网络有些繁忙，请耐心等待！',
@@ -27,10 +27,10 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 			'type': 'popup',
 			// 'msg': html,
 			'lock':true,
-			'width':'80%',
-			'height': '80%',
+			'width':'100%',
+			'height': '100%',
 			'closeImg': path,
-			'animation':'animated bounceIn',
+			'animation':'animated bounceInDown',
 			'onReady': function(){
 				// alert('big popup');
 				var myScroll;
@@ -110,4 +110,3 @@ function handleTouchEvent(event){
 // EventUtil.addHandler(document, "touchstart", handleTouchEvent);
 // EventUtil.addHandler(document, "touchend", handleTouchEvent);
 // EventUtil.addHandler(document, "touchmove", handleTouchEvent);
-
