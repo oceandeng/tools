@@ -30,7 +30,7 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 			'width':'100%',
 			'height': '100%',
 			'closeImg': path,
-			'animation':'animated bounceInDown',
+			'animation':'animated rotateInDownLeft',
 			'onReady': function(){
 				// alert('big popup');
 				var myScroll;
@@ -55,8 +55,7 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 // Dialog type alert
 	$('#alert').on('click', function(){
 
-// Dialog('aaaa');
-
+		// Dialog('aaaa');
 		Dialog({
 			'type': 'alert',
 			'msg': 'aaa',
@@ -102,8 +101,6 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 			"height": 20
 		});
 	});
-
-
 
 });
 
