@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-28 19:13:05
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-06-28 19:32:32
+* @Last Modified time: 2015-08-09 22:41:31
 */
 
 'use strict';
@@ -70,3 +70,67 @@ var EventUtil = {
 		}
 	}
 }
+
+// 事件截流
+	var processor = {
+		timeoutId: null,
+
+		// 实际进行处理的方法
+		performProcessing: function(){
+			// 实际执行的代码
+		},
+
+		// 初始处理调用的方法
+		process: function(){
+			clearTimeout(timeoutId);
+
+			var that = this;
+			this.timeoutId = setTimeout(function(){
+				that.performProcessing();
+			}, 100);
+		}
+	}
+
+	// 调用
+	processor.process();
+
+	// 简化函数
+	function throttle(method, context){
+		clearTimeout(method.tId);
+		method.tId= setTimeout(function(){
+			method.call(context);
+		}, 100);
+	}
+
+	// div 窗口变化时高度等于宽度
+	function resizeDiv(){
+		var div = document.getElementById('myDiv');
+		div.style.height = div.offsetWidth + 'px';
+	}
+
+	window.onresize = function(){
+		throttle(resizeDiv);
+	}
+
+// 自定义DOM事件 createEvent('customEvent');
+	// DOM.createEvent('customEvent').initCustomEvent(type, bubbles, cancelable, detail);
+		// type (字符串)：触发的时间类型， 例如'keydown'
+		// bubbles (布尔值)：表示事件是否应该冒泡
+		// cancelable (布尔值)：表示事件是否可以取消
+		// detail (对象)：任意值，保存在event对象的detail属性中
+	var div = document.getElementById('myDiv'),
+		event;
+
+	EventUtil.addHandler(div, 'myevent', function(event){
+		alert('DIV：' + event.detail);
+	});
+	EventUtil.addHandler(document, 'myevent', function(event){
+		alert('DOCUMENT:' + event.detail);
+	});
+
+	if(document.implementation.hasFeature('CustomEvents', '3.0')){
+		event = document.createEvent('CustomEvents');
+		event.initCustomEvent('myevent', true, false, 'Hello World!');
+		div.dispatchEvent(event);
+	}
+
