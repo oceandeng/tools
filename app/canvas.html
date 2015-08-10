@@ -26,7 +26,6 @@
 
 <body>
 
-
     <canvas id="circle"></canvas>
 
     <script>
@@ -43,11 +42,20 @@
         canvas.style.height = 100 + 'px';
 
         image.onload = function(){
+
+            var imageW = image.width,
+                imageH = image.height;
+
             ctx.beginPath();
             ctx.arc(100, 100, 100, 0, Math.PI * 2);
             ctx.clip();
 
-            ctx.drawImage(image, 0, 0, 200, image.height * 200 / image.width);
+            if(imageW < imageH){
+                ctx.drawImage(image, 0, 0, 200, image.height * 200 / image.width);
+            }
+            if(imageW > imageH){
+                ctx.drawImage(image, 0, 0, image.width / image.height * 200 , 200);
+            }
         }
 
         image.src = "images/header.jpg";
@@ -72,7 +80,7 @@
 
             // 使用context绘制
             // var skyStyle = context.createLinearGradient(0, 0, 0, canvas.height);
-            var skyStyle = context.createRadialGradient(600, 800, 600, 600, 400, 0)
+            var skyStyle = context.createRadialGradient(600, 800, 600, 600, 400, 0);
             skyStyle.addColorStop(0.0, 'black');
             skyStyle.addColorStop(1.0, '#035');
             context.fillStyle = skyStyle;
@@ -131,7 +139,6 @@
             
         //     cxt.restore();
 
-
         // }
 
         // function starPath(cxt){
@@ -144,7 +151,6 @@
         //     }
         //     cxt.closePath();
         // }
-
 
         </script>
 

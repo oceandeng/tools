@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-07-29 18:35:31
+* @Last Modified time: 2015-08-06 11:21:15
 */
 
 'use strict';
@@ -16,9 +16,22 @@ var oTools = {
 	isWechat: /MicroMessenger/i.test(ua),
     // 检测是否支持 touch 事件
     clickEvent: "ontouchstart" in document.documentElement ? "touchstart" : "click",
-    
+    ranNum: Math.ceil(Math.random() * 1e10),
+    timeNum: Date.now(),
+
     $: function(s){
         return document.querySelectorAll(s);
+    },
+    $$: function(s){
+        return document.querySelector(s);
+    },
+    addDomLoaded: function(fn){
+        if(document.addEventListener){
+            document.addEventListener('DOMContentLoaded', function(){
+                fn();
+                document.removeEventListener('DOMContentLoaded');
+            }, false);
+        }
     },
     // cookie
     getcookie: function(name) {
@@ -124,9 +137,6 @@ var oTools = {
         var num = Math.floor(Math.random() * 3);
         col[num] = 0;
         return "rgba(" + col[0] + "," + col[1] + "," + col[2] + ","; 
-    },
-    $$: function(s){
-        return document.querySelector(s);
     }
 }
 
