@@ -19,60 +19,100 @@
     body{
         background: #ccc;
     }
+    div{
+        word-wrap:break-word;
+    }
 </style>
 <script type="text/javascript" src="scripts/canvas/canvas.js"></script>
-
 </head>
 
 <body>
-
-    <canvas id="circle"></canvas>
+/*******************************************************
+*     获取图片信息
+********************************************************/
+<canvas id="imgdata"></canvas>
 
     <script>
-    /*******************************************************
-    *     图片圆形处理
-    ********************************************************/
-        var canvas = document.querySelector('#circle'),
-            image = new Image();
-        var ctx = canvas.getContext('2d');
+        (function(){
+            var canvas = document.querySelector('#imgdata');
+                image = new Image();
+            var ctx = canvas.getContext('2d');
 
-        canvas.width = 200;
-        canvas.height = 200;
-        canvas.style.width = 100 + 'px';
-        canvas.style.height = 100 + 'px';
+            canvas.width = 200;
+            canvas.height = 200;
+            canvas.style.width = 100 + 'px';
+            canvas.style.height = 100 + 'px';
 
-        image.onload = function(){
+            image.crossOrigin = ''; // 配合图片跨域访问 Access-Control-Allow-Origin:*
 
-            var imageW = image.width,
-                imageH = image.height;
+            image.onload = function(){
+                var w = image.width,
+                    h = image.height,
+                    ratio = w / h;
 
-            ctx.beginPath();
-            ctx.arc(100, 100, 100, 0, Math.PI * 2);
-            ctx.clip();
+                ctx.drawImage(image, 0, 0, 200, 200 / ratio);
 
-            if(imageW < imageH){
-                ctx.drawImage(image, 0, 0, 200, image.height * 200 / image.width);
+                // var imageData = ctx.getImageData(0, 0, 200, 200);
+                var imageData = canvas.toDataURL();
+                console.log(imageData);
             }
-            if(imageW > imageH){
-                ctx.drawImage(image, 0, 0, image.width / image.height * 200 , 200);
-            }
-        }
-
-        image.src = "images/header.jpg";
+            // image.src = 'images/header.jpg';
+            // 跨域取不到信息
+            image.src = 'http://ocean.cn/images/demo.png';
+        })();
 
     </script>
-    /*******************************************************
-    *     canvas 简易库应用
-    ********************************************************/
 
-        <canvas id="container"></canvas>
+/*******************************************************
+*     图片圆形处理
+********************************************************/
+<canvas id="circle"></canvas>
 
-        <script type="text/javascript">
+    <script>
+        (function(){
+            var canvas = document.querySelector('#circle'),
+                image = new Image();
+            var ctx = canvas.getContext('2d');
 
+            canvas.width = 200;
+            canvas.height = 200;
+            canvas.style.width = 100 + 'px';
+            canvas.style.height = 100 + 'px';
+
+            image.onload = function(){
+
+                var imageW = image.width,
+                    imageH = image.height;
+
+                ctx.beginPath();
+                ctx.arc(100, 100, 100, 0, Math.PI * 2);
+                ctx.clip();
+
+                if(imageW < imageH){
+                    ctx.drawImage(image, 0, 0, 200, image.height * 200 / image.width);
+                }
+                if(imageW > imageH){
+                    ctx.drawImage(image, 0, 0, image.width / image.height * 200 , 200);
+                }
+
+                var imageData = canvas.toDataURL();
+                // console.log(imageData);
+            }
+
+            image.src = "images/header.jpg";
+        })();
+    </script>
+
+/*******************************************************
+*     canvas 简易库应用
+********************************************************/
+<canvas id="container"></canvas>
+
+    <script type="text/javascript">
         window.onload = function(){
 
             var canvas = document.querySelector('#container');
-            
+
             canvas.width = 1200;
             canvas.height = 800;
 
@@ -151,8 +191,7 @@
         //     }
         //     cxt.closePath();
         // }
-
-        </script>
+    </script>
 
 </body>
 </html>

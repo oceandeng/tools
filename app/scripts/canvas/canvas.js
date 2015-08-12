@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-04-26 20:08:19
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-07-27 15:34:26
+* @Last Modified time: 2015-08-11 11:18:02
 */
 
 'use strict';
@@ -91,7 +91,21 @@ var canvastools = {
                               -Math.sin((54 + i * 72)/180 * Math.PI) * 0.5);
             }
             cxt.closePath();
-        }
+        },
+// 获取图片base64信息
+        getBase64Image: function(img){
+            var canvas = document.createElement('canvas');
 
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, img.width, img.height);
+
+            var dataURL = canvas.toDataURL('image/png');
+            return dataURL;
+
+            // return dataURL.replace('data:image/png;base64,', '');
+        }
 
 }
