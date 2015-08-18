@@ -2,7 +2,7 @@
  * @Author: ocean
  * @Date:   2015-06-30 11:35:58
  * @Last Modified by:   ocean
- * @Last Modified time: 2015-06-30 13:45:10
+ * @Last Modified time: 2015-08-18 10:01:17
  */
 
 'use strict';
@@ -13,8 +13,6 @@
 输入：strIP：ip地址 
 返回：如果通过验证返回true,否则返回false； 
 */
-var ovalidate = {
-
 	function isIP(strIP) {
 	    if (isNull(strIP)) return false;
 	    var re = /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/g //匹配IP地址的正则表达式 
@@ -24,39 +22,77 @@ var ovalidate = {
 	    return false;
 	}
 
-	/* 
-	用途：检查输入字符串是否为空或者全部都是空格 
-	输入：str 
-	返回： 
-	如果全是空返回true,否则返回false 
-	*/
+/* 
+是否为空
+*/
 	function isNull(str) {
+	    if (str == "") {
+	    	return true;
+		}
+	}
+/*
+验证中文姓名 (汉字和数字1-10位)
+*/
+	function isCnName(str){
+	    var patrn = /^\s*[0-9\u4e00-\u9fa5]{1,10}\s*$/;
+	    if(!patrn.exec(str))
+	    {
+	        return false;
+	    }
+	    return true;
+	}
+/* 
+检查输入手机号码是否正确 
+*/
+	function checkMobile(str) {
+		var patten = /^1\d{10}$/;
+		return patten.exec(str);
+	}
+/*
+检验身份证
+*/	
+function isIdCard(str) 
+{
+    var patrnOne = /^\s*\d{15}\s*$/;
+    var patrnTwo = /^\s*\d{16}[\dxX]{2}\s*$/;
+    if(!patrnOne.exec(str) && !patrnTwo.exec(str)){
+        return false;
+    }
+    return true;
+}
+
+/* 
+用途：检查输入字符串是否为空或者全部都是空格 
+输入：str 
+返回： 
+如果全是空返回true,否则返回false 
+*/
+	function isNullSpace(str) {
 	    if (str == "") return true;
 	    var regu = "^[ ]+$";
 	    var re = new RegExp(regu);
 	    return re.test(str);
 	}
 
+/* 
+用途：检查输入对象的值是否符合整数格式 
+输入：str 输入的字符串 
+返回：如果通过验证返回true,否则返回false 
 
-	/* 
-	用途：检查输入对象的值是否符合整数格式 
-	输入：str 输入的字符串 
-	返回：如果通过验证返回true,否则返回false 
-
-	*/
+*/
 	function isInteger(str) {
 	    var regu = /^[-]{0,1}[0-9]{1,}$/;
 	    return regu.test(str);
 	}
 
-	/* 
-	用途：检查输入手机号码是否正确 
-	输入： 
-	s：字符串 
-	返回： 
-	如果通过验证返回true,否则返回false 
+/* 
+用途：检查输入手机号码是否正确 
+输入： 
+s：字符串 
+返回： 
+如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function checkMobile(s) {
 	    var regu = /^[1][3][0-9]{9}$/;
 	    var re = new RegExp(regu);
@@ -68,14 +104,14 @@ var ovalidate = {
 	}
 
 
-	/* 
-	用途：检查输入字符串是否符合正整数格式 
-	输入： 
-	s：字符串 
-	返回： 
-	如果通过验证返回true,否则返回false 
+/* 
+用途：检查输入字符串是否符合正整数格式 
+输入： 
+s：字符串 
+返回： 
+如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function isNumber(s) {
 	    var regu = "^[0-9]+$";
 	    var re = new RegExp(regu);
@@ -86,14 +122,14 @@ var ovalidate = {
 	    }
 	}
 
-	/* 
-	用途：检查输入字符串是否是带小数的数字格式,可以是负数 
-	输入： 
-	s：字符串 
-	返回： 
-	如果通过验证返回true,否则返回false 
+/* 
+用途：检查输入字符串是否是带小数的数字格式,可以是负数 
+输入： 
+s：字符串 
+返回： 
+如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function isDecimal(str) {
 	    if (isInteger(str)) return true;
 	    var re = /^[-]{0,1}(\d+)[\.]+(\d+)$/;
@@ -105,37 +141,37 @@ var ovalidate = {
 	    }
 	}
 
-	/* 
-	用途：检查输入对象的值是否符合端口号格式 
-	输入：str 输入的字符串 
-	返回：如果通过验证返回true,否则返回false 
+/* 
+用途：检查输入对象的值是否符合端口号格式 
+输入：str 输入的字符串 
+返回：如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function isPort(str) {
 	    return (isNumber(str) && str < 65536);
 	}
 
-	/* 
-	用途：检查输入对象的值是否符合E-Mail格式 
-	输入：str 输入的字符串 
-	返回：如果通过验证返回true,否则返回false 
+/* 
+用途：检查输入对象的值是否符合E-Mail格式 
+输入：str 输入的字符串 
+返回：如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function isEmail(str) {
 	    var myReg = /^[-_A-Za-z0-9]+@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/;
 	    if (myReg.test(str)) return true;
 	    return false;
 	}
 
-	/* 
-	用途：检查输入字符串是否符合金额格式 
-	格式定义为带小数的正数，小数点后最多三位 
-	输入： 
-	s：字符串 
-	返回： 
-	如果通过验证返回true,否则返回false 
+/* 
+用途：检查输入字符串是否符合金额格式 
+格式定义为带小数的正数，小数点后最多三位 
+输入： 
+s：字符串 
+返回： 
+如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function isMoney(s) {
 	    var regu = "^[0-9]+[\.][0-9]{0,3}$";
 	    var re = new RegExp(regu);
@@ -145,14 +181,14 @@ var ovalidate = {
 	        return false;
 	    }
 	}
-	/* 
-	用途：检查输入字符串是否只由英文字母和数字和下划线组成 
-	输入： 
-	s：字符串 
-	返回： 
-	如果通过验证返回true,否则返回false 
+/* 
+用途：检查输入字符串是否只由英文字母和数字和下划线组成 
+输入： 
+s：字符串 
+返回： 
+如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function isNumberOr_Letter(s) { //判断是否是数字或字母 
 	    var regu = "^[0-9a-zA-Z\_]+$";
 	    var re = new RegExp(regu);
@@ -162,13 +198,13 @@ var ovalidate = {
 	        return false;
 	    }
 	}
-	/* 
-	用途：检查输入字符串是否只由英文字母和数字组成 
-	输入： 
-	s：字符串 
-	返回： 
-	如果通过验证返回true,否则返回false 
-	*/
+/* 
+用途：检查输入字符串是否只由英文字母和数字组成 
+输入： 
+s：字符串 
+返回： 
+如果通过验证返回true,否则返回false 
+*/
 	function isNumberOrLetter(s) { //判断是否是数字或字母 
 	    var regu = "^[0-9a-zA-Z]+$";
 	    var re = new RegExp(regu);
@@ -178,13 +214,13 @@ var ovalidate = {
 	        return false;
 	    }
 	}
-	/* 
-	用途：检查输入字符串是否只由汉字、字母、数字组成 
-	输入： 
-	value：字符串 
-	返回： 
-	如果通过验证返回true,否则返回false 
-	*/
+/* 
+用途：检查输入字符串是否只由汉字、字母、数字组成 
+输入： 
+value：字符串 
+返回： 
+如果通过验证返回true,否则返回false 
+*/
 	function isChinaOrNumbOrLett(s) { //判断是否是汉字、字母、数字组成 
 	    var regu = "^[0-9a-zA-Z\u4e00-\u9fa5]+$";
 	    var re = new RegExp(regu);
@@ -194,11 +230,11 @@ var ovalidate = {
 	        return false;
 	    }
 	}
-	/* 
-	用途：判断是否是日期 
-	输入：date：日期；fmt：日期格式 
-	返回：如果通过验证返回true,否则返回false 
-	*/
+/* 
+用途：判断是否是日期 
+输入：date：日期；fmt：日期格式 
+返回：如果通过验证返回true,否则返回false 
+*/
 	function isDate(date, fmt) {
 	    if (fmt == null) fmt = "yyyyMMdd";
 	    var yIndex = fmt.indexOf("yyyy");
@@ -227,12 +263,12 @@ var ovalidate = {
 	    return "31";
 	}
 
-	/* 
-	用途：字符1是否以字符串2结束 
-	输入：str1：字符串；str2：被包含的字符串 
-	返回：如果通过验证返回true,否则返回false 
+/* 
+用途：字符1是否以字符串2结束 
+输入：str1：字符串；str2：被包含的字符串 
+返回：如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function isLastMatch(str1, str2) {
 	    var index = str1.lastIndexOf(str2);
 	    if (str1.length == index + str2.length) return true;
@@ -240,39 +276,39 @@ var ovalidate = {
 	}
 
 
-	/* 
-	用途：字符1是否以字符串2开始 
-	输入：str1：字符串；str2：被包含的字符串 
-	返回：如果通过验证返回true,否则返回false 
+/* 
+用途：字符1是否以字符串2开始 
+输入：str1：字符串；str2：被包含的字符串 
+返回：如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function isFirstMatch(str1, str2) {
 	    var index = str1.indexOf(str2);
 	    if (index == 0) return true;
 	    return false;
 	}
 
-	/* 
-	用途：字符1是包含字符串2 
-	输入：str1：字符串；str2：被包含的字符串 
-	返回：如果通过验证返回true,否则返回false 
+/* 
+用途：字符1是包含字符串2 
+输入：str1：字符串；str2：被包含的字符串 
+返回：如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function isMatch(str1, str2) {
 	    var index = str1.indexOf(str2);
 	    if (index == -1) return false;
 	    return true;
 	}
-	/* 
-	用途：检查输入的起止日期是否正确，规则为两个日期的格式正确， 
-	且结束如期>=起始日期 
-	输入： 
-	startDate：起始日期，字符串 
-	endDate：结束如期，字符串 
-	返回： 
-	如果通过验证返回true,否则返回false 
+/* 
+用途：检查输入的起止日期是否正确，规则为两个日期的格式正确， 
+且结束如期>=起始日期 
+输入： 
+startDate：起始日期，字符串 
+endDate：结束如期，字符串 
+返回： 
+如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function checkTwoDate(startDate, endDate) {
 	    if (!isDate(startDate)) {
 	        alert("起始日期不正确!");
@@ -287,14 +323,14 @@ var ovalidate = {
 	    return true;
 	}
 
-	/* 
-	用途：检查输入的Email信箱格式是否正确 
-	输入： 
-	strEmail：字符串 
-	返回： 
-	如果通过验证返回true,否则返回false 
+/* 
+用途：检查输入的Email信箱格式是否正确 
+输入： 
+strEmail：字符串 
+返回： 
+如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function checkEmail(strEmail) {
 	    //var emailReg = /^[_a-z0-9]+@([_a-z0-9]+\.)+[a-z0-9]{2,3}$/; 
 	    var emailReg = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
@@ -306,14 +342,14 @@ var ovalidate = {
 	    }
 	}
 
-	/* 
-	用途：检查输入的电话号码格式是否正确 
-	输入： 
-	strPhone：字符串 
-	返回： 
-	如果通过验证返回true,否则返回false 
+/* 
+用途：检查输入的电话号码格式是否正确 
+输入： 
+strPhone：字符串 
+返回： 
+如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function checkPhone(strPhone) {
 	    var phoneRegWithArea = /^[0][1-9]{2,3}-[0-9]{5,10}$/;
 	    var phoneRegNoArea = /^[1-9]{1}[0-9]{5,8}$/;
@@ -338,14 +374,14 @@ var ovalidate = {
 	}
 
 
-	/* 
-	用途：检查复选框被选中的数目 
-	输入： 
-	checkboxID：字符串 
-	返回： 
-	返回该复选框中被选中的数目 
+/* 
+用途：检查复选框被选中的数目 
+输入： 
+checkboxID：字符串 
+返回： 
+返回该复选框中被选中的数目 
 
-	*/
+*/
 
 	function checkSelect(checkboxID) {
 	    var check = 0;
@@ -460,16 +496,16 @@ var ovalidate = {
 	    return true;
 	}
 
-	/* 
-	用途：检查输入的起止日期是否正确，规则为两个日期的格式正确或都为空 
-	且结束日期>=起始日期 
-	输入： 
-	startDate：起始日期，字符串 
-	endDate：  结束日期，字符串 
-	返回： 
-	如果通过验证返回true,否则返回false 
+/* 
+用途：检查输入的起止日期是否正确，规则为两个日期的格式正确或都为空 
+且结束日期>=起始日期 
+输入： 
+startDate：起始日期，字符串 
+endDate：  结束日期，字符串 
+返回： 
+如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function checkPeriod(startDate, endDate) {
 	    if (!checkDate(startDate)) {
 	        alert("起始日期不正确!");
@@ -484,14 +520,14 @@ var ovalidate = {
 	    return true;
 	}
 
-	/* 
-	用途：检查证券代码是否正确 
-	输入： 
-	secCode:证券代码 
-	返回： 
-	如果通过验证返回true,否则返回false 
+/* 
+用途：检查证券代码是否正确 
+输入： 
+secCode:证券代码 
+返回： 
+如果通过验证返回true,否则返回false 
 
-	*/
+*/
 	function checkSecCode(secCode) {
 	    if (secCode.length != 6) {
 	        alert("证券代码长度应该为6位");
@@ -507,15 +543,15 @@ var ovalidate = {
 	    return true;
 	}
 
-	/**************************************************** 
-	function:cTrim(sInputString,iType) 
-	description:字符串去空格的函数 
-	parameters:iType：1=去掉字符串左边的空格 
+/**************************************************** 
+function:cTrim(sInputString,iType) 
+description:字符串去空格的函数 
+parameters:iType：1=去掉字符串左边的空格 
 
-	2=去掉字符串左边的空格 
-	0=去掉字符串左边和右边的空格 
-	return value:去掉空格的字符串 
-	****************************************************/
+2=去掉字符串左边的空格 
+0=去掉字符串左边和右边的空格 
+return value:去掉空格的字符串 
+****************************************************/
 	function cTrim(sInputString, iType) {
 	    var sTmpStr = ' ';
 	    var i = -1;
@@ -539,4 +575,3 @@ var ovalidate = {
 	    }
 	    return sInputString;
 	}
-}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+
+
+<script src="scripts/grayscale.js"></script>
+<script>
+	var navStr = navigator.userAgent.toLowerCase();
+	if(navStr.indexOf("msie 10.0")!==-1||navStr.indexOf("rv:11.0")!==-1){ // 判断是IE10或者IE11
+	    grayscale(document.body);
+	}
+</script>
+</body>
+</html>
