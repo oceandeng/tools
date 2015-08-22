@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-28 19:13:05
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-08-09 22:41:31
+* @Last Modified time: 2015-08-22 17:46:26
 */
 
 'use strict';
@@ -133,4 +133,3 @@ var EventUtil = {
 		event.initCustomEvent('myevent', true, false, 'Hello World!');
 		div.dispatchEvent(event);
 	}
-
