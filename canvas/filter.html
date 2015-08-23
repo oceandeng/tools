@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+<div style="margin: 20px auto; width: 1400px">
+	<canvas id="canvasA" width="600" height="375" style="display:block; margin:20px auto; border: 1px solid #aaa; float:left"></canvas>
+	<canvas id="canvasB" width="600" height="375" style="display:block; margin:20px auto; border: 1px solid #aaa; float:right"></canvas>
+</div>
+<div style="clear: both"></div>
+
+<div style="text-align: center; margin-top:50px; font-size: 20px;">
+	<a href="javascript: filter()">Filter</a>
+	<a href="javascript: greyEffect()">Grey Effect</a>
+	<a href="javascript: blackEffect()">Black Effect</a>
+	<a href="javascript: reverseEffect()">Reverse Effect</a>
+	<a href="javascript: blurEffect()">Blur Effect</a>
+	<a href="javascript: mosaicEffect()">Mosaic Effect</a>
+</div>
+<script type="text/javascript">
+
+		var canA = document.querySelector('#canvasA'),
+			ctxA = canA.getContext('2d');
+		var canB = document.querySelector('#canvasB'),
+			ctxB = canB.getContext('2d');
+		var image = new Image();
+
+	window.addEventListener('load', function(){
+
+		canA.width = 600;
+		canA.height = 375;
+
+		image.onload = function(){
+			ctxA.drawImage(image, 0, 0, canA.width, canA.height);
+		};
+		image.src = 'images/img.jpg';
+	}, false);
+
+// 图像复制getImageData putImageData
+	function filter(){
+		var imageData = ctxA.getImageData(0, 0, canA.width, canA.height);
+
+		ctxB.putImageData(imageData, 0, 0, 0, 0, canB.width, canB.height);
+	}
+
+// 灰度滤镜
+	function greyEffect(){
+		var imageData = ctxA.getImageData(0, 0, canA.width, canA.height);
+		var pixelData = imageData.data;
+
+		for( var i = 0; i < canB.width * canB.height; i++) {
+			var r = pixelData[i*4+0];
+			var g = pixelData[i*4+1];
+			var b = pixelData[i*4+2];
+
+			var grey = r*0.3 + g*0.59 + b*0.11;
+
+			pixelData[i*4+0] = grey;
+			pixelData[i*4+1] = grey;
+			pixelData[i*4+2] = grey;
+		}
+
+		ctxB.putImageData(imageData, 0, 0, 0, 0, canB.width, canB.height);
+	}
+
+// 黑度滤镜
+	function blackEffect(){
+		var imageData = ctxA.getImageData(0, 0, canA.width, canA.height);
+		var pixelData = imageData.data;
+		var v = 0;
+
+		for( var i = 0; i < canB.width * canB.height; i++) {
+			var r = pixelData[i*4+0];
+			var g = pixelData[i*4+1];
+			var b = pixelData[i*4+2];
+
+			var grey = r*0.3 + g*0.59 + b*0.11;
+			grey > (255 / 2) ? v = 255 : v = 0			
+
+			pixelData[i*4+0] = v;
+			pixelData[i*4+1] = v;
+			pixelData[i*4+2] = v;
+		}
+
+		ctxB.putImageData(imageData, 0, 0, 0, 0, canB.width, canB.height);
+	}
+
+// 反色滤镜
+	function reverseEffect(){
+		var imageData = ctxA.getImageData(0, 0, canA.width, canA.height);
+		var pixelData = imageData.data;
+		var v = 0;
+
+		for( var i = 0; i < canB.width * canB.height; i++) {
+			var r = pixelData[i*4+0];
+			var g = pixelData[i*4+1];
+			var b = pixelData[i*4+2];
+
+			pixelData[i*4+0] = 255 - r;
+			pixelData[i*4+1] = 255 - g;
+			pixelData[i*4+2] = 255 - b;
+		}
+
+		ctxB.putImageData(imageData, 0, 0, 0, 0, canB.width, canB.height);
+	}
+
+// 模糊滤镜
+	function blurEffect(){
+		var tmpImageData = ctxA.getImageData(0, 0, canA.width, canA.height);
+		var tmpPixelData = tmpImageData.data;
+		
+		var imageData = ctxA.getImageData(0, 0, canA.width, canA.height);
+		var pixelData = imageData.data;
+
+		var blurR = 3;
+		var totalNum = (2*blurR + 1)*(2*blurR + 1);
+
+		for( var i = blurR; i < canB.height - blurR; i++){
+			for(var j = blurR; j < canB.width - blurR; j++){
+				
+				var totalr = 0, totalg = 0, totalb = 0;
+				for( var dx = -blurR; dx <= blurR; dx++){
+					for (var dy = -blurR; dy <= blurR; dy++){
+						var x = i + dx;
+						var y = j + dy;
+
+						var p = x*canB.width + y;
+						totalr += tmpPixelData[p*4+0];
+						totalg += tmpPixelData[p*4+1];
+						totalb += tmpPixelData[p*4+2];
+					}
+				}
+
+				var p = i*canB.width + j;
+				pixelData[p*4+0] = totalr / totalNum;
+				pixelData[p*4+1] = totalg / totalNum;
+				pixelData[p*4+2] = totalb / totalNum;
+			}
+		}
+
+		ctxB.putImageData(imageData, 0, 0, 0, 0, canB.width, canB.height);
+	}
+
+// 马赛克滤镜
+	function mosaicEffect(){
+		var tmpImageData = ctxA.getImageData(0, 0, canA.width, canA.height);
+		var tmpPixelData = tmpImageData.data;
+		
+		var imageData = ctxA.getImageData(0, 0, canA.width, canA.height);
+		var pixelData = imageData.data;
+
+		var size = 16;
+		var totalNum = size*size;
+
+		for( var i = 0; i < canB.height; i += size){
+			for(var j = 0; j < canB.width; j += size){
+				
+				var totalr = 0, totalg = 0, totalb = 0;
+				for( var dx = 0; dx <= size; dx++){
+					for (var dy = 0; dy <= size; dy++){
+						var x = i + dx;
+						var y = j + dy;
+
+						var p = x*canB.width + y;
+						totalr += tmpPixelData[p*4+0];
+						totalg += tmpPixelData[p*4+1];
+						totalb += tmpPixelData[p*4+2];
+					}
+				}
+
+				var p = i*canB.width + j;
+				var resr = totalr / totalNum;
+				var resg = totalg / totalNum;
+				var resb = totalb / totalNum;
+
+				for(var dx = 0; dx < size; dx ++){
+					for(var dy = 0; dy < size; dy ++){
+						var x = i + dx;
+						var y = j + dy;
+
+						var p = x*canB.width + y;
+										
+						pixelData[p*4+0] = resr;
+						pixelData[p*4+1] = resg;
+						pixelData[p*4+2] = resb;
+					}
+				}
+			}
+		}
+
+		ctxB.putImageData(imageData, 0, 0, 0, 0, canB.width, canB.height);
+	}
+</script>
+</body>
+</html>

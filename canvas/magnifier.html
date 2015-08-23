@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body style="background: black">
+
+<canvas id="canvas" style="display:block; margin:20px auto; border: 1px solid #aaa;">
+	您的浏览器不支持canvas
+</canvas>
+
+<script type="text/javascript">
+// ctx.drawImage(image, sx, sy, sw, sy, dx, dx, dw, dh);
+	var canvas = document.querySelector('#canvas');
+	var ctx = canvas.getContext('2d');
+
+	var offcanvas = document.createElement('canvas');
+	var offctx = offcanvas.getContext('2d');
+
+	var image = new Image();
+	var isMouseDown = false;
+
+	window.addEventListener('load', function(){
+		canvas.width = 1200;
+		canvas.height = 750;
+
+
+		image.onload = function(){
+			offcanvas.width = image.width;
+			offcanvas.height = image.height;
+			scale = offcanvas.width / canvas.width;
+
+			ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+			offctx.drawImage(image, 0, 0);
+		};
+		image.src = 'images/img.jpg';
+	});
+
+
+	function windowToCanva(x, y){
+		var bbox = canvas.getBoundingClientRect();
+		return {x: x - bbox.left, y: y - bbox.top};
+	}
+
+	canvas.onmousedown = function(e){
+		e.preventDefault();
+
+		var point = windowToCanva(e.clientX, e.clientY);
+		console.log(point.x, point.y);
+
+		isMouseDown = true;
+		drawCanvasWithMagnifier(true, point);
+	}
+
+	canvas.onmousemove = function(e){
+		e.preventDefault();
+		if(isMouseDown == true){
+			var point = windowToCanva(e.clientX, e.clientY);
+			console.log(point.x, point.y);
+			drawCanvasWithMagnifier(true, point);
+		}
+	}
+
+	canvas.onmouseup = function(e){
+		e.preventDefault();
+
+		isMouseDown = false;
+		drawCanvasWithMagnifier(false);
+	}
+
+	canvas.onmouseout = function(e){
+		e.preventDefault();
+
+		isMouseDown = false;
+		drawCanvasWithMagnifier(false);
+	}
+
+	function drawCanvasWithMagnifier(isShowMagnifier, point){
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+		if(isShowMagnifier == true){
+			drawMagnifier(point);
+		};
+	}
+
+	function drawMagnifier(point){
+		var imageLGcx = point.x * scale;
+		var imageLGcy = point.y * scale;
+
+		var mr = 200;
+
+		var sx = imageLGcx - mr;
+		var sy = imageLGcy - mr;
+	
+		var dx = point.x - mr;
+		var dy = point.y - mr;
+
+		ctx.save();
+
+		ctx.lineWidth = 10;
+		ctx.strokeStyle = "#069";
+		ctx.beginPath();
+		ctx.arc(point.x, point.y, mr, 0, Math.PI*2);
+		ctx.stroke();
+		ctx.clip();
+
+		ctx.drawImage(offcanvas, sx, sy, 2*mr, 2*mr, dx, dy, 2*mr, 2*mr);		
+	
+		ctx.restore();
+	}
+</script>
+<!-- endbuild -->
+</body>
+</html>

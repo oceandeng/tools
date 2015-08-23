@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body style="background: black">
+
+<canvas id="canvas" style="display:block; margin:20px auto; border: 1px solid #aaa;">
+	您的浏览器不支持canvas
+</canvas>
+<input type="range" id="scale-range" min="0.5" max="3.0" step="0.01" value="1.0" style="display:block; margin: 20px auto; width:800px" />
+
+<script type="text/javascript">
+	var canvas = document.querySelector('#canvas');
+	var slider = document.querySelector('#scale-range');
+	var ctx = canvas.getContext('2d');
+	var image = new Image();
+	var isMouseDown = false;
+
+	window.addEventListener('load', function(){
+		canvas.width = 800;
+		canvas.height = 500;
+
+		var scale = slider.value;
+
+		image.onload = function(){
+			drawImageByScale(scale);
+			// ctx.drawImage(image, sx, sy, sw, sy, dx, dx, dw, dh);
+			slider.onmousemove = function(){
+				scale = slider.value;
+				drawImageByScale(scale);
+			}
+		};
+		image.src = 'images/img.jpg';
+	});
+
+	function drawImageByScale(scale){
+		var imageWidth = 800 * scale;
+		var imageHeight = 500 * scale;
+
+		// var sx = imageWidth / 2 - canvas.width / 2;
+		// var sy = imageHeight / 2 - canvas.height / 2;
+
+		// ctx.drawImage(image, sx, sy, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
+
+		var dx = canvas.width / 2 - imageWidth / 2;
+		var dy = canvas.height / 2 - imageHeight / 2;
+
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(image, dx, dy, imageWidth, imageHeight);
+	}
+</script>
+<!-- endbuild -->
+</body>
+</html>
