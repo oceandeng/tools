@@ -102,6 +102,8 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 		});
 	});
 
+console.log(oTools.getAbsoluteURL('public'));
+
 });
 
 

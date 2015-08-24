@@ -1,3 +1,56 @@
+/*
+**************alert*******************************************
+Dialog({
+    'type': 'alert',
+    'msg': 'aaa',
+    'width': '60%',
+    'showButtons': true,
+    'cancelButton': false,
+    'contentStyle': {
+        'background': 'rgba(0, 0, 0, .8)',
+        'color': '#fff',
+        'margin': '0 auto',
+        'min-height': '60px',
+        'padding': '10px',
+        'border-radius': '5px'
+    }
+});
+*************popup********************************************
+Dialog({
+    'id': 'wrapper',
+    'type': 'popup',
+    'lock':true,
+    'width':'100%',
+    'height': '100%',
+    'closeImg': path,
+    'animation':'animated rotateInDownLeft',
+    'onReady': function(){
+        // alert('big popup');
+        var myScroll;
+        (function(){
+            myScroll = new IScroll('#wrapper', {
+                scrollbars: true,
+                mouseWheel: true,
+                interactiveScrollbars: true,
+                shrinkScrollbars: 'scale',
+                fadeScrollbars: true,
+                bounce: false
+            });
+        })();
+    },
+    'onClose': function() {
+        // 关闭回调
+        // alert('close popup');
+    }
+});
+*************loading********************************************
+Dialog({
+    'id': 'canvas',
+    'type': 'loading',
+    'time': 1000
+});
+*/
+
 'use strict';
 
 (function(G, D) {

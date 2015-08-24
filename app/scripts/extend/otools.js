@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-08-06 11:21:15
+* @Last Modified time: 2015-08-18 15:04:09
 */
 
 'use strict';
@@ -137,29 +137,70 @@ var oTools = {
         var num = Math.floor(Math.random() * 3);
         col[num] = 0;
         return "rgba(" + col[0] + "," + col[1] + "," + col[2] + ","; 
-    }
-}
+    },
+    getAbsoluteURL: (function(){
+        var a;
+
+        return function(url){
+            if(!a) a = document.createElement('a');
+            a.href = url;
+
+            return a.href;
+        }
+    })()
+};
 
 //html5 动画
-window.requestAnimationFrame = (function() {
-    return window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.oRequestAnimationFrame ||
-        // if all else fails, use setTimeout
-        function(callback) {
-            return window.setTimeout(callback, 1000 / 60); // shoot for 60 fps
-        };
-})();
+// window.requestAnimationFrame = (function() {
+//     return window.requestAnimationFrame ||
+//         window.webkitRequestAnimationFrame ||
+//         window.mozRequestAnimationFrame ||
+//         window.oRequestAnimationFrame ||
+//         // if all else fails, use setTimeout
+//         function(callback) {
+//             return window.setTimeout(callback, 1000 / 60); // shoot for 60 fps
+//         };
+// })();
 
-window.cancelAnimationFrame = (function() {
-    return window.cancelAnimationFrame ||
-        window.webkitCancelAnimationFrame ||
-        window.mozCancelAnimationFrame ||
-        window.oCancelAnimationFrame ||
-        function(id) {
-            window.clearTimeout(id);
+// window.cancelAnimationFrame = (function() {
+//     return window.cancelAnimationFrame ||
+//         window.webkitCancelAnimationFrame ||
+//         window.mozCancelAnimationFrame ||
+//         window.oCancelAnimationFrame ||
+//         function(id) {
+//             window.clearTimeout(id);
+//         };
+// })();
+
+
+/* requestAnimationFrame.js
+ * by zhangxinxu 2013-09-30
+*/
+(function() {
+    var lastTime = 0;
+    var vendors = ['webkit', 'moz'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] ||    // name has changed in Webkit
+                                      window[vendors[x] + 'CancelRequestAnimationFrame'];
+    }
+
+    if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+            var id = window.setTimeout(function() {
+                callback(currTime + timeToCall);
+            }, timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
         };
+    }
+    if (!window.cancelAnimationFrame) {
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+    }
 })();
 
 // html5 audio
