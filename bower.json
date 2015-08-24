@@ -1,7 +1,5 @@
 {
   "name": "web",
   "private": true,
-  "dependencies": {
-    "zepto": "~1.1.6"
-  }
+  "dependencies": {}
 }
