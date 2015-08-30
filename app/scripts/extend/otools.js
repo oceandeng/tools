@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-08-06 11:21:15
+* @Last Modified time: 2015-08-30 20:53:58
 */
 
 'use strict';
@@ -137,6 +137,18 @@ var oTools = {
         var num = Math.floor(Math.random() * 3);
         col[num] = 0;
         return "rgba(" + col[0] + "," + col[1] + "," + col[2] + ","; 
+    },
+    //指定范围随机数  selectForm(2, 10);
+    selectForm(lowerValue, upperValue){
+        var choices = upperValue - lowerValue + 1;
+        return Math.floor(Math.random() * choices + lowerValue);
+    } 
+}
+
+var OO = {
+    // 判断属性是否来自原型
+    hasPrototypeProperty: function(object, name){
+        return !object.hasOwnproperty(name) && (name in object);
     }
 }
 
