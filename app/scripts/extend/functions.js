@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-28 19:33:40
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-06-29 10:44:34
+* @Last Modified time: 2015-08-24 17:56:27
 */
 
 //弹出消息框 基于zepto
@@ -35,5 +35,28 @@ function alertmess(str){
         setTimeout(function(){
             $('.mess').remove();
         }, 1500);
+    }
+}
+
+function placeholder() {
+    if (!("placeholder" in document.createElement("input"))) {
+      $('*[placeholder]').each(function () {
+        $this = $(this);
+        var placeholder = $(this).attr('placeholder');
+        if ($(this).val() === '') {
+          $this.val(placeholder);
+        }
+        $this.bind('focus', function () {
+          if ($(this).val() === placeholder) {
+            this.plchldr = placeholder;
+            $(this).val('');
+          }
+        });
+        $this.bind('blur', function () {
+          if ($(this).val() === '' && $(this).val() !== this.plchldr) {
+            $(this).val(this.plchldr);
+          }
+        });
+      });
     }
 }

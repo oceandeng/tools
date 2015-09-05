@@ -1,0 +1,82 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no">
+<meta name="full-screen" content="yes">
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="0" http-equiv="expires">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body style="height:2000px; background: #333;">
+
+<div id="div" style="width: 100px; height: 100px; background: red; position: fixed; top: 30px;"></div>
+
+<div style="width:100%; margin: 0; padding: 0; height:1px; background: red; position: absolute; top: 300px; left: 0"></div>
+
+<!-- build:js scripts/animate.js -->
+<script src="scripts/zepto/zepto.js"></script>
+<script src="scripts/zepto/event.js"></script>
+<script src="scripts/zepto/touch.js"></script>
+<!-- endbuild -->
+
+<script>
+(function(){
+	var lastTime, deltaTime, start, end, step;
+
+	function init(e, s){
+		start = window.pageYOffset;
+		end = e;
+		step = s;
+		lastTime = Date.now();
+		loop();
+	}
+
+	function loop(){
+		window.requestAnimationFrame(loop);
+		var now = Date.now();
+		deltaTime = now - lastTime;
+		lastTime = now;
+
+		animate();
+	}
+
+	// function interpolate(source, target, shift) {
+	// 	return (source + (target - source) * shift);
+	// };
+
+	// function easing(pos) {
+	// 	return (-Math.cos(pos * Math.PI) / 2) + .5;
+	// };
+
+	function animate(){
+		if(start > end){
+			start -= step;
+			if(start < end){
+				start = end;
+			}
+console.log(start);
+			window.scrollTo(0, start);
+			return;
+		}
+		if(start < end){
+			start += step;
+			if(start > end){
+				start = end;
+			}
+			window.scrollTo(0, start);
+			return;
+		}
+	};
+
+	var oDiv = document.querySelector('#div');
+	oDiv.addEventListener('click', function(){
+		init(300, 15);
+	});
+})();
+</script>
+</body>
+</html>

@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 
   // Configurable paths
   var config = {
-    app: 'canvas',
+    app: 'app',
     dist: 'dist'
   };
 
@@ -58,7 +58,7 @@ module.exports = function (grunt) {
         },
         files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass']
-      },      
+      },
       styles: {
         files: ['<%= config.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
