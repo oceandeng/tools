@@ -25,13 +25,15 @@
 
 <script>
 (function(){
+
 	var lastTime, deltaTime, start, end, step;
 
-	function init(e, s){
+	function scrollToPosition(e, s){
 		start = window.pageYOffset;
 		end = e;
 		step = s;
 		lastTime = Date.now();
+
 		loop();
 	}
 
@@ -74,9 +76,10 @@ console.log(start);
 
 	var oDiv = document.querySelector('#div');
 	oDiv.addEventListener('click', function(){
-		init(300, 15);
+		scrollToPosition(300, 15);
 	});
 })();
+
 </script>
 </body>
 </html>

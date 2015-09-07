@@ -7,14 +7,16 @@ require.config({
         dialog: './extend/dialog',
         validate: './extend/validate',
     	iscroll: './iscroll/iscroll',
-    	loading: './extend/loading'
+    	loading: './extend/loading',
+    	zepto: './zepto/zepto',
+    	event: './zepto/event'
     },
     shim: {
 
     }
 });
 
-require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
+require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading', 'zepto', 'event'], function(){
 
 // Dialog + iscroll type popup
 	$('#splendid').on('click', function(){

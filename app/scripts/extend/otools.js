@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-08-18 15:04:09
+* @Last Modified time: 2015-08-26 16:50:10
 */
 
 'use strict';
@@ -104,26 +104,26 @@ var oTools = {
     // 截取字符串，中英文都是1个字节
     cutstr: function (str,len){
         var str_length = 0;
-        var str_len = 0;  
-            str_cut = new String();  
-            str_len = str.length;  
-        for(var i = 0;i<str_len;i++){  
-            a = str.charAt(i);  
-            str_length++;  
+        var str_len = 0;
+            str_cut = new String();
+            str_len = str.length;
+        for(var i = 0;i<str_len;i++){
+            a = str.charAt(i);
+            str_length++;
             if(escape(a).length > 4){
                 //中文字符的长度经编码之后大于4  
-                str_length++;  
-            }  
-            str_cut = str_cut.concat(a);  
+                str_length++;
+            }
+            str_cut = str_cut.concat(a);
             if(str_length>=len){
-                str_cut = str_cut.concat("...");  
-                return str_cut;  
-            }  
-        }  
-        //如果给定字符串小于指定长度，则返回源字符串；  
-        if(str_length<len){  
-            return  str;  
-        }  
+                str_cut = str_cut.concat("...");
+                return str_cut;
+            }
+        }
+        //如果给定字符串小于指定长度，则返回源字符串；
+        if(str_length<len){
+            return  str;
+        }
     },
     //随机颜色
     randomColor: function(){
@@ -147,7 +147,15 @@ var oTools = {
 
             return a.href;
         }
-    })()
+    })(),
+    setStyle: function(elem, prop){
+        if(!elem){
+            return false;
+        };
+        for(var i in prop){
+            elem.style[i] = prop[i];
+        }
+    }
 };
 
 //html5 动画
