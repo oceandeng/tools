@@ -2,7 +2,15 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
+<<<<<<< HEAD
 * @Last Modified time: 2015-08-26 16:50:10
+=======
+<<<<<<< HEAD
+* @Last Modified time: 2015-08-30 20:53:58
+=======
+* @Last Modified time: 2015-08-18 15:04:09
+>>>>>>> 9fcd236d9665717a8abe1f2471c97f8c3a3dacb9
+>>>>>>> 37e86f1fa8eb32487348fd3545b2ec445b4832f5
 */
 
 'use strict';
@@ -138,6 +146,21 @@ var oTools = {
         col[num] = 0;
         return "rgba(" + col[0] + "," + col[1] + "," + col[2] + ","; 
     },
+<<<<<<< HEAD
+    //指定范围随机数  selectForm(2, 10);
+    selectForm(lowerValue, upperValue){
+        var choices = upperValue - lowerValue + 1;
+        return Math.floor(Math.random() * choices + lowerValue);
+    } 
+}
+
+var OO = {
+    // 判断属性是否来自原型
+    hasPrototypeProperty: function(object, name){
+        return !object.hasOwnproperty(name) && (name in object);
+    }
+}
+=======
     getAbsoluteURL: (function(){
         var a;
 
@@ -157,6 +180,7 @@ var oTools = {
         }
     }
 };
+>>>>>>> 9fcd236d9665717a8abe1f2471c97f8c3a3dacb9
 
 //html5 动画
 // window.requestAnimationFrame = (function() {
