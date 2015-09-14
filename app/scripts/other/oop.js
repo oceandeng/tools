@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-08-30 21:19:52
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-09-05 16:16:57
+* @Last Modified time: 2015-09-05 16:51:14
 */
 
 'use strict';
@@ -16,6 +16,25 @@ var factorial = (function fn(num){
 	}
 })();
 
+// 内存泄露
+// 泄露 IE
+function assignHandler(){
+	var element = document.getElementById("someElement");
+	element.onclick = function(){
+		alert(element.id);
+	}
+}
+// 解决
+function assignHandler(){
+	var element = document.getElementById("someElement");
+	var id = element.id;
+
+	element.onclick = function(){
+		alert(id);
+	}
+
+	element = null;
+}
 
 // 构造函数和原型组合
 function Person(name, age, job){
