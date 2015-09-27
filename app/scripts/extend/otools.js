@@ -2,15 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
-<<<<<<< HEAD
-* @Last Modified time: 2015-09-22 11:08:01
-=======
-<<<<<<< HEAD
-* @Last Modified time: 2015-08-30 20:53:58
-=======
-* @Last Modified time: 2015-08-18 15:04:09
->>>>>>> 9fcd236d9665717a8abe1f2471c97f8c3a3dacb9
->>>>>>> 37e86f1fa8eb32487348fd3545b2ec445b4832f5
+* @Last Modified time: 2015-09-27 22:15:29
 */
 
 'use strict';
