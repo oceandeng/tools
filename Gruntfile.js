@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 
   // Configurable paths
   var config = {
-    app: 'underscore',
+    app: 'app',
     dist: 'dist'
   };
 

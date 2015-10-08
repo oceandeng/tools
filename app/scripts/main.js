@@ -5,6 +5,7 @@ require.config({
     	fastclick: './extend/fastclick',
     	otools: './extend/otools',
         dialog: './extend/dialog',
+        drag: './extend/drag',
         validate: './extend/validate',
     	iscroll: './iscroll/iscroll',
     	loading: './extend/loading',
@@ -14,6 +15,13 @@ require.config({
     shim: {
 
     }
+});
+
+require(['drag'], function(){
+
+	new Drag('menu');
+	// new LimitDrag('menu');
+
 });
 
 require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading', 'zepto', 'event'], function(){
@@ -33,6 +41,7 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading', 'zepto', 'event'
 			'height': '100%',
 			'closeImg': path,
 			'animation':'animated rotateInDownLeft',
+			'outAnimation': 'rotateOutDownLeft',
 			'onReady': function(){
 				// alert('big popup');
 				var myScroll;
@@ -104,7 +113,7 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading', 'zepto', 'event'
 		});
 	});
 
-console.log(oTools.getAbsoluteURL('public'));
+console.log(OO.getAbsoluteURL('public'));
 
 });
 

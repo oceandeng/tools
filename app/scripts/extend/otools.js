@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-09-27 22:15:29
+* @Last Modified time: 2015-09-29 16:31:17
 */
 
 'use strict';
@@ -139,7 +139,7 @@ var oTools = {
         return "rgba(" + col[0] + "," + col[1] + "," + col[2] + ","; 
     },
     //指定范围随机数  selectForm(2, 10);
-    selectForm(lowerValue, upperValue){
+    selectForm: function(lowerValue, upperValue){
         var choices = upperValue - lowerValue + 1;
         return Math.floor(Math.random() * choices + lowerValue);
     },
