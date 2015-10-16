@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-28 19:13:05
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-09-24 10:21:19
+* @Last Modified time: 2015-10-09 11:07:29
 */
 
 'use strict';
@@ -71,6 +71,7 @@ var EventUtil = {
 	}
 }
 
+/************************************************
 // 事件截流
 	var processor = {
 		timeoutId: null,
@@ -101,7 +102,9 @@ var EventUtil = {
 			method.call(context);
 		}, 100);
 	}
+************************************************/
 
+/************************************************	
 	// div 窗口变化时高度等于宽度
 	function resizeDiv(){
 		var div = document.getElementById('myDiv');
@@ -111,13 +114,16 @@ var EventUtil = {
 	window.onresize = function(){
 		throttle(resizeDiv);
 	}
+************************************************/
 
+/************************************************	
 // 自定义DOM事件 createEvent('customEvent');
 	// DOM.createEvent('customEvent').initCustomEvent(type, bubbles, cancelable, detail);
 		// type (字符串)：触发的时间类型， 例如'keydown'
 		// bubbles (布尔值)：表示事件是否应该冒泡
 		// cancelable (布尔值)：表示事件是否可以取消
 		// detail (对象)：任意值，保存在event对象的detail属性中
+
 	var div = document.getElementById('myDiv'),
 		event;
 
@@ -134,7 +140,10 @@ var EventUtil = {
 		div.dispatchEvent(event);
 	}
 
+************************************************/
 
+
+/************************************************	
 // 监测是touch事件
 function handleTouchEvent(event){
 	// 只跟踪一次
@@ -157,3 +166,5 @@ function handleTouchEvent(event){
 // EventUtil.addHandler(document, "touchstart", handleTouchEvent);
 // EventUtil.addHandler(document, "touchend", handleTouchEvent);
 // EventUtil.addHandler(document, "touchmove", handleTouchEvent);
+
+************************************************/

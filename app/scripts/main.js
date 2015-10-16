@@ -6,25 +6,30 @@ require.config({
     	otools: './extend/otools',
         dialog: './extend/dialog',
         drag: './extend/drag',
+        eventUtil: './extend/eventutil',
+        eventTarget: './extend/event_target',
         validate: './extend/validate',
     	iscroll: './iscroll/iscroll',
-    	loading: './extend/loading',
-    	zepto: './zepto/zepto',
-    	event: './zepto/event'
+    	loading: './extend/loading'
     },
     shim: {
 
     }
 });
 
-require(['drag'], function(){
+require(['eventUtil', 'drag', 'eventTarget'], function(){
+	var drag = new DragDrop();
+	drag.enable();
 
-	new Drag('menu');
+	drag.addHandler('dragstart', function(event){
+		
+	});
+	// new Drag('menu');
 	// new LimitDrag('menu');
 
 });
 
-require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading', 'zepto', 'event'], function(){
+require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 
 // Dialog + iscroll type popup
 	$('#splendid').on('click', function(){
