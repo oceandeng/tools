@@ -1,0 +1,108 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no">
+<meta name="full-screen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>web</title>
+<link rel="shortcut icon" href="/favicon.ico">
+<style>
+	html,body{
+		height: 100%;
+	}
+	body{
+		padding: 0;
+	}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=qRn44eyeVuP1EGWn5ovWnGgs"></script>
+</head>
+<body>
+
+<header>
+	
+</header>
+
+<div style="width:100%; height:100%;" id="container"></div>
+
+<!-- <article style="height: 2000px; background: #333; margin: 0">
+
+	<section id="btn" style="display: block; width: 100%; height: 60px; background: green; position: fixed; bottom: 0"></section>
+
+</article> -->
+
+<footer>
+		
+</footer>
+
+<script src="scripts/zepto/zepto.js"></script>
+<script src="scripts/zepto/event.js"></script>
+
+<script>
+	$('#btn').on('click', function(){
+		$.scrollTo({
+			endY: 300,
+	    	duration: 200,
+			callback: function(){
+				console.log(window.pageYOffset);
+			}
+		})
+	});
+</script>
+
+<script>
+
+	var map = new BMap.Map('container');
+	map.centerAndZoom(new BMap.Point(116.3964,39.9093), 15);
+
+// 复杂的自定义覆盖物
+    function ComplexCustomOverlay(point, text, mouseoverText){
+      this._point = point;
+      this._text = text;
+      this._overText = mouseoverText;
+    }
+    ComplexCustomOverlay.prototype = new BMap.Overlay();
+    ComplexCustomOverlay.prototype.initialize = function(map){
+      this._map = map;
+      var div = this._div = document.createElement("div");
+      div.style.position = "absolute";
+      div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
+      div.style.background = "url(images/bg.png) no-repeat";
+      div.style.color = "white";
+      div.style.width = "30px";
+      div.style.height = "30px";
+      div.style.lineHeight = "30px";
+      div.style.textAlign = "center";
+      div.style.MozUserSelect = "none";
+      div.style.fontSize = "16px";
+      div.style.fontWeight = "bold";
+      var span = this._span = document.createElement("span");
+      div.appendChild(span);
+      span.appendChild(document.createTextNode(this._text));
+      var that = this;
+
+      map.getPanes().labelPane.appendChild(div);
+
+      return div;
+    }
+    ComplexCustomOverlay.prototype.draw = function(){
+      var map = this._map;
+      var pixel = map.pointToOverlayPixel(this._point);
+      this._div.style.left = pixel.x - 30 + "px";
+      this._div.style.top  = pixel.y - 30 + "px";
+    }
+
+    var myCompOverlay = new ComplexCustomOverlay(new BMap.Point(116.407845,39.914101), '1');
+    var myCompOverlay1 = new ComplexCustomOverlay(new BMap.Point(116.390000,39.914101), '2');
+    var myCompOverlay2 = new ComplexCustomOverlay(new BMap.Point(116.380000,39.904101), '3');
+
+    map.addOverlay(myCompOverlay);
+    map.addOverlay(myCompOverlay1);
+    map.addOverlay(myCompOverlay2);
+
+</script>
+
+</body>
+</html>
