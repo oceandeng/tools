@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:16:24
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-07-13 18:22:08
+* @Last Modified time: 2015-11-02 14:14:24
 */
 
 'use strict';
@@ -22,6 +22,9 @@ var loading = function(arg){
 
 	LoadingImg.prototype = {
 	    constructor:LoadingImg,
+	    creatDom: function(){
+
+	    },
 	    init: function (arg) {
 	        var isConsist = !isEmpty(arg);
 	        this.block = isConsist ? arg.block ? arg.block : 12 : 12;

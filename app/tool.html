@@ -1,0 +1,126 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no">
+<meta name="full-screen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>web</title>
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- build:css(.tmp) styles/main.css -->
+<link rel="stylesheet" href="styles/animate.css">
+<link rel="stylesheet" href="styles/main.css">
+<!-- endbuild -->
+</head>
+<body>
+	<nav>
+		<div id="menu" class="draggable" style="position: fixed; top: 10px; right: 10px;">菜单</div>
+ 		<ul id="menuList" class="menu">
+ 			<li>菜单一</li>
+ 			<li>菜单二</li>
+ 			<li>菜单三</li>
+ 			<li>菜单四</li>
+ 			<li>菜单五</li>
+ 		</ul>
+	</nav>
+
+	<section class="container">
+	<section class="post-box">
+
+		<figure class="p-img" id="postImg">
+			<div class="p-img-box">
+				<img src="images/test/demo-1.jpg" data-bsrc="images/test/b-demo-1.jpg" alt="">
+			</div>
+			<div class="p-img-box">
+				<img src="images/test/demo-2.jpg" data-bsrc="images/test/b-demo-2.jpg" alt="">
+			</div>
+			<div class="p-img-box">
+				<img src="images/test/demo-3.jpg" data-bsrc="images/test/b-demo-3.jpg" alt="">
+			</div>
+			<div class="p-img-box">
+				<img src="images/test/demo-4.jpg" data-bsrc="images/test/b-demo-4.jpg" alt="">
+			</div>
+			<div class="p-img-box">
+				<img src="images/test/demo-5.jpg" data-bsrc="images/test/b-demo-5.jpg" alt="">
+			</div>
+			<div class="p-img-box">
+				<img src="images/test/demo-3.jpg" data-bsrc="images/test/b-demo-3.jpg" alt="">
+			</div>
+			<div class="p-img-box">
+				<img src="images/test/demo-1.jpg" data-bsrc="images/test/b-demo-1.jpg" alt="">
+			</div>
+			<div class="p-img-box">
+				<img src="images/test/demo-2.jpg" data-bsrc="images/test/b-demo-2.jpg" alt="">
+			</div>
+			<div class="p-img-box">
+				<img src="images/test/demo-3.jpg" data-bsrc="images/test/b-demo-3.jpg" alt="">
+			</div>
+		</figure>
+	</section>
+	</section>
+
+<!-- build:js scripts/zepto.min.js -->
+<script src="scripts/zepto/zepto.js"></script>
+<script src="scripts/zepto/ajax.js"></script>
+<script src="scripts/zepto/event.js"></script>
+<script src="scripts/zepto/touch.js"></script>
+<script src="scripts/zepto/fx.js"></script>
+<script src="scripts/zepto/fx_methods.js"></script>
+<!-- endbuild -->
+
+<!-- build:js scripts/drag.js -->
+<script src="scripts/extend/eventutil.js"></script>
+<script src="scripts/extend/event_target.js"></script>
+<script src="scripts/extend/dialog.js"></script>
+<script src="scripts/extend/drag.js"></script>
+<!-- endbuild -->
+
+<!-- build:js scripts/light_box.js -->
+<script src="scripts/extend/functions.js"></script>
+<script src="scripts/extend/otools.js"></script>
+<script src="scripts/extend/light_box.js"></script>
+<!-- endbuild -->
+<script>
+
+// 拖拽调用
+	$(function(){
+		var drag = new DragDrop();
+		drag.enable();
+
+		$('#menu').on('tap', function(){
+			var $menuList = $('#menuList');
+
+			oTools.alertmess('我是菜单！！！');
+		});
+	});
+
+// 小图放大图
+	$(function(){
+
+		var sW = $(window).width(),
+			sH = $(window).height();
+
+		var $pImg = $('#postImg').find('.p-img-box');
+		var pImgW = $pImg.width();
+
+		$pImg.height(pImgW);
+
+		// 图片大图显示
+		var $postImg = $('#postImg');
+
+		$postImg.lightBox({
+			width: sW,
+			height: sH,
+			cEvent: oTools.clickEvent,
+			parentClass: '.p-img-box',
+			loadImg: 'images/loading.gif'
+		});
+
+	});
+
+</script>
+
+</body>
+</html>

@@ -1,10 +1,5 @@
 // bower:scss
 // endbower
-img{
-  width:auto !important;
-  height:auto !important;
-  max-width:100% !important;
-}
 
 @import "compass/css3";
 @import "normalize";
@@ -12,10 +7,14 @@ img{
 
 // @import "normalize/html5";
 
+img{
+  max-width: 100%;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button{
     -webkit-appearance: none !important;
-    margin: 0; 
+    margin: 0;
 }
 input[type="number"]{-moz-appearance:textfield;}
 
@@ -28,8 +27,6 @@ input[type="number"]{-moz-appearance:textfield;}
 
 /* Space out content a bit */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
   font-family: $family;
 }
 
@@ -146,4 +143,26 @@ body {
 .alert,.loading{
   @include line-height();
   color: rgba(200, 0, 0, .8);
+}
+
+.p-img{
+  width: 100%;
+  @include clearfix();
+  // display: -webkit-flex;
+  // display: flex;
+  // flex-wrap: wrap;
+
+  .p-img-box{
+    width: 33.33333333%;
+    float:left;
+    overflow: hidden;
+    border-bottom: 1px solid #fff;
+    text-align: center;
+    overflow: hidden;
+
+    img{
+      margin-left: -1px;
+      border-right: 1px solid #fff;
+    }
+  }
 }
