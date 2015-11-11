@@ -11,10 +11,16 @@ require.config({
         validate: './extend/validate',
     	iscroll: './iscroll/iscroll',
     	loading: './extend/loading'
-    },
-    shim: {
-
     }
+  //   shim: {
+		// "underscore" : {
+  //           exports : "_";
+  //       },
+  //       "jquery.form" : {
+  //           deps : ["jquery"]
+  //       }
+  //   },
+    // baseUrl : "js" //配置根目录
 });
 
 require(['eventUtil', 'drag', 'eventTarget'], function(){
