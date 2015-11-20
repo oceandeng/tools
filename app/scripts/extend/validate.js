@@ -2,7 +2,7 @@
  * @Author: ocean
  * @Date:   2015-06-30 11:35:58
  * @Last Modified by:   ocean
- * @Last Modified time: 2015-08-18 10:01:17
+ * @Last Modified time: 2015-11-19 16:03:56
  */
 
 'use strict';
@@ -50,7 +50,7 @@
 	}
 /*
 检验身份证
-*/	
+*/
 function isIdCard(str) 
 {
     var patrnOne = /^\s*\d{15}\s*$/;

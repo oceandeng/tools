@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-28 19:13:05
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-10-09 11:07:29
+* @Last Modified time: 2015-11-18 14:50:04
 */
 
 'use strict';
@@ -102,6 +102,24 @@ var EventUtil = {
 			method.call(context);
 		}, 100);
 	}
+
+	// 面向对象
+	function Processor(fn){
+	    this.timeoutId = null;
+	    this.performProcessing = fn;
+	    this.process();
+	}
+
+	Processor.prototype.process = function(e){
+	        clearTimeout(this.timeoutId);
+
+	        var that = this;
+	        this.timeoutId = setTimeout(function(){
+	            that.performProcessing(e);
+	        }, 100);
+	}
+
+
 ************************************************/
 
 /************************************************	

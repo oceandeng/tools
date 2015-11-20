@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:16:24
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-11-13 11:47:28
+* @Last Modified time: 2015-11-17 14:21:05
 */
 
 'use strict';
@@ -40,7 +40,7 @@ var loading = function(arg){
     };
 
 	function LoadingImg(arg){
-		this.id = '';
+		this.page_body = document.getElementsByTagName("body")[0];
 	    this.init(arg);
 	}
 
@@ -49,24 +49,42 @@ var loading = function(arg){
 	    init: function (arg) {
 
 	        var isConsist = !isEmpty(arg);
-	        this.id = isConsist ? arg.id ? arg.id : 'canvas' : 'canvas';
+	        this.id = isConsist ? arg.id ? arg.id : 'loading' : 'loading';
 	        this.block = isConsist ? arg.block ? arg.block : 12 : 12;
 	        this.height = isConsist ? arg.height ? arg.height : 15 : 15;
 	        this.width = isConsist ? arg.width ? arg.width : 3 : 3;
 	        this.time = isConsist ? arg.time ? arg.time : 100 : 100;
 
-	    	this.createDom();
-	    	this.setStyle();
-	    	this.draw();
+	    },
+	    start: function(){
+
+	    	var flag = true;
+	    	var childs = this.page_body.childNodes;
+
+			for(var i = 0, l = childs.length; i < l; i ++){
+				if(childs[i].nodeName.toLowerCase() == "canvas" && childs[i].id == 'loading'){
+					flag = false;
+				}else{
+					flag = true;
+				}
+			}
+
+			if(flag){
+		    	this.createDom();
+		    	this.setStyle();
+		    	this.draw();
+			}
+
 	    },
 	    createDom: function(){
 			this.canvas = document.createElement('canvas');
 			this.offcanvas = document.createElement('canvas');
 
-	        var page_body = document.getElementsByTagName("body")[0];
-	        page_body.appendChild(this.canvas);
+	        this.page_body.appendChild(this.canvas);
+
 	    },
 	    setStyle: function(){
+	    	this.canvas.id = this.id;
 	        this.canvas.width = this.offcanvas.width = 160;
 	        this.canvas.height = this.offcanvas.height = 160;
 	        this.canvas.style.width = this.offcanvas.style.width = "80px";
@@ -112,13 +130,29 @@ var loading = function(arg){
 	        for(var i = 1; i <= this.block; i ++){
 	            this.loop(i/this.block);
 	        };
-	        setTimeout(function(){
+	        this.timeout = setTimeout(function(){
 	            that.view(radius);
 	        }, that.time);
 
 	    },
 	    removeDom: function(){
-            this.canvas.parentNode.removeChild(this.canvas);
+	    	var that = this;
+			var flag = true;
+	    	var childs = this.page_body.childNodes;
+
+			for(var i = 0, l = childs.length; i < l; i ++){
+				if(childs[i].nodeName.toLowerCase() == "canvas" && childs[i].id == 'loading'){
+					flag = false;
+				}else{
+					flag = true;
+				}
+			}
+
+			if(!flag){
+	            this.canvas.parentNode.removeChild(this.canvas);
+	            clearTimeout(that.timeout);
+			}
+
 	    },
 	    close: function(){
 	    	this.removeDom();
@@ -127,13 +161,17 @@ var loading = function(arg){
 	return new LoadingImg(arg);
 };
 
+/********************************************
+// -- 调用DEMO 
+*********************************************/
 
-/* 调用DEMO */
 var load = loading({
-	'width': 5,
-	'height': 20
-});
+		'width': 5,
+		'height': 20
+	});
+
+	load.start();
 
 $('#menu').on('click', function(){
-	load.close();
+	load && load.close();
 });
