@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-28 19:33:40
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-11-12 16:47:03
+* @Last Modified time: 2015-11-27 16:57:17
 */
 
 //弹出消息框 基于zepto
@@ -81,3 +81,13 @@ var strLen = (function() {
         }
     };
 })();
+
+// -- 获取所有父节点
+function getParents(dom){
+    var parents = [];
+    while(dom.parentNode){
+        parents.push(dom.parentNode);
+        dom = dom.parentNode;
+    }
+    return parents;
+}

@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-11-18 10:25:19
+* @Last Modified time: 2015-12-10 13:30:46
 */
 
 'use strict';
@@ -144,7 +144,7 @@ var oTools = {
             a = str.charAt(i);
             str_length++;
             if(escape(a).length > 4){
-                //中文字符的长度经编码之后大于4  
+                //中文字符的长度经编码之后大于4
                 str_length++;
             }
             str_cut = str_cut.concat(a);
@@ -169,7 +169,7 @@ var oTools = {
         col[2] = col[2].toFixed();
         var num = Math.floor(Math.random() * 3);
         col[num] = 0;
-        return "rgba(" + col[0] + "," + col[1] + "," + col[2] + ","; 
+        return "rgba(" + col[0] + "," + col[1] + "," + col[2] + ",";
     },
     //指定范围随机数  selectForm(2, 10);
     selectForm: function(lowerValue, upperValue){
@@ -183,6 +183,14 @@ var oTools = {
           ele.addEventListener(events[i], addFlash, false);
         }
       }
+    },
+    transitionEnd: function($ele, fn){
+        var n = 0;
+        $ele.get(0).addEventListener('webkitTransitionEnd', function(){
+            if(n != 0) return;
+            fn && fn();
+            n++;
+        }, false);
     }
 }
 
