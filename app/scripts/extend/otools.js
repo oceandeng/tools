@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-12-10 13:30:46
+* @Last Modified time: 2015-12-23 16:39:17
 */
 
 'use strict';
@@ -185,12 +185,13 @@ var oTools = {
       }
     },
     transitionEnd: function($ele, fn){
-        var n = 0;
-        $ele.get(0).addEventListener('webkitTransitionEnd', function(){
-            if(n != 0) return;
-            fn && fn();
-            n++;
-        }, false);
+        var events = ["webkitTransitionEnd", "transitionend", "oTransitionEnd", "otransitionend", "transitionend"];
+
+        for(var i = 0; i < events.length; i ++){
+            $ele.on(events[i], function(){
+                fn && fn();
+            });
+        }
     }
 }
 

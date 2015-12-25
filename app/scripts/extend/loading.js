@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:16:24
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-11-17 14:21:05
+* @Last Modified time: 2015-12-23 16:42:52
 */
 
 'use strict';
@@ -93,6 +93,7 @@ var loading = function(arg){
 	        this.canvas.style.top = '20%';
 	        this.canvas.style.left = '50%';
 	        this.canvas.style.marginLeft = '-40px';
+	        this.canvas.style.zIndex = '999';
 	    },
 	    draw: function(){
 	    	this.ctx = this.canvas.getContext("2d");

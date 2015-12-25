@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no">
+<meta name="full-screen" content="yes">
+<!-- build:css  styles/bootstrap.min.css-->
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+<!-- endbuild -->
+</head>
+<body>
+
+	<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm" type="button">点击我</button>
+
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">这里是标题</h4>
+				</div>
+				<div class="modal-body">
+					<p>这里是内容</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<!-- build:js scripts/vendor.js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<!-- endbuild -->
+
+<!-- build:js scripts/custom.min.js-->
+
+<!-- endbuild -->
+
+<script>
+	// $(function(){
+	// 	$('.btn').click(function(){
+	// 		$('#mymodal').modal('toggle');
+	// 	});
+	// });
+</script>
+
+</body>
+</html>
