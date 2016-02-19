@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 
   // Configurable paths
   var config = {
-    app: 'bootstrap',
+    app: 'eqshow',
     dist: 'dist'
   };
 
