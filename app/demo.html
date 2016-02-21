@@ -15,7 +15,35 @@
 
 <h1>DEMO</h1>
 
+<div id="focusPointSource" style="width: 200px; height: 200px; background: red; position: absolute"></div>
+
+
 <script type="text/javascript" src="scripts/javascript/oop.js"></script>
 <script type="text/javascript" src="scripts/javascript/array.js"></script>
+<script src="scripts/javascript/animate_manage.js" type="text/javascript"></script>
+
+<script>
+	window.onload = function(){
+		document.getElementById("focusPointSource").onclick = function(){
+			var _this = this;
+
+			new animateManage({
+				"context": _this,
+				"effect": "linear",
+				"time": 500,
+				"starCss": {
+					"left": this.left
+				},
+				"css": {
+					"left": 200
+				},
+				"callback": function(){
+					alert("动画结束的回调函数执行")
+				}
+			}).init();
+		}
+	}
+</script>
+
 </body>
 </html>
