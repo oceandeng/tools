@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2016-02-18 17:12:03
 * @Last Modified by:   ocean
-* @Last Modified time: 2016-02-19 17:29:15
+* @Last Modified time: 2016-02-19 18:12:27
 */
 
 'use strict';
@@ -18,11 +18,13 @@
 		this.movePos = {};
 		this.endPos = {};
 		this.mTop = 0;
-		this.lock = false;
+		this.lock = true;
 		this.index = 0;
 
 		this.init();
 	};
+
+	Eqshow.version = '1.0.0';
 
 	Eqshow.prototype.init = function(){
 
@@ -69,32 +71,41 @@
 		var s = event.originalEvent.changedTouches[0],
 			$_this = $(_this);
 
-
 		this.movePos = {
 			x: s.clientX,
 			y: s.clientY
 		}
-		
+
 		$_this.css({
 			zIndex: 99
 		});
 
-
 		this.mTop = this.movePos.y - this.startPos.y;
-		
+
+		this.$list.each(function(k, v){
+			if($(this).hasClass('ac')){
+				this.lock = false;
+			}
+		});
+
 		if(this.mTop < 0){
-			$_this.next().addClass('ac').css({
-				zIndex: 100,
-				display: 'block',
-				top: wh + this.mTop
-			})
+			if(this.lock){
+				$_this.next().addClass('ac').css({
+					zIndex: 100,
+					display: 'block',
+					top: wh + this.mTop
+				})
+			}
 		}else if(this.mTop > 0){
-			$_this.prev().addClass('ac').css({
-				zIndex: 100,
-				display: 'block',
-				top: - wh + this.mTop
-			});
+			if(this.lock){
+				$_this.prev().addClass('ac').css({
+					zIndex: 100,
+					display: 'block',
+					top: - wh + this.mTop
+				});
+			}
 		}
+
 
 
 		event.preventDefault();
@@ -111,7 +122,7 @@
 
 		$('.ac').animate({
 			top: 0
-		})
+		});
 
 	};
 
