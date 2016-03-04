@@ -1,0 +1,43 @@
+html,body{
+	height: 100%;
+}
+body{
+	width:100%;
+	overflow:hidden;
+}
+img{
+	display:block;
+	margin:0 auto;
+}
+.hide{ display:none;}
+.page{
+	width:100%;
+	height:100%;
+	position:absolute;
+	text-align:center;
+	background: #fed10c;
+}
+.page .pt-img{
+	position: relative;
+	z-index: -1;
+}
+.page-1{
+	/*background:#fed10c url("../images/page1.jpg") no-repeat;*/
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+.page-3{
+	/*background:#fed10c url("../images/3bg.svg") no-repeat -12px 80px;*/
+	background-size:contain;
+}
+.page-current{
+	z-index:1;
+}
+.pt-page-moveIconUp{
+	width:25px;
+	height: 14px;
+	position: absolute;
+	bottom:5%;
+	left:50%;
+	margin-left:-12.5px;
+}

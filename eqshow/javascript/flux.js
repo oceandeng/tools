@@ -53,16 +53,16 @@ window.flux = {
 		$(this.options.transitions).each(function(index, tran){
 			var t = new flux.transitions[tran](this),
 				compatible = true;
-			
+
 			if(t.options.requires3d && !flux.browser.supports3d)
 				compatible = false;
-				
+
 			if(t.options.compatibilityCheck)
 				compatible = t.options.compatibilityCheck();
 
 			if(compatible)
 				newTrans.push(tran);
-		});		
+		});
 
 		this.options.transitions = newTrans;
 
@@ -1308,7 +1308,7 @@ window.flux = {
 					'perspective': this.options.perspective,
 					'perspective-origin': '50% 50%'
 				});
-				
+
 				var _this = this;
 
 				var tiles = this.slider.image1.find('div.tile');
@@ -1321,7 +1321,7 @@ window.flux = {
 
 					_this.finished();
 				});
-				
+
 				setTimeout(function(){
 					tiles.css3({
 						'transform': flux.browser.rotateY(180)
@@ -1338,7 +1338,7 @@ window.flux = {
 			requires3d: true,
 			perspective: 1300,
 			direction: 'left',
-			setup: function() {				
+			setup: function() {
 				var tab = $('<div class="tab"></div>').css({
 						width: '50%',
 						height: '100%',
@@ -1421,7 +1421,7 @@ window.flux = {
 				this.slider.image1.find('div.tab').first().transitionEnd(function(){
 					_this.finished();
 				});
-				
+
 				setTimeout(function(){
 					_this.slider.image1.find('div.tab').css3({
 						// 179 not 180 so that the tab rotates the correct way in Firefox
@@ -1450,7 +1450,7 @@ window.flux = {
 					position: 'absolute',
 					top: '0px',
 					left: '0px',
-					background: this.slider[this.options.direction == 'left' ? 'image1' : 'image2'].css('background-image')	
+					background: this.slider[this.options.direction == 'left' ? 'image1' : 'image2'].css('background-image')
 				}).css3({
 					'backface-visibility': 'hidden'
 				}),
@@ -1499,7 +1499,7 @@ window.flux = {
 					});
 				}, 50);
 			}
-		}, opts));	
+		}, opts));
 	};
 })(window.jQuery || window.Zepto);
 
@@ -1519,7 +1519,7 @@ window.flux = {
 					'mask-position': '70%',
 					'mask-size': '400%'
 				});
-				
+
 				this.slider.image1.append(img);
 			},
 			execute: function() {
@@ -1552,13 +1552,13 @@ window.flux = {
 				var img = $('<div class="image"></div>').css({
 					width: '100%',
 					height: '100%',
-					'background-image': this.slider.image1.css('background-image')	
+					'background-image': this.slider.image1.css('background-image')
 				}).css3({
 					'transition-duration': '600ms',
 					'transition-timing-function': 'ease-in',
 					'transition-property': 'opacity'
 				});
-				
+
 				this.slider.image1.append(img);
 			},
 			execute: function() {

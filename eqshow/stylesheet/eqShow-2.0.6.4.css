@@ -137,7 +137,7 @@ h6 {
     -webkit-animation: rotating 1.2s linear infinite;
     -moz-animation: rotating 1.2s linear infinite;
     -o-animation: rotating 1.2s linear infinite;
-    animation: rotating 1.2s linear infinite
+    animation: rotating 1.2s linear infinite;
 }
 
 @-webkit-keyframes rotating {

@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2016-02-17 15:39:43
 * @Last Modified by:   ocean
-* @Last Modified time: 2016-02-19 11:41:56
+* @Last Modified time: 2016-02-24 10:17:48
 */
 
 'use strict';
@@ -77,7 +77,8 @@ function renderPage(a, b, c) {
             p = 0;
         m.contain.on("mousedown touchstart", function(a) {
             return "button" == a.target.tagName.toLowerCase() || a.target.getAttribute("data") || a.target.getAttribute("href") || "8" == a.target.getAttribute("ctype") ? void a.stopPropagation() : (a.stopPropagation(), a.preventDefault(), void(m.touchPos < m.pLen || m.touchPos > 0 || (f = !0, h = 0, m.stopInertiaMove = !0, g = a.originalEvent.touches ? a.originalEvent.changedTouches[0].clientY : a.clientY, "WE" == k && (i = a.originalEvent.touches ? a.originalEvent.changedTouches[0].clientX : a.clientX), p = m.touchPos, o = Date.now())))
-        }), m.contain.on("mousemove touchmove", function(a) {
+        }),
+        m.contain.on("mousemove touchmove", function(a) {
             if (a.stopPropagation(), f) {
                 if (h = m.touchPos + (a.originalEvent.touches ? a.originalEvent.changedTouches[0].clientY : a.clientY) - g, "WE" == k && (j = (a.originalEvent.touches ? a.originalEvent.touches[0].clientX : a.clientX) - i, Math.abs(j) > Math.abs(h - m.touchPos) && !scene.property.forbidHandFlip)) {
                     if (j > 0) {

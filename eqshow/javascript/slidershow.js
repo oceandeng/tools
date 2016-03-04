@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2016-02-18 17:12:03
 * @Last Modified by:   ocean
-* @Last Modified time: 2016-02-19 18:12:27
+* @Last Modified time: 2016-02-22 18:23:01
 */
 
 'use strict';
@@ -13,18 +13,20 @@
 
 	var Eqshow = function(opts){
 		this.$ele = $(opts.ele);
-		this.$list = this.$ele.find('.main-page');
+		this.$list = this.$ele.find(opts.selector);
 		this.startPos = {};
 		this.movePos = {};
 		this.endPos = {};
 		this.mTop = 0;
-		this.lock = true;
+		this.upLock = false;
+		this.downLock = false;
+		this.isMoving = false;
 		this.index = 0;
 
 		this.init();
 	};
 
-	Eqshow.version = '1.0.0';
+	Eqshow.prototype.version = '1.0.0';
 
 	Eqshow.prototype.init = function(){
 
@@ -54,17 +56,15 @@
 			y: s.clientY
 		}
 
-		$_this.css({
+		if(!this.isMoving){
+			$_this.prev().css({
+				top: - wh
+			})
 
-		});
-
-		$_this.prev().css({
-			top: - wh
-		})
-
-		$_this.next().css({
-			top: wh
-		});
+			$_this.next().css({
+				top: wh
+			});
+		}
 	};
 
 	Eqshow.prototype.touchMove = function(event, _this){
@@ -76,44 +76,33 @@
 			y: s.clientY
 		}
 
-		$_this.css({
-			zIndex: 99
-		});
-
 		this.mTop = this.movePos.y - this.startPos.y;
 
 		this.$list.each(function(k, v){
-			if($(this).hasClass('ac')){
-				this.lock = false;
-			}
+			$(this).removeClass('ac');
 		});
 
-		if(this.mTop < 0){
-			if(this.lock){
-				$_this.next().addClass('ac').css({
-					zIndex: 100,
-					display: 'block',
-					top: wh + this.mTop
-				})
-			}
-		}else if(this.mTop > 0){
-			if(this.lock){
-				$_this.prev().addClass('ac').css({
-					zIndex: 100,
-					display: 'block',
-					top: - wh + this.mTop
-				});
-			}
+		if(!this.isMoving){
+			$_this.css({
+				zIndex: 99
+			});
+
+			this.sUp($_this);
+			this.sDown($_this);
 		}
-
-
 
 		event.preventDefault();
 	};
 
 	Eqshow.prototype.touchEnd = function(event, _this){
 		var s = event.originalEvent.changedTouches[0],
-			$_this = $(_this);
+			$_this = $(_this),
+			__this = this;
+
+		this.upLock = false;
+		this.downLock = false;
+
+		this.isMoving = true;
 
 		this.endPos = {
 			x: s.clientX,
@@ -122,8 +111,37 @@
 
 		$('.ac').animate({
 			top: 0
+		}).promise().done(function(){
+			__this.isMoving = false;
 		});
+	};
 
+	Eqshow.prototype.sUp = function($_this){
+		if(this.mTop < 0){
+			this.upLock = true;
+
+			if(this.upLock && !this.downLock){
+				$_this.next().addClass('ac').css({
+					zIndex: 100,
+					display: 'block',
+					top: wh + this.mTop
+				})
+			}
+		}
+	};
+
+	Eqshow.prototype.sDown = function($_this){
+		if(this.mTop > 0){
+			this.downLock = true;
+
+			if(this.downLock && !this.upLock){
+				$_this.prev().addClass('ac').css({
+					zIndex: 100,
+					display: 'block',
+					top: - wh + this.mTop
+				});
+			}
+		}
 	};
 
 	W.Eqshow = Eqshow;
