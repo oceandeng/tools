@@ -83,7 +83,7 @@ var EventUtil = {
 
 		// 初始处理调用的方法
 		process: function(){
-			clearTimeout(timeoutId);
+			clearTimeout(this.timeoutId);
 
 			var that = this;
 			this.timeoutId = setTimeout(function(){
