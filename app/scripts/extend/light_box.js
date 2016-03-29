@@ -1,8 +1,8 @@
 /* 
 * @Author: ocean
 * @Date:   2015-09-23 15:08:54
-* @Last Modified by:   ocean
-* @Last Modified time: 2015-10-22 11:58:09
+* @Last Modified by:   ocean_deng
+* @Last Modified time: 2016-03-10 18:22:29
 */
 
 'use strict';
@@ -79,7 +79,7 @@ console.log(imgArr);
 		this.index = i;
 		this.config = config;
         this.imgArr = imgArr;
-        this.config_onClose = typeof config.onClose == "function" ? configo.onClose : function() {
+        this.config_onClose = typeof config.onClose == "function" ? config.onClose : function() {
             return true
         };
         this.ulLeft = 0,

@@ -125,7 +125,7 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 	});
 
 console.log(OO.getAbsoluteURL('public'));
-
+		
 });
 
 
