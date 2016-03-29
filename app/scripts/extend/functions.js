@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-28 19:33:40
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-11-27 16:57:17
+* @Last Modified time: 2016-03-29 10:03:08
 */
 
 //弹出消息框 基于zepto
@@ -90,4 +90,31 @@ function getParents(dom){
         dom = dom.parentNode;
     }
     return parents;
+}
+
+// -- 根据屏幕长宽比算图片长宽
+function resizeImg(bgImg) {
+    var imgwidth = bgImg.width();
+    var imgheight = bgImg.height();
+
+    var winwidth = $(window).width();
+    var winheight = $(window).height();
+
+    var widthratio = winwidth/imgwidth;
+    var heightratio = winheight/imgheight;
+
+    var widthdiff = heightratio*imgwidth;
+    var heightdiff = widthratio*imgheight;
+
+    if(heightdiff>winheight) {
+        bgImg.css({
+            width: winwidth+'px',
+            height: heightdiff+'px'
+        });
+    } else {
+        bgImg.css({
+            width: widthdiff+'px',
+            height: winheight+'px'
+        });
+    }
 }

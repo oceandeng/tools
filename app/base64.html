@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+
+
+
+<script>
+
+function cacheExternalImage(url){
+    var body = document.getElementsByTagName('body')[0];
+	var ele = document.createElement('div');
+
+    var image = new Image,
+    	src = url,
+    	canvas = document.createElement('canvas'),
+    	ctx = canvas.getContext('2d');
+
+    ele.style.wordBreak = 'break-all';
+
+    image.crossOrigin = "Anonymous";
+    image.onload = function() {
+
+    	canvas.width = image.width;
+    	canvas.height = image.height;
+
+		console.log(image.width);
+		console.log(image.height);
+      //ctx.drawImage( image, 0, 0 );
+		ctx.drawImage(image, 0, 0, image.width / 2, image.height / 2);
+
+		base64Str = canvas.toDataURL();
+		console.log(base64Str);
+
+		// ele.innerHTML = base64Str;
+		ele.appendChild(canvas);
+		body.appendChild(ele);
+    }
+    image.src = src;
+    // if ( image.complete || image.complete === undefined ) {
+    //     image.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+    //     image.src = src;
+    // }
+
+    //方法
+	function base64con(str){
+		var arr = str.split(',');
+		return arr[arr.length-1];
+	}
+
+    return image;
+}
+
+cacheExternalImage('http://ocean.cn/images/demo.png');
+
+
+</script>
+
+</body>
+</html>
