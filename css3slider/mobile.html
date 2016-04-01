@@ -1,0 +1,45 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no,email=no">
+<meta name="full-screen" content="yes">
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="0" http-equiv="expires">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" type="text/css" href="styles/main.css">
+</head>
+<body>
+
+<div class="outBox">
+	<div id="demo">
+		<ul id="sliderBox">
+			<li id="left2"><a href=""><img src="images/test/b-demo-1.jpg" alt=""></a></li>
+			<li id="left"><a href=""><img src="images/test/b-demo-2.jpg" alt=""></a></li>
+			<li id="cur"><a href=""><img src="images/test/b-demo-3.jpg" alt=""></a></li>
+			<li><a href=""><img src="images/test/b-demo-4.jpg" alt=""></a></li>
+			<li><a href=""><img src="images/test/b-demo-5.jpg" alt=""></a></li>
+		</ul>
+	</div>
+</div>
+
+<script src="scripts/tools.js"></script>
+<script>
+	whenReady(function(){
+		var ele = document.querySelector('#demo');
+		
+		EventUtil.addHandler(ele, 'click', function(e){
+			// ele.style.transform = 'rotateY(75deg)';
+			// ele.style.transform = 'translate(' + 40 + 'px, ' + 40 + 'px)';
+			// ele.style.transform = 'perspective(' + 400 + 'px) rotateY(' + 75 + 'deg)';
+		});
+	});
+</script>
+
+    <!-- transform: perspective(300px) rotateY(75deg); /* 往后兼容 */ -->
+
+</body>
+</html>

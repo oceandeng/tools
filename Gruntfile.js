@@ -1,6 +1,6 @@
 // Generated on 2015-06-27 using
 // generator-webapp 0.5.1
-'use strict';
+// 'use strict';
 
 // # Globbing
 // for performance reasons we're only matching one level down:
