@@ -50,4 +50,4 @@ body {overflow:hidden; background:url(../images/bg.jpg);}
 #info {width:0px; position:absolute; right:0; top:0; background:#CCC; z-index:99; -webkit-transition:1s all ease;-moz-transition:1s all ease;-ms-transition:1s all ease;-o-transition:1s all ease;border-radius:0 0 0 5px;}
 #info:hover {width:200px;}
 #info div {width:180px; padding:10px;}
-#info span {position:absolute; left:-20px; width:20px; text-align:center; line-height:30px; font-size:16px; background:#CCC; border-radius:0 0 0 5px;}
+#info span {position:absolute; left:-20px;jflkd width:20px; text-align:center; line-height:30px; font-size:16px; background:#CCC; border-radius:0 0 0 5px;}
