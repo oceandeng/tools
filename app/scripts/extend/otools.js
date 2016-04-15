@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean
-* @Last Modified time: 2015-12-23 16:39:17
+* @Last Modified time: 2016-04-05 13:31:53
 */
 
 'use strict';
@@ -277,12 +277,19 @@ var OO = {
 window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext;
 
 // 页面data-href跳转事件
+// $(function(){
+//     var dataHrefEle = $("*[data-href]");
+//     dataHrefEle.each(function(k, v){
+//         var $_this = $(this);
+//         $_this.on(oTools.clickEvent, function(){
+//             location.href = $_this.attr('data-href');
+//         });
+//     })
+// });
 $(function(){
-    var dataHrefEle = $("*[data-href]");
-    dataHrefEle.each(function(k, v){
+    $(document).on(oTools.clickEvent, '*[data-href]', function(){
         var $_this = $(this);
-        $_this.on(oTools.clickEvent, function(){
-            location.href = $_this.attr('data-href');
-        });
-    })
+
+        location.href = $_this.attr('data-href');
+    });
 });

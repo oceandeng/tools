@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 
   // Configurable paths
   var config = {
-    app: 'css3slider',
+    app: 'app',
     dist: 'dist'
   };
 
