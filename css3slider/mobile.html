@@ -15,31 +15,41 @@
 <body>
 
 <div class="outBox">
-	<div id="demo">
-		<ul id="sliderBox">
-			<li id="left2"><a href=""><img src="images/test/b-demo-1.jpg" alt=""></a></li>
-			<li id="left"><a href=""><img src="images/test/b-demo-2.jpg" alt=""></a></li>
-			<li id="cur"><a href=""><img src="images/test/b-demo-3.jpg" alt=""></a></li>
+	<div id="sliderBox">
+		<ul>
+			<li><a href=""><img src="images/test/b-demo-1.jpg" alt=""></a></li>
+			<li><a href=""><img src="images/test/b-demo-2.jpg" alt=""></a></li>
+			<li><a href=""><img src="images/test/b-demo-3.jpg" alt=""></a></li>
 			<li><a href=""><img src="images/test/b-demo-4.jpg" alt=""></a></li>
 			<li><a href=""><img src="images/test/b-demo-5.jpg" alt=""></a></li>
 		</ul>
 	</div>
 </div>
 
+<script src=""></script>
+
 <script src="scripts/tools.js"></script>
 <script>
 	whenReady(function(){
-		var ele = document.querySelector('#demo');
-		
-		EventUtil.addHandler(ele, 'click', function(e){
+		// var ele = document.querySelector('#demo');
+
+		// EventUtil.addHandler(ele, 'click', function(e){
 			// ele.style.transform = 'rotateY(75deg)';
 			// ele.style.transform = 'translate(' + 40 + 'px, ' + 40 + 'px)';
 			// ele.style.transform = 'perspective(' + 400 + 'px) rotateY(' + 75 + 'deg)';
-		});
+		// });
 	});
 </script>
 
-    <!-- transform: perspective(300px) rotateY(75deg); /* 往后兼容 */ -->
+<script src="scripts/perspective_slide.js"></script>
+<script>
+	var slideBox = document.querySelector('#sliderBox');
+
+	var perspectiveSlide = new PerspectiveSlide({
+		slideBox: slideBox
+	});
+
+</script>
 
 </body>
 </html>

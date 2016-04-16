@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+/*	svg {
+	    -webkit-clip-path: url(#theSVGPath);
+	    clip-path: url(#theSVGPath);
+	}*/
+</style>		
+</head>
+<body>
+<svg>
+    <defs>
+      <clipPath id="clipPath">
+			<img src="images/test/b-demo-1.jpg" alt="">
+          <!-- <rect x="0" y="0" width="80" height="80" /> -->
+      </clipPath>
+    </defs>
+    <circle cx="60" cy="60" r="50" fill="#34538b" clip-path="url(#clipPath)" />
+</svg>
+
+
+
+	<!-- <img src="images/test/b-demo-1.jpg" alt=""> -->
+
+
+</body>
+</html>

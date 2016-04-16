@@ -1,9 +1,4 @@
-/*
-* @Author: ocean_deng
-* @Date:   2016-03-29 13:38:04
-* @Last Modified by:   ocean_deng
-* @Last Modified time: 2016-03-29 17:13:01
-*/
+@import "normalize";
 
 @mixin box-center{
 	height: 100%;
@@ -21,10 +16,22 @@ img{
 }
 .outBox{
 	@include box-center();
+	overflow: hidden;
 }
 
 #sliderBox{
-	list-style-type: none;
+	position: relative;
+	width: 80%;
+	height: 100%;
+	margin: 0 auto;
+
+	ul{
+		margin: 0;
+		padding: 0;
+		position: relative;
+		height: 100%;
+		list-style-type: none;
+	}
 
 	li{
 		@include box-center();
@@ -33,31 +40,40 @@ img{
 		position: absolute;
 		left: 0;
 		top: 0;
-		transform: perspective(1100px) rotateY(300deg);
-		z-index: 1; 
-		opacity: 0.8; 
-		transition: 1s all ease;
-		box-shadow: 0 4px 14px rgba(0,0,0,0.6); 
+		z-index: 1;
+		opacity: 0.8;
+		// box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+		display: none;
 		cursor: pointer;
+		// -webkit-transform: perspective(1100px) rotateY(300deg);
+		// transform: perspective(1100px) rotateY(300deg);
+		transition: 1s all ease;
+		background: #fff;
 	}
 
 	#cur{
 		z-index: 4;
-		opacity: 1; 
+		opacity: 1;
+		-webkit-transform: scale(1);
 		transform: scale(1);
 		z-index: 99;
 	}
 
 	#left {
-		-webkit-transform:perspective(1100px) translate(-300px, 10px) rotateY(60deg) scale(0.9);
-		-moz-transform:perspective(1100px) translate(-300px, 10px) rotateY(60deg) scale(0.9);
-		-ms-transform:perspective(1100px) translate(-300px, 10px) rotateY(60deg) scale(0.9);
-		-o-transform:perspective(1100px) translate(-300px, 10px) rotateY(60deg) scale(0.9);
+		-webkit-transform:perspective(1100px) translate(-200px, 10px) rotateY(60deg) scale(0.9);
+		transform:perspective(1100px) translate(-200px, 10px) rotateY(60deg) scale(0.9);
 	}
 	#left2 {
-		-webkit-transform:perspective(1100px) translate(-400px, 10px) rotateY(60deg) scale(0.9);
-		-moz-transform:perspective(1100px) translate(-400px, 10px) rotateY(60deg) scale(0.9);
-		-ms-transform:perspective(1100px) translate(-400px, 10px) rotateY(60deg) scale(0.9);
-		-o-transform:perspective(1100px) translate(-400px, 10px) rotateY(60deg) scale(0.9);
+		-webkit-transform:perspective(1100px) translate(-300px, 10px) rotateY(60deg) scale(0.9);
+		transform:perspective(1100px) translate(-300px, 10px) rotateY(60deg) scale(0.9);
+	}
+
+	#right {
+		-webkit-transform:perspective(1100px) translate(200px, 10px) rotateY(-60deg) scale(0.9);
+		transform:perspective(1100px) translate(200px, 10px) rotateY(-60deg) scale(0.9);
+	}
+	#right2 {
+		-webkit-transform:perspective(1100px) translate(300px, 10px) rotateY(-60deg) scale(0.9);
+		transform:perspective(1100px) translate(300px, 10px) rotateY(-60deg) scale(0.9);
 	}
 }
