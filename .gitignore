@@ -3,4 +3,4 @@ dist
 .tmp
 .sass-cache
 bower_components
-angular/source_code
+source_code
