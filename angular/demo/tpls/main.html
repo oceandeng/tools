@@ -1,0 +1,15 @@
+<div ng-controller="DemoCtrl">
+	<p>	hello {{user.username}}</p>
+	<p> age {{user.age}}</p>
+
+<hr>
+
+	<ul>
+		<li ng-repeat="item in json.items">
+			<span>{{$index + 1}}</span> ----- 
+			<span>{{item.Name}}</span> ----- 
+			<span>{{item.City}}</span> ----- 
+			<span>{{item.Country}}</span>
+		</li>
+	</ul>
+</div>
