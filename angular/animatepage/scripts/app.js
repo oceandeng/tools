@@ -35,5 +35,13 @@ bookStoreApp.config(function($stateProvider, $urlRouterProvider){
                 controller: 'TableCtrl'
             }
         }
+    }).state('datepicker', {
+        url: '/datepicker',
+        views: {
+            '': {
+                templateUrl: 'tpls/datepicker.html',
+                controller: 'DatePickerCtrl'
+            }
+        }
     })
 });

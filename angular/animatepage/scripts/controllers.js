@@ -85,6 +85,19 @@ bookStoreCtrls.controller('TableCtrl', ['$scope', 'UserServe', function($scope, 
     // set pagecount in $scope
     $scope.pageCount = 9;
 }]);
+
 /**
  * 这里接着往下写，如果控制器的数量非常多，需要分给多个开发者，可以借助于grunt来合并代码
  */
+
+// DatePickerCtrl
+bookStoreCtrls.controller('DatePickerCtrl', ['$scope', function($scope){
+    $scope.pageClass = "select";
+
+    $scope.myText = 'Not Selected';
+    $scope.currentDate = '';
+    $scope.updateMyText = function(date) {
+        $scope.myText = 'Selected';
+    };
+
+}]);
