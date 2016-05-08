@@ -1,0 +1,92 @@
+var bookStoreDirectives = angular.module('bookStoreDirectives', []);
+
+// ng-repeat 渲染完成
+// bookStoreDirectives.directive('repeatFinish', function($timeout) {
+// 	return {
+//         restrict: 'A',
+//         scope: true,
+// 		link: function(scope, element, attr){
+// 		// 初始化下拉美化
+// 		    var selectBox = new SelectBox(element.parent());
+
+// 		    if(scope.$last == true){
+// console.log(attr);
+// 		    }
+
+// 			scope.$watch(function(){
+// 				selectBox.refresh();
+// 				selectBox.setValue(scope.setVal);
+// 			});
+// 		}
+// 	}
+// });
+
+bookStoreDirectives.directive('repeatFinish', function($timeout) {
+	return {
+        restrict: 'A',
+        scope: false,
+		link: function(scope, element, attr){
+			// console.log(scope.$index);
+			if(scope.$last == true){
+				// console.log('ng-repeat执行完毕');
+				// 向父节点传递事件
+				$timeout(function(){
+					scope.$emit('rFinish', element.parent());
+				});
+			}
+		}
+	}
+});
+
+// 滚动表格指令封装
+bookStoreDirectives.directive('stable', function(){
+	return {
+		restrict: 'EA',
+		templateUrl : 'dtpls/d_table_tpl.html',
+		replace: true,
+		link: function(scope, element, attr){
+		    /****************** 表格ping插件调用 S **********************/
+		    var allW = $('.part-one').outerWidth() + $('.part-two').outerWidth() + $('.part-thr').outerWidth() + $('.part-fou').outerWidth() + $('.part-fiv').outerWidth();
+		    var dyanH = $(window).height() - $('.header').height() - $('.main-title').height() - 75;
+
+		    scope.$on('rFinish', function(){
+		    	element.pingTable({
+			        width: allW,
+			        height: 300
+			    });
+		    });
+		    /****************** 表格ping插件调用 E **********************/
+		}
+	}
+})
+
+
+/*
+Directive param demo
+angular.module('myApp', []) .directive('myDirective', function() {
+	return {
+		restrict: String,
+		priority: Number,
+		terminal: Boolean,
+		template: String or Template Function:
+		function(tElement, tAttrs) {...},
+		templateUrl: String,
+		replace: Boolean or String,
+		scope: Boolean or Object,
+		transclude: Boolean,
+		controller: String or
+		function(scope, element, attrs, transclude, otherInjectables) { ... },
+		controllerAs: String,
+		require: String,
+		link: function(scope, iElement, iAttrs) { ... },
+		compile: // 返回一个对象或连接函数，如下所示：
+		function(tElement, tAttrs, transclude) {
+			return {
+				pre: function(scope, iElement, iAttrs, controller) { ... },
+				post: function(scope, iElement, iAttrs, controller) { ... }
+			}
+			return function postLink(...) { ... }
+		}
+	};
+});
+*/

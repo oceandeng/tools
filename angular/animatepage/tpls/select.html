@@ -1,0 +1,24 @@
+{{text}}
+<p><a href="#/hello">哈喽页</a></p>
+
+<select  name="mySle" id="mySle">
+	<option value="{{item}}" ng-repeat="item in options" repeat-finish>{{item}}</option>
+</select>
+
+<select  name="mySle1" id="mySle1">
+	<option value="{{item}}" ng-repeat="item in options" repeat-finish>{{item}}</option>
+</select>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<table style="text-align: left">
+				<tr ng-repeat="item in customItems">
+					<td>{{item.Name | titleCase}}</td>
+					<td>{{item.City}}</td>
+					<td>{{item.Country}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
