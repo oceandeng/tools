@@ -96,6 +96,7 @@ bookStoreDirectives.directive('datepicker', function(){
 				// 使用AngularJS内部的'binding-specfic'变量
 				element.datepicker('setDate', ngModel.$viewValue || '');
 			};
+
 			element.datepicker(optionsObj);
 		}
 	}
