@@ -6,7 +6,7 @@ bookStoreApp.config(function($stateProvider, $urlRouterProvider){
         url: '/hello',
         views: {
             '': {
-                templateUrl: 'tpls/hello.html',
+                templateUrl: 'tpls/pages/hello.html',
                 controller: 'HelloCtrl'
             }
         }
@@ -14,7 +14,7 @@ bookStoreApp.config(function($stateProvider, $urlRouterProvider){
         url: '/list',
         views: {
             '': {
-                templateUrl: 'tpls/bookList.html',
+                templateUrl: 'tpls/pages/bookList.html',
                 controller: 'BookListCtrl'
             }
         }
@@ -23,7 +23,7 @@ bookStoreApp.config(function($stateProvider, $urlRouterProvider){
         url: '/select',
         views: {
             '': {
-                templateUrl: 'tpls/select.html',
+                templateUrl: 'tpls/pages/select.html',
                 controller: 'SelectCtrl'
             }
         }
@@ -31,7 +31,7 @@ bookStoreApp.config(function($stateProvider, $urlRouterProvider){
         url: '/table',
         views: {
             '': {
-                templateUrl: 'tpls/table.html',
+                templateUrl: 'tpls/pages/table.html',
                 controller: 'TableCtrl'
             }
         }
@@ -39,8 +39,32 @@ bookStoreApp.config(function($stateProvider, $urlRouterProvider){
         url: '/datepicker',
         views: {
             '': {
-                templateUrl: 'tpls/datepicker.html',
+                templateUrl: 'tpls/pages/datepicker.html',
                 controller: 'DatePickerCtrl'
+            }
+        }
+    }).state('ui', {
+        url: '/ui',
+        views: {
+            '': {
+                templateUrl: 'tpls/pages/ui.html',
+                controller: 'UICtrl'
+            }
+        }
+    }).state('admin', {
+        url: '/admin',
+        views: {
+            '': {
+                templateUrl: 'tpls/body.html',
+                controller: 'AdminCtrl'
+            },
+            'left@admin': {
+                templateUrl: 'tpls/left.html',
+                controller: 'LeftCtrl'
+            },
+            'right@admin': {
+                templateUrl: 'tpls/right.html',
+                controller: 'RightCtrl'
             }
         }
     })

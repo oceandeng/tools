@@ -101,3 +101,28 @@ bookStoreCtrls.controller('DatePickerCtrl', ['$scope', function($scope){
     };
 
 }]);
+bookStoreCtrls.controller('UICtrl', ['$scope', function($scope){
+    $scope.title = "UI";
+
+    $scope.expanders = [
+        {title: 'Click me to expand',
+        text: 'Hi there folks, I am the content that was hidden but is now shown.'},
+        {title: 'Click this',
+        text: 'I am even better text than you have seen previously'},
+        {title: 'No, click me!',
+        text: 'I am text that should be seen before seeing other texts'}
+    ];
+}]);
+bookStoreCtrls.controller('AdminCtrl', ['$scope', function($scope){
+    $scope.parentLeft = 'parent11111';
+    $scope.parentRight = 'parent22222';
+
+}]);
+bookStoreCtrls.controller('LeftCtrl', ['$scope', function($scope){
+    $scope.left = '111';
+
+}]);
+bookStoreCtrls.controller('RightCtrl', ['$scope', function($scope){
+    $scope.right = '222';
+    $scope.item = '菜单';
+}]);

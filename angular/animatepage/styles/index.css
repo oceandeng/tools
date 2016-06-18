@@ -144,3 +144,20 @@
 .tbody .t-row:after { clear: both; }
 .tbody .t-row .t-col { height: 60px; display: table; float: left; padding: 0 10px; }
 .tbody .t-row .t-col > span { display: table-cell; vertical-align: middle; text-align: center; }
+
+.expander {
+  border: 1px solid black;
+  margin: 1px;
+  width: 250px;
+}
+
+.expander > .title {
+  background-color: black;
+  color: white;
+  padding: .1em .3em;
+  cursor: pointer;
+}
+
+.expander > .body {
+  padding: .1em .3em;
+}
