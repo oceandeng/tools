@@ -34,12 +34,17 @@ html,body{
 	background: orange; 
 } 
 /* div css3实现垂直居中 E */
+#clock{
+	font: bold 24pt sans;
+	background: #ddf;
+	padding: 10px;
+	border: solid black 2px;
+	border-radius: 10px;
+}
 </style>
 
 </head>
 <body>
-
-<h1>DEMO</h1>
 
 <div id="focusPointSource" style="width: 200px; height: 200px; background: red; position: absolute"></div>
 
@@ -47,9 +52,14 @@ html,body{
 	<div id="div1">列1</div> 
 </div> 
 
+<span id="clock"></span>
+<textarea name="" id="" cols="60" rows="20"></textarea>
+
 <script type="text/javascript" src="scripts/javascript/oop.js"></script>
 <script type="text/javascript" src="scripts/javascript/array.js"></script>
 <script src="scripts/javascript/animate_manage.js" type="text/javascript"></script>
+<script src="scripts/javascript/event/whenReady.js"></script>
+<script src="scripts/javascript/event/clock.js"></script>
 
 <script>
 	window.onload = function(){
@@ -67,7 +77,7 @@ html,body{
 					"left": 200
 				},
 				"callback": function(){
-					alert("动画结束的回调函数执行")
+					// alert("动画结束的回调函数执行")
 				}
 			}).init();
 		}
