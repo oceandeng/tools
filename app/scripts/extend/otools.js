@@ -1,8 +1,8 @@
 /* 
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
-* @Last Modified by:   ocean
-* @Last Modified time: 2016-04-05 13:31:53
+* @Last Modified by:   ocean_deng
+* @Last Modified time: 2016-08-05 10:12:41
 */
 
 'use strict';
@@ -129,6 +129,10 @@ var oTools = {
             return false
         }
         return true;
+    },
+    isEmptyArray: function(arr){
+        arr.splice(0, arr.length);
+        return arr;
     },
     // 字符串长度，中英文都是1个字符
     strlength: function(str) {

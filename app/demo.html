@@ -11,9 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
-html,body{
-	height: 100%;
-}
+
 /* div css3实现垂直居中 S */
 #container{ 
 	display: box; 
@@ -28,8 +26,8 @@ html,body{
 	-moz-box-align:center; 
 } 
 #div1{ 
-	width: 200px;
-	height: 200px;
+	width: 100px;
+	height: 100px;
 	text-align: center;
 	background: orange; 
 } 
@@ -46,20 +44,36 @@ html,body{
 </head>
 <body>
 
-<div id="focusPointSource" style="width: 200px; height: 200px; background: red; position: absolute"></div>
+<div id="focusPointSource" style="width: 100px; height: 100px; background: red; position: absolute"></div>
 
 <div id="container"> 
 	<div id="div1">列1</div> 
 </div> 
 
 <span id="clock"></span>
-<textarea name="" id="" cols="60" rows="20"></textarea>
+<textarea name="" id="" cols="50" rows="5"></textarea>
 
+<ul class="dnd">
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+	<li>4</li>
+</ul>
+<ul class="dnd">
+	<li>2</li>
+	<li>2</li>
+	<li>2</li>
+	<li>2</li>
+</ul>
+<ul class="dnd">
+	<li></li>
+</ul>
 <script type="text/javascript" src="scripts/javascript/oop.js"></script>
 <script type="text/javascript" src="scripts/javascript/array.js"></script>
 <script src="scripts/javascript/animate_manage.js" type="text/javascript"></script>
 <script src="scripts/javascript/event/whenReady.js"></script>
 <script src="scripts/javascript/event/clock.js"></script>
+<script src="scripts/javascript/event/dnd.js"></script>
 
 <script>
 	window.onload = function(){

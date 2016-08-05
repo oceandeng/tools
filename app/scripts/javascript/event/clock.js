@@ -2,14 +2,14 @@
 * @Author: ocean_deng
 * @Date:   2016-07-10 22:29:24
 * @Last Modified by:   ocean_deng
-* @Last Modified time: 2016-07-10 22:50:04
+* @Last Modified time: 2016-07-18 14:00:56
 */
 
 'use strict';
 whenReady(function(){
 	var clock = document.getElementById("clock");
 	var icon = new Image();
-	icon.src = "clock-icon.png";
+	icon.src = "../../../images/dnd-icon.jpg";
 
 	// 没分钟显示一次时间
 	function displayTime(){
@@ -31,4 +31,4 @@ whenReady(function(){
 		dt.setData("Text", Date() + "\n");
 		if(dt.setDragImage) dt.setDragImage(icon, 0, 0);
 	};
-});
+})
