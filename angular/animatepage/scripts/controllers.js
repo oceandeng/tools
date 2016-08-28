@@ -32,7 +32,7 @@ bookStoreCtrls.controller('SelectCtrl', ['$scope', '$timeout', 'UserServe', func
     $scope.text = "select";
     $scope.pageClass="select";
 
-    // 初始化下拉美化
+    // 初始化下拉
     var selectBox = new SelectBox($('#mySle'));
     var selectBox1 = new SelectBox($('#mySle1'));
 
@@ -54,13 +54,13 @@ bookStoreCtrls.controller('SelectCtrl', ['$scope', '$timeout', 'UserServe', func
     $scope.$on('rFinish', function(event, element){
         switch(element.attr('id')){
             case 'mySle':
-                selectBox.refresh();
                 selectBox.setValue($scope.setVal);
+                selectBox.refresh();
                 console.log('a');
                 break;
             case 'mySle1':
-                selectBox1.refresh();
                 selectBox1.setValue('2');
+                selectBox1.refresh();
                 console.log('b');
                 break;
         }

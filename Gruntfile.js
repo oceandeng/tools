@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 
   // Configurable paths
   var config = {
-    app: 'app',
+    app: 'angular',
     dist: 'dist'
   };
 
@@ -185,7 +185,7 @@ module.exports = function (grunt) {
         sassDir: '<%= config.app %>/styles',
         cssDir: '.tmp/styles',
         imagesDir: '<%= config.app %>/images',
-        javascriptsDir: '<%= config.app %>/scripts',
+        javascriptsDir: '<%= config.app %>/',
         fontsDir: '<%= config.app %>/styles/fonts',
         importPath: 'bower_components',
         relativeAssets: true,
