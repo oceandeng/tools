@@ -1,8 +1,8 @@
 /* 
 * @Author: ocean
 * @Date:   2015-11-07 22:58:40
-* @Last Modified by:   ocean
-* @Last Modified time: 2015-11-08 22:59:15
+* @Last Modified by:   ocean_deng
+* @Last Modified time: 2016-08-28 19:06:05
 */
 
 'use strict';
@@ -16,11 +16,11 @@ function inherit(p){
 		return Object.create(p);
 	}
 	var t = typeof p;
-	if(t !== "object" && t !== "function") throw TypeError();
+	if(t != "object" && t != "function") throw TypeError();
 	function F(){};
 	F.prototype = p;
 	return new F();
-}
+}	
 
 /*************************************
 // >> getter/setter 存取器属性
@@ -43,8 +43,8 @@ var p = {
 
 var q = inherit(p);
 q.x = 1, q.y = 1;
-// console.log(q.r);
-// console.log(q.theta);
+console.log(q.r);
+console.log(q.theta);
 
 // >> 这个对象产生严格自增的序列号
 var serialnum = {
@@ -56,6 +56,7 @@ var serialnum = {
 		else throw "序列号的值不能比当前值小";
 	}
 }
+
 
 // 返回随机数的存取器属性 random.octet 0-255之间
 var random = {
@@ -86,20 +87,20 @@ Object.defineProperty(o, "x", {value: 1, writable: true, enumerable: false, conf
 // >> 复制属性的特性
 // >> 给Object.prototype添加一个不可枚举的extend()方法
 **************************************/
-Object.defineProperty(Object.prototype, "extend", {
-	writable: true,
-	enumerable: false,
-	configurable: true,
-	value: function(o){
-		var names = Object.getOwnPropertyNames(o);
+// Object.defineProperty(Object.prototype, "extend", {
+// 	writable: true,
+// 	enumerable: false,
+// 	configurable: true,
+// 	value: function(o){
+// 		var names = Object.getOwnPropertyNames(o);
 
-		for(var i = 0; i < names.length; i++){
-			if(names[i] in this) continue;
-			var desc = Object.getOwnPropertyDescriptor(o, name[i]);
-			Object.defineProperty(this, names[i], desc);
-		}
-	}
-});
+// 		for(var i = 0; i < names.length; i++){
+// 			if(names[i] in this) continue;
+// 			var desc = Object.getOwnPropertyDescriptor(o, name[i]);
+// 			Object.defineProperty(this, names[i], desc);
+// 		}
+// 	}
+// });
 
 /*************************************
 // >> 原型属性
@@ -127,3 +128,45 @@ console.log(classof("aa"));
 var o = {x: 1, y: {z: [false, null, ""]}};
 var s = JSON.stringify(o);
 var p = JSON.parse(s);
+
+var _ = {
+	extend: function(o, p){
+		for(var prop in p){
+			o[prop] = p[prop];
+		}
+		return o;
+	},
+	merge: function(o, p){
+		for(var prop in p){
+			if(o.hasOwnProperty(prop)) continue;
+			o[prop] = p[prop];
+		}
+		return o;
+	},
+	restrict: function(o, p){
+		for(var prop in o){
+			if(!(porp in p)) delete o[porp];
+		}
+		return o;
+	},
+	subtract: function(o, p){
+		for(var prop in p){
+			delete o[prop];
+		}
+		return o;
+	},
+	union: function(o, p){
+		return this.extend(this.extend({}, o), p);
+	},
+	intersection: function(o, p){
+		return this.restrict(this.extend({}, o), p);
+	},
+	keys: function(o){
+		if(typeof o !== "object") throw TypeError();
+		var result = [];
+		for(var prop in o){
+			if(o.hasOwnproperty(prop)) result.push(prop);
+		}
+		return result;
+	}
+};
