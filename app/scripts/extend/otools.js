@@ -15,7 +15,7 @@ var oTools = {
 	isIOS: /iphone|ipad|ipod/i.test(ua),
 	isWechat: /MicroMessenger/i.test(ua),
     // 检测是否支持 touch 事件
-    clickEvent: "ontouchstart" in document.documentElement ? "touchstart" : "click",
+    clickEvent: "ontouchstart" in document.documentElement ? "tap" : "click",
     ranNum: Math.ceil(Math.random() * 1e10),
     timeNum: Date.now(),
 
