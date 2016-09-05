@@ -145,6 +145,10 @@ Dialog({
         this.config_type = o.type || "alert";
         this.config_title = o.title || "\u53cb\u60c5\u63d0\u793a";
         this.config_msg = o.msg || "";
+        this.config_tipsbg = o.tipsbg;
+        this.config_adviceVal = o.adviceVal || 0,
+        this.config_relationId = o.relationId || "",
+        this.config_carAccId = o.carAccId || "",
         this.config_lock = o.lock == true ? true : false;
         this.config_lockColor = o.lockColor || "#000";
         this.config_lockOpacity = parseInt(o.lockOpacity) || 50;
@@ -190,6 +194,7 @@ Dialog({
         this.config_showButtons = o.showButtons == true ? true : false;
         this.config_submitButton = o.submitButton == undefined ? "\u786e\u5b9a" : o.submitButton;
         this.config_cancelButton = o.cancelButton == undefined ? "\u53d6\u6d88" : o.cancelButton;
+        this.config_submitDone = o.submitDone == undefined ? true: o.submitDone;
         this.config_onReady = typeof o.onReady == "function" ? o.onReady : function() {};
         this.config_onClose = typeof o.onClose == "function" ? o.onClose : function() {
             return true
@@ -208,7 +213,7 @@ Dialog({
             alert("\u5f88\u62b1\u6b49\uff0c\u60a8\u6240\u4f7f\u7528\u7684\u6d4f\u89c8\u5668\u8fc7\u4e8e\u53e4\u8001\uff0c\u672c\u63d2\u4ef6\u672a\u80fd\u517c\u987e\u5230\uff01");
             return false;
         }
-        if (!F$(this.config_id) && !this.config_msg) {
+        if (!F$(this.config_id) && !this.config_msg && !this.config_adviceVal) {
             return false
         };
         this.config_top = fillUnit(this.config_top);
@@ -250,14 +255,68 @@ Dialog({
             elem = D.getElementById(this.config_id);
 
         switch(this.config_type){
-            case "alert":
+            case "input":
+                var html = "";
+                html += "<div class='D_tit' style='color:#19273f'></div>";
+                html += "<div class='D_alert'><input id='adviceInp' data-relationId=" + this.config_relationId + " data-carAccId=" + this.config_carAccId + " style='border:1px solid #ccc; font-size: 16px; width: 98%; height:40px; line-height:40px; text-align:center; background:#fff;' type='number' value = '" + this.config_adviceVal + "' /></div>";
+
+               if (this.config_showButtons) {
+                    foot.className = "D_foot";
+                    if (this.config_submitButton) {
+                        foot_html += '<input type="button" value="' + this.config_submitButton + '" class="D_submit" data-dialog-submit/>';
+                    }
+                    if (this.config_cancelButton) {
+                        foot_html += '<input type="button" value="' + this.config_cancelButton + '" class="D_cancel" data-dialog-cancel />';
+                    }
+                    foot.innerHTML = foot_html;
+                    content.appendChild(foot);
+                }
+
+                if (this.config_closeButton) {
+                    head_html += '<div class="D_close" data-dialog-close style="width:'+ this.config_close_img_w + '; height: '+ this.config_close_img_h +'"><img src="' + this.config_close_img + '" style="max-width:100%" alt="" /></div>'
+                }
+                head.innerHTML = head_html;
+
                 content.className = "D_content";
-                body.innerHTML = "<div class='D_alert'>" + this.config_msg + "</div>";
+                body.innerHTML = html;
                 body.className = "D_body";
                 parent.appendChild(content);
+                content.appendChild(head);
                 content.appendChild(body);
                 page_body.appendChild(parent);
 
+                if (this.config_lock) {
+                    parent.appendChild(shade);
+                    shade.className = "D_shade";
+                }
+
+                this.parent = parent;
+                this.content = content;
+                this.body = body;
+                this.shade = shade;
+                this.bCon = body.querySelector('.D_alert');
+                this.foot = foot;
+                this.fBtn = foot.querySelector('input');
+                this.head = head;
+                this.closeBtn = D.querySelector('.D_close');
+                this.input = body.querySelector('#adviceInp');
+                break;
+            case "alert":
+                head.className = "D_head";
+                content.className = "D_content";
+                body.innerHTML = "<div class='D_alert'>" + this.config_msg + "</div>";
+                body.className = "D_body";
+
+                if (this.config_lock) {
+                    parent.appendChild(shade);
+                    shade.className = "D_shade";
+                }
+
+                parent.appendChild(content);
+                content.appendChild(head);
+                content.appendChild(body);
+                page_body.appendChild(parent);
+                
                 if (this.config_showButtons) {
                     foot.className = "D_foot";
                     if (this.config_submitButton) {
@@ -269,12 +328,37 @@ Dialog({
                     foot.innerHTML = foot_html;
                     content.appendChild(foot);
                 }
+
                 this.parent = parent;
+                this.shade = shade;
                 this.content = content;
                 this.body = body;
+                this.head = head;
                 this.bCon = body.querySelector('.D_alert');
                 this.foot = foot;
                 this.fBtn = foot.querySelector('input');
+                this.closeBtn = D.querySelector('.D_close');
+                break;
+            case "tips":
+                content.className = "D_content";
+                body.innerHTML = "<div class='D_tips'><img src=" + this.config_tipsbg + " alt='' /><p class='D_mess'>" + this.config_msg + "</p></div>";
+                body.className = "D_body";
+
+                if (this.config_lock) {
+                    parent.appendChild(shade);
+                    shade.className = "D_shade";
+                }
+
+                parent.appendChild(content);
+                content.appendChild(body);
+                page_body.appendChild(parent);
+                
+                this.parent = parent;
+                this.shade = shade;
+                this.content = content;
+                this.body = body;
+                this.bTips = body.querySelector('.D_tips');
+                this.dMess = body.querySelector('.D_mess');
                 break;
             case "loading":
                 elem.style.display = "block";
@@ -312,6 +396,7 @@ Dialog({
         this.create();
         this.setStyle();
         this.position();
+        // this.validate();
         this.animation();
         if (this.config_onReady) {
             this.config_onReady(this);
@@ -325,7 +410,8 @@ Dialog({
             setStyle(this.shade, {
                 background: this.config_lockColor,
                 opacity: this.config_lockOpacity / 100,
-                filter: "alpha(opacity=" + this.config_lockOpacity + ")"
+                filter: "alpha(opacity=" + this.config_lockOpacity + ")",
+                zIndex: 9
             });
         }
         if (this.config_move && this.head && !this.config_position) {
@@ -341,23 +427,45 @@ Dialog({
                 'text-align': 'center'
             });
             setStyle(this.foot, {
-                'position': 'absolute',
+                // 'position': 'absolute',
                 'width': '90%',
-                'padding': '0 5%',
+                'padding': '0 5% 20px 5%',
                 'left': '0',
                 'bottom': '10px'
             });
+            // setStyle(this.fBtn, {
+            //     'border': 'none',
+            //     'width': '100%',
+            //     'height': '40px',
+            //     'line-height': '40px',
+            //     'text-align': 'center',
+            //     'color': '#fff',
+            //     'background': '#333'
+            // });
             setStyle(this.fBtn, {
                 'border': 'none',
                 'width': '100%',
                 'height': '40px',
-                'line-height': '40px',
                 'text-align': 'center',
                 'color': '#fff',
-                'background': '#333'
+                'background': '#10285d'
             });
             setStyle(this.bCon, {
-                'padding': '20px 10px 60px 10px'
+                'padding': '20px 10px'
+            });
+            setStyle(this.bTips, {
+                'position': 'relative'
+            });
+            setStyle(this.dMess, {
+                'position': 'absolute',
+                'top': '50%',
+                'margin-top': '-10px',
+                'width': '100%',
+                'height': '20px',
+                'line-height': '20px',
+                'text-align': 'center',
+                'font-size': '20px',
+                'color': '#19273f',
             })
         }
         if(this.head){
@@ -400,9 +508,11 @@ Dialog({
         }
         if (this.parent && !this.config_position) {
             setStyle(this.content, {
-                position: "fixed"
+                position: "fixed",
+                zIndex: 99
             });
             setStyle(this.content, {
+                zIndex: 99,
                 top: this.config_top,
                 right: this.config_right,
                 bottom: this.config_bottom,
@@ -461,33 +571,33 @@ Dialog({
             that = this;
         for (var i = 0, l = elems.length; i < l; i++) {
             if (elems[i].getAttribute("data-dialog-close") != null) {
-                elems[i].onclick = function() {
+                $(elems[i]).on(oTools.clickEvent, function() {
                     that.close();
                     return false;
-                };
+                });
             }
             if (elems[i].getAttribute("data-dialog-submit") != null) {
-                elems[i].onclick = function() {
+                $(elems[i]).on(oTools.clickEvent, function() {
                     that.submit();
                     return false;
-                };
+                });
             }
             if (elems[i].getAttribute("data-dialog-cancel") != null) {
-                elems[i].onclick = function() {
+                $(elems[i]).on(oTools.clickEvent, function() {
                     that.cancel();
                     return false;
-                };
+                });
             }
         }
         if (this.shade && this.config_lockClose) {
-            this.shade.onclick = function() {
+            $(this.shade).on(oTools.clickEvent, function() {
                 that.close();
-            }
+            });
         }
         if (this.config_time) {
             this.timer = setTimeout(function() {
-                that.content.style.display = 'none';
-                // that.remove();
+                // that.content.style.display = 'none';
+                that.remove();
             }, this.config_time);
         }
         on(window, "resize", function() {
@@ -546,7 +656,12 @@ Dialog({
     };
     Dialog.prototype.submit = function() {
         if (this.config_onSubmit(this) !== false) {
+
             this.remove();
+
+            // if(this.config_submitDone){
+            //     this.remove();
+            // }
         }
     };
     Dialog.prototype.cancel = function() {
