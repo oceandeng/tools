@@ -109,20 +109,7 @@ require(['dialog', 'otools', 'fastclick', 'iscroll', 'loading'], function(){
 
 	console.log(oTools.strlength($('#en').text()));
 	console.log(oTools.strlength($('#cn').text()));
-	
-	$(function(){
-		$('<canvas id="canvas"></canvas>').appendTo('body');
 
-		$('#canvas').css({
-			'border-radius':'5px',
-			'background':'rgba(0,0,0,0.8)'
-		});
-		loading({
-			"id": "canvas",
-			"width": 5,
-			"height": 20
-		});
-	});
 
 console.log(OO.getAbsoluteURL('public'));
 

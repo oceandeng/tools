@@ -1,13 +1,13 @@
 /* 
 * @Author: ocean
 * @Date:   2015-06-29 10:16:24
-* @Last Modified by:   ocean
-* @Last Modified time: 2015-12-23 16:42:52
+* @Last Modified by:   ocean_deng
+* @Last Modified time: 2016-09-16 22:26:11
 */
 
 'use strict';
 
-var loading = function(arg){
+(function(window){
 	var isEmpty = function(obj){
 		var name;
 		for(name in obj){
@@ -159,20 +159,23 @@ var loading = function(arg){
 	    	this.removeDom();
 	    }
 	}
-	return new LoadingImg(arg);
-};
+
+	window.LoadingImg = LoadingImg;
+	// return new LoadingImg(arg);
+})(window);
 
 /********************************************
 // -- 调用DEMO 
 *********************************************/
 
-var load = loading({
+var load = new LoadingImg({
 		'width': 5,
 		'height': 20
 	});
 
-	load.start();
+load.start();
 
-$('#menu').on('click', function(){
+$('#menu').on(oTools.clickEvent, function(){
+	console.log('a')
 	load && load.close();
 });
