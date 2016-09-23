@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<link rel="stylesheet" type="text/css" href="../../styles/main.css">
+<link rel="stylesheet" type="text/css" href="styles/color-picker.css">
+<style type="text/css">
+	/* colorSelector */
+	.colorSelector {
+	    position: relative;
+	    cursor: pointer;
+	}
+	.colorSelector p{
+        width: 150px;
+        padding: 0 0 0 50px;
+        line-height: 24px;
+        margin: 0;
+    }
+	.colorSelector div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 24px;
+        height: 24px;
+        border: 1px solid $b-color;
+        background: #ccc;
+    }
+</style>
+</head>
+<body>
+
+	<section class="plugin-box">
+		<div class="colorSelector">
+			<div id="colorPicker"></div>
+			<p>等级颜色</p>
+		</div>
+	</section>
+
+<script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../../scripts/main.js"></script>
+
+<script type="text/javascript" src="scripts/color-picker.js"></script>
+
+<script type="text/javascript">
+	var $colorPicker = $('#colorPicker');
+
+	$colorPicker.ColorPicker({
+		    color: '#0000ff',
+		    onShow: function(colpkr) {
+		        $(colpkr).fadeIn(500);
+		        return false;
+		    },
+		    onHide: function(colpkr) {
+		        $(colpkr).fadeOut(500);
+		        return false;
+		    },
+		    onChange: function(hsb, hex, rgb) {
+		        $colorPicker.css('backgroundColor', '#' + hex);
+		    },
+		    onSubmit: function(hsb, hex, rgb, ele, colpkr){
+		        $colorPicker.css('backgroundColor', '#' + hex);
+		        $(colpkr).fadeOut(500);
+		        return false;
+		    }
+		});
+
+
+</script>
+
+</body>
+</html>

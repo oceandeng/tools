@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<link rel="stylesheet" type="text/css" href="../../styles/main.css">
+<link rel="stylesheet" type="text/css" href="styles/city-picker.css">
+<style type="text/css">
+	.city-picker{
+		position: relative;
+		width: 500px;
+	}
+	.p-input{
+		width: 100%;
+	}
+</style>
+</head>
+<body>
+
+	<section class="plugin-box">
+		<div class="city-picker">
+			<input id="cityPicker" class="p-input" readonly type="text">
+		</div>
+	</section>
+
+
+
+<script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../../scripts/main.js"></script>
+
+<script type="text/javascript" src="scripts/city-picker.data.js"></script>
+<script type="text/javascript" src="scripts/city-picker.js"></script>
+
+
+<script type="text/javascript">
+	$('#cityPicker').citypicker({
+		placeholder: '请选择省/市/区',
+    	city: 'city',
+    	province: 'province',
+		district: 'district',
+        onClose: function(){
+			console.log('closed')
+        }
+    });
+</script>
+
+</body>
+</html>

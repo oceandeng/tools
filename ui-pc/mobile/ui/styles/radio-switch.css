@@ -1,0 +1,31 @@
+#outBox{
+    width: 66px;
+    height: 30px;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+}
+#inBox{
+    width: 26px;
+    height: 26px;
+    border-radius: 5px;
+    position: absolute;
+    background: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, .4);
+}
+
+.open-one{
+    background: #96d85b;
+}
+.open-two{
+    top: 2px;
+    right: 1px;
+}
+.close-one{
+    background: rgba(200, 200, 200, .4);
+    border-left: transparent;
+}
+.close-two{
+    left: 0px;
+    top: 0px;
+}

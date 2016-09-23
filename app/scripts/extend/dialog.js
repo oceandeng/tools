@@ -16,7 +16,7 @@ Dialog({
     }
 });
 *************popup********************************************
-Dialog({
+var dialog = new Dialog({
     'id': 'wrapper',
     'type': 'popup',
     'lock':true,
@@ -54,6 +54,8 @@ Dialog({
 'use strict';
 
 (function(G, D) {
+
+
     var isIE = /msie (\d+\.\d+)/i.test(navigator.userAgent) ? (document.documentMode || +RegExp['\x241']) : undefined;
 
     function F$(elem) {
