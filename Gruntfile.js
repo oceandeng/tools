@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 
   // Configurable paths
   var config = {
-    app: 'ui-pc',
+    app: 'ui',
     dist: 'dist'
   };
 

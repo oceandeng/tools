@@ -2,7 +2,7 @@
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean_deng
-* @Last Modified time: 2016-08-05 10:12:41
+* @Last Modified time: 2016-09-27 10:47:55
 */
 
 'use strict';
@@ -196,6 +196,16 @@ var oTools = {
                 fn && fn();
             });
         }
+    },
+    getX: function(e) {
+        e = e || window.event;
+        var _left = document.documentElement.scrollLeft || document.body.scrollLeft;
+        return e.pageX || e.clientX + _left;
+    },
+    getY: function(e) {
+        e = e || window.event;
+        var _top = document.documentElement.scrollTop || document.body.scrollTop;
+        return e.pageY || e.clientY + _top;
     }
 }
 
