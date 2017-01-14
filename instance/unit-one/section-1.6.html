@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+	.found{
+		background-color: #ff0;
+	}
+</style>
+</head>
+<body>
+	<form id="textsearch">
+		<textarea name="" id="incoming" cols="150" rows="10"></textarea>
+		<p>Search pattern: <input id="pattern" type="text"></p>
+	</form>
+	<button id="searchSubmit">Search for pattern</button>
+	<div id="searchResult"></div>
+
+<script>
+	document.getElementById('searchSubmit').onclick = function(){
+		// 获取模式
+		var pattern = document.getElementById('pattern').value
+		var re = new RegExp(pattern,'g')
+
+		// 获取字符串
+		var searchString = document.getElementById('incoming').value
+
+		var matchArray,
+			resultString = '<pre>',
+			first = 0,
+			last = 0;
+
+		// 找到每一个匹配
+		while((matchArray = re.exec(searchString)) != null){
+			last = matchArray.index;
+
+			// 获取所有匹配的字符串，将其链接起来
+			resultString += searchString.substring(first, last);
+
+			// 使用class，添加匹配的字符串
+			resultString += '<span class="found">' + matchArray[0] + '</span>';
+			first = re.lastIndex;
+		}
+
+		// 完成字符串
+		resultString += searchString.substring(first, searchString.length)
+		resultString += '</pre>'
+
+		// 插入到页面中
+		document.getElementById('searchResult').innerHTML = resultString
+	}
+</script>
+
+
+</body>
+</html>
