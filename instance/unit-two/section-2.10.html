@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Associative Array</title>
+</head>
+<body>
+	<form id="picker">
+		<div><label>Value 1:</label><input type="text" id="first"></div>
+		<div><label>Value 2:</label><input type="text" id="second"></div>
+		<div><label>Value 3:</label><input type="text" id="third"></div>
+		<div><label>Value 4:</label><input type="text" id="four"></div>
+
+		<div><button id="validate">validate</button></div>
+	</form>
+	<div id="result"></div>
+	<script>
+		// 获取表单元素的名称和值以及验证
+		document.getElementById('validate').addEventListener('click', function(event){
+			event.preventDefault()
+
+			// 创建元素键/值对的数组
+			var elems = document.getElementById('picker').elements;
+			var elemArray = new Object()
+			for(var i = 0, len = elems.length; i < len; i++){
+				if(elems[i].type == 'text') elemArray[elems[i].id] = elems[i].value
+			}
+
+			var str = ''
+			Object.keys(elemArray).forEach(function(key){
+				var value = elemArray[key]
+				str += key + '->' + value + '<br/>'
+			})
+			document.getElementById('result').innerHTML = str
+		})
+	</script>
+
+</body>
+</html>

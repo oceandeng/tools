@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Converting ISO 8601 date</title>
+</head>
+<body>
+	<form>
+		<p>Datestring in ISO 8601 format: <input type="text" id="datestring"></p>
+	</form>
+	<button id="dateSubmit">Convert Date</button>
+	<div id="result"></div>
+
+	<script>
+		document.getElementById('dateSubmit').addEventListener('click', function(){
+			var dtstr = document.getElementById('datestring').value
+			var convdate = convertISO8601toDate(dtstr)
+			document.getElementById('result').innerHTML = convdate
+		})
+
+		function converISO8061toDate(dtstr){
+			// 将任何非数字的字符替换为空格
+			dtstr = dtstr.replace(/\D/g, ' ')
+			// 清除末尾的任何空白
+			dtstr = dtstr.replace(/\s+$/g, '')
+			// 根据空格分割字符串
+			var dtcomps = dtsrt.split(' ')
+			// 并非所有的ISO 8601日期都可以转换
+			// 除非月份和日期都指定了，否则是无效的
+			if(dtcomps.length < 3) return 'invalid date'
+			if(dtcomps.length < 4){
+				dtcomps[3] = 0
+				dtcomps[4] = 0
+				dtcomps[5] = 0
+			}
+			// 在基于1的ISO 8601月份和基于0的日期格式之间转换
+			dtcomps[1]--
+			var convdt = new Date(Date.UTC.apply(null, dtcomps))
+			return convdt.toUTCString()
+		}
+	</script>
+</body>
+</html>

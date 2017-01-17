@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Accessing numbers in table</title>
+</head>
+<body>
+	<table id="table1">
+		<tr>
+			<td>Washington</td>
+			<td>145</td>
+		</tr>
+		<tr>
+			<td>Oregon</td>
+			<td>233</td>
+		</tr>
+		<tr>
+			<td>Missouri</td>
+			<td>833</td>
+		</tr>
+	</table>
+
+	<script>
+		var sum = 0
+		// 使用querySelector找到第二列中的所有单元格
+		var cells = document.querySelectorAll('td + td')
+
+		for(var i = 0, len = cells.length; i < len; i++){
+			console.log(cells[i])
+			sum += parseFloat(cells[i].firstChild.data)
+		}
+
+		// 现在求和直至表的末尾
+		var newRow = document.createElement('tr')
+
+		// 第一个单元格
+		var firstCell = document.createElement('td')
+		var firstCellText = document.createTextNode('Sum:')
+		firstCell.appendChild(firstCellText)
+		newRow.appendChild(firstCell)
+
+		// 带有总和的第二个单元格
+		var secondCell = document.createElement('td')
+		var secondCellText = document.createTextNode(sum)
+		secondCell.appendChild(secondCellText)
+		newRow.appendChild(secondCell)
+
+		// 给表添加行
+		document.getElementById('table1').appendChild(newRow)
+		
+	</script>
+</body>
+</html>
