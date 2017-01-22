@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Adding and Removing Elements</title>
+<style>
+	table{
+		border-collapse: collapse;
+	}
+	td, th{
+		padding: 5px;
+		border: 1px solid #ccc;
+	}
+	tr:nth-child(2n+1){
+		background-color: #eeffee;
+	}
+</style>
+</head>
+<body>
+	<table id="mixed">
+		<tr>
+			<th>Value One</th>
+			<th>Value Two</th>
+			<th>Value Three</th>
+		</tr>
+	</table>
+	<div id="result"></div>
+
+	<script>
+		var values = new Array(3)
+		values[0] = [123.45, 'apple', false]
+		values[1] = [65, 'banana', false]
+		values[2] = [1034.99, 'cherry', false]
+
+		var mixed = document.getElementById('mixed')
+		var tbody = document.createElement('tbody')
+
+		for(var i = 0, len = values.length; i < len; i++){
+			var tr = document.createElement('tr')
+
+			for(var j = 0, slen = values[i].length; j < slen; j++){
+				var td = document.createElement('td')
+				var txt = document.createTextNode(values[i][j])
+				td.appendChild(txt)
+				tr.appendChild(td)
+			}
+
+			tr.onclick = prunerow
+
+			tbody.appendChild(tr)
+			mixed.appendChild(tbody)
+		}
+
+		function prunerow(){
+			var parent = this.parentNode;
+			var oldrow = parent.removeChild(this)
+
+			var datastring = ''
+			for(var i = 0, len = oldrow.childNodes.length; i < len; i++){
+				var cell = oldrow.childNodes[i]
+				datastring += cell.firstChild.data + ' '
+			}
+
+			// 输出消息
+			var msg = document.createTextNode('removed ' + datastring)
+			var p = document.createElement('p')
+			p.appendChild(msg)
+			document.getElementById('result').appendChild(p)
+		}
+	</script>
+</body>
+</html>

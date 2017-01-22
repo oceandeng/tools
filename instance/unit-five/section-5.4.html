@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Css Computed Style</title>
+<style>
+	#test{
+		background-color: red;
+		width: 100px;
+		height: 100px;
+	}
+</style>
+</head>
+<body>
+	<div id="test"><p>Hi</p></div>
+
+	<script>
+		var elem = document.getElementById('test')	
+
+		var bkcolor = elem.currentStyle ? elem.currentStyle['backgroundColor'] : window.getComputedStyle(elem).getPropertyValue('background-color')
+		
+		console.log(bkcolor)
+	</script>
+</body>
+</html>

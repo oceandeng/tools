@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+	*{margin: 0; padding: 0;}
+	li{
+		list-style-type: none;
+		width: 100%;
+		height: 40px;
+		line-height: 40px;
+		border-bottom: 1px dashed #ccc;
+	}
+</style>
+</head>
+<body>
+	<ul id="theList">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	
+	<script>
+		// var lis = document.querySelectorAll('li:nth-child(2n+1)')
+		// for(var i = 0; i < lis.length; i++){
+		// 	lis[i].setAttribute('style', 'background-color: #ffeeee')
+		// }
+
+		// var lis = document.querySelectorAll('li:nth-child(odd)')
+		// for(var i = 0, len = lis.length; i < len; i++){
+		// 	lis[i].setAttribute('style', 'background-color: #ffeeee')
+		// }
+
+		 var parentElement = document.getElementById('theList')
+		 var lis = parentElement.getElementsByTagName('li')
+		 for(var i = 0, len = lis.length; i < len; i++){
+		 	if(i % 2 == 0) lis[i].setAttribute('style', 'background-color: #ffeeee;')
+		 }
+
+	</script>
+</body>
+</html>

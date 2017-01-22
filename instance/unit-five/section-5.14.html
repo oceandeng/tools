@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+</head>
+<body>
+
+<script>
+	var fadingObject = {
+		 yellowColor: function(val){
+		 	var r = 'ff',
+		 		g = 'ff',
+		 		b = val.toString(16);
+
+		 	var newval = '#' + r + g + b
+		 	return newval
+		 },
+		 fade: function(id, start, finish){
+		 	this.count = this.start = start
+		 	this.finish = finish
+		 	this.id = id
+		 	this.countDown = function(){
+		 		this.count += 30;
+		 		if(this.count >= this.finish){
+		 			document.getElementById(this.id).style.background = 'transparent'
+		 			this.countDown = null
+		 			return
+		 		}
+		 		document.getElementById(this.id).style.backgroundColor = this.yellowColor(this.count)
+		 		setTimeout(this.countDown.bind(this), 100)
+		 	}
+		 }
+	}
+
+	function generateAlert(txt){
+		var txtNd = document.createTextNode(txt);
+		msg = document.createElement('div')
+		msg.setAttribute('role', 'alert')
+		msg.setAttribute('id', 'msg')
+
+
+		msg.setAttribute('class', 'alert')
+
+		msg.appendChild(txtNd)
+		document.body.appendChild(msg)
+		fadingObject.fade('msg', 0, 127)
+		fadingObject.countDown()
+	}
+
+generateAlert('aaa')
+
+</script>
+</body>
+</html>

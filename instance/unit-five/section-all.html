@@ -31,10 +31,26 @@
 	elem.setAttribute('style', 'font-family: Courier; background-color: yellow')
 	elem.setAttribute('class', 'classname')
 
-
 	var styleAttr = document.createAttribute('style')
-	
+	styleAttr.nodeValue = 'background-color: red'
+	someElement.setAttribute(styleAttr)
 
+	var className = document.getElementById('elem1').getAttribute('calss')
+
+	var elems = document.querySelectorAll('*[class]')
+	elems = document.querySelectorAll('*[class="red"]')
+	elems = document.querySelectorAll('*[class*="red"')
+	elems = document.querySelectorAll('div:not(.red)')
+
+	var div = document.getElementById('target')
+	var paras = document.getElementsByTagName('p')
+
+	var newPara = document.createElement('p')
+	if(paras[3]){
+		div.insertBefore(newPara, paras[3])
+	}else{
+		div.appendChild(newPara)
+	}
 
 </script>
 
