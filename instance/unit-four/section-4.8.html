@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Using bind with timers</title>
+	<style>
+		#item{
+			font-size: 72pt;
+			margin: 70px auto;
+			width: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div id="item">
+		10
+	</div>
+
+	<script>
+		var theCounter = new Counter('item', 10, 0)
+		theCounter.countDown()
+
+		function Counter(id, start, finish){
+			this.count = this.start = start
+			this.finish = finish
+			this.id = id
+			this.countDown = function(){
+				if(this.count == this.finish - 1){
+					this.countDown = null
+					return
+				}
+				document.getElementById(this.id).innerHTML = this.count--
+				setTimeout(this.countDown.bind(this), 1000)
+			}
+		}
+	</script>
+</body>
+</html>

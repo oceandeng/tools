@@ -2,10 +2,12 @@
 * @Author: denghaiyang
 * @Date:   2017-01-16 16:48:59
 * @Last Modified by:   denghaiyang
-* @Last Modified time: 2017-01-16 17:39:46
+* @Last Modified time: 2017-01-17 10:21:25
 */
 
 'use strict';
+
+console.info('%c section-3.3', 'color: #ff0')
 
 var reverseArray = function(x, indx, str){
 	return indx == 0 ? str : reverseArray(x, --indx, (str += ' ' + x[indx]))

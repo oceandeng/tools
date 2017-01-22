@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>faux Global</title>
+</head>
+<body>
+
+	<script>
+		// IIFE (Immedately Invoked Function Expression)
+		(function(){
+			var i = 0
+
+			function increment(){
+				i++;
+				console.log('value is ' + i)
+			}
+
+			function runIncrement(){
+				while(i < 5){
+					increment()
+				}
+			}
+
+			window.onload = function(){
+				runIncrement()
+			}
+		})()
+	</script>
+
+</body>
+</html>

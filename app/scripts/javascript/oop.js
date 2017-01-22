@@ -1,8 +1,8 @@
 /* 
 * @Author: ocean
 * @Date:   2015-11-07 22:58:40
-* @Last Modified by:   ocean_deng
-* @Last Modified time: 2016-08-28 19:06:05
+* @Last Modified by:   denghaiyang
+* @Last Modified time: 2017-01-19 19:31:25
 */
 
 'use strict';
@@ -158,7 +158,7 @@ var _ = {
 	union: function(o, p){
 		return this.extend(this.extend({}, o), p);
 	},
-	intersection: function(o, p){
+	intersection: function(o, p){=
 		return this.restrict(this.extend({}, o), p);
 	},
 	keys: function(o){
@@ -170,3 +170,65 @@ var _ = {
 		return result;
 	}
 };
+
+
+function FirstVaild(overLength, init){
+	// 定义最终返回对象，初始两个值，一个对象总容量，一个是当前长度
+	var ret = {
+		overLength: overLength,
+		size: Math.min(Object.keys(init).length, overLength) // 如果传入初始数据条数大于容量，取容量值
+	}
+	// 缓存数据
+	var datas = Object.assign({}, init)
+
+	// 定义属性的函数
+	var _defineProperty = function(ret, key){
+		Object.defineProperty(ret, key, {
+			set: function(value){
+				// 针对 o.key = value 的set方法
+				if(!datas[key]) ret.size++
+				datas[key] = value
+			},
+			get: function(){
+				// 获取当前数据，如果当前数据有值，返回值并将当前属性值设置为undefined
+				var res = undefined
+				if(typeof datas[key] !== undefined){
+					res = datas[key]
+					ret.size--
+					datas[key] = undefined
+				}
+				return res
+			}
+		})
+	}
+
+	// 将dirty初始化false，并定义每个属性的get/set
+	Object.keys(init).slice(0, ret.size).map(function(key){
+		_defineProperty(ret, key)
+	})
+
+	Object.assign(ret, {
+		cache: function(key, value){
+			if(this.size >= this.overLength){
+				throw '内存已满，请扩展容量'
+			}
+			// 属性不存在，定义他，并且长度+1，属性存在但值不存在，长度+1
+			if(!(key in datas)){
+				_defineProperty(this, key)
+				this.size++
+			}else if(!datas[key]){
+				this.size++
+			}
+			// 不论怎样，新值覆盖旧值
+			datas[key] = value
+			return this
+		},
+		// 删除属性直接把datas中的属性设置为undefined
+		delete: function(key){
+			datas[key] = undefined
+			this.size--
+			return this
+		}
+	})
+	return ret
+}
