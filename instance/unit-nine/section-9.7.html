@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Protanopia</title>
+</head>
+<body>
+
+<video id="videoobj" controls width="480" height="270">
+	<source src="videofile.mp4" type="video/mp4">
+	<source src="videofile.webm" type="video/webm">
+</video>
+<canvas id="canvasobj" width="480" height="270"></canvas>
+
+<script>
+	// 红色色盲过滤器
+	function protanopia(pixels){
+		var d = pixels.data('name', 'value')
+		for(var i = 0; i < d.length; i += 4){
+			var r = d[i]
+			var g = d[i + 1]
+			var b = d[i + 2]
+
+			// 转换为一个近似红色色盲的值
+			d[i] = 0.567 * r + .433 * g
+			d[i + 1] = 0.558 * r + .442 * g
+			d[i + 2] = 0.242 * r + .758 * b
+		}
+		return d
+	}
+
+	// 事件监听器
+	window.onload = function(){
+		document.getElementById('videoobj').addEventListener('play', drawVideo, false)
+	}
+
+	// 绘制视频
+	function drawVideo(){
+		var videoObj = document.getElementById('videoobj')
+
+		// 如果没有播放的话，停止
+		if(videoObj.paused || videoObj.ended) return false
+
+		// 创建压坏的画布
+		var canvasObj = document.getElementById('canvasobj')
+		var bc = document.createElement('canvas')
+		bc.width = 480
+		bc.height = 270
+
+		// 获取压坏的环境并显示画布
+		var ctx = canvasObj.getContext('2d')
+		var ctx2 = bc.getContext('2d')
+
+		// 将视频绘制到压坏的画布上并获取数据
+		ctx2.drawImage(videoObj, 0, 0, 480, 270)
+		var pData = ctx2.getImageData(0, 0, 480, 270)
+
+		// 将其灰度化并设置为显示画布
+		pData = protanopia(pData)
+		ctx.putImageData(pData, 0, 0)
+
+		setTimeout(drawVideo, 20)
+	}
+</script>
+</body>
+</html>
