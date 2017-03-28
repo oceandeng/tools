@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style media="screen">
+        body{
+            height: 3000px;
+        }
+    </style>
+    <link rel="stylesheet" href="./styles/normalize.css">
+
+    
+    <link rel="stylesheet" href="./styles/sidetoolbar.css">
+</head>
+<body>
+
+    <h1>sidetoolbar</h1>
+
+
+    <div class="side-tool-bar">
+        <div class="shop-cart clearfix">
+            <div id="cartNum" class="cart-num">0</div>
+            <i class="icon icon-cart"></i>
+            <p class="orange">购物车</p>
+        </div>
+
+        <div id="toolBar" class="tool-bar clearfix">
+            <div id="onlineConnect" class="tool-item online-connect">
+                <div class="t-i">
+                    <div class="t-i-i bottom-line f-i floatL">
+                        <i class="icon icon-connect"></i>
+                        <p>线上沟通</p>
+                    </div>
+                    <div class="f-s floatL">
+                        <div class="t-i-i floatL">
+                            <i class="icon icon-qq"></i>
+                            <p>QQ咨询</p>
+                        </div>
+                        <div class="t-i-i floatL">
+                            <i class="icon icon-online"></i>
+                            <p>在线咨询</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sPhone" class="tool-item s-phone">
+                <div class="p-t-i clearfix">
+                    <div class="t-i-i bottom-line floatL">
+                        <i class="icon icon-phone"></i>
+                        <p>售前电话</p>
+                    </div>
+                    <div class="p-t-i-i floatL">
+                        <h3>24h免费咨询热线</h3>
+                        <p>400-660-5555</p>
+                    </div>
+                </div>
+
+            </div>
+            <div id="hotActive" class="tool-item bottom-line hot-active">
+                <i class="new-icon"></i>
+                <i class="icon icon-hot-active"></i>
+                <p>热门活动</p>
+
+                <div class="banner">
+                    <img src="./images/active-banner.png" alt="">
+                </div>
+            </div>
+            <div id="freeCall" class="tool-item free-call">
+                <div class="f-t-i clearfix">
+                    <div class="t-i-i floatL">
+                        <i class="icon icon-free-call"></i>
+                        <p>免费回呼</p>
+                    </div>
+                    <div class="f-t-i-i floatL">
+                        <div class="mobile-line">
+                            <label for="">您的电话：</label>
+                            <input type="text" name="mobile" value="">
+                        </div>
+                        <div class="button">回电给我</div>
+                    </div>
+                </div>
+            </div>
+            <div id="goTop" class="tool-item top-line go-top none">
+
+                <i class="icon icon-to-top"></i>
+                <p>回到顶部</p>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="http://s.300.cn/current/home/js/jquery-1.8.3.min.js" charset="utf-8"></script>
+
+
+    <script src="./scripts/sidetoolbar.js" charset="utf-8"></script>
+    <script>
+        $(function(){
+            // 返回顶部调用
+            $('#goTop').goTop()
+            // 展开效果调用
+            $('#toolBar').toolBarToogle();
+        })
+    </script>
+</body>
+</html>

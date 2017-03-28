@@ -1,0 +1,209 @@
+.side-tool-bar{
+    font-family: 'Microsoft Yahei';
+    position: fixed;
+    right: 0;
+    top: 50%;
+    margin-top: -200px;
+    font-size: 12px;
+    text-align: center;
+}
+.side-tool-bar .none{
+    display: none !important;
+}
+.side-tool-bar .blue-border{
+    border: 1px solid #3db1ea;
+    background: #fff;
+}
+.side-tool-bar .top-line{
+    border-top: 1px solid #d1d1d1;
+}
+.side-tool-bar .bottom-line{
+    border-bottom: 1px solid #d1d1d1;
+}
+.side-tool-bar .orange{color: #ff6800}
+.side-tool-bar .blue{color: #3db1ea}
+.side-tool-bar i{
+    margin: 5px auto;
+}
+.side-tool-bar p{
+    margin: 0;
+    color: #3db1ea;
+}
+.side-tool-bar .shop-cart{
+    width: 60px;
+    height: 60px;
+    border: 1px solid #ff6800;
+    position: relative;
+    cursor: pointer;
+}
+.side-tool-bar .shop-cart:hover .icon-cart{
+    background-position: 0 -30px;
+}
+.side-tool-bar .shop-cart:hover, .side-tool-bar .hot-active:hover{
+    background: #ff6800;
+}
+.side-tool-bar .online-connect:hover .f-i, .side-tool-bar .online-connect .active .f-i, .side-tool-bar .s-phone .active .t-i-i, .side-tool-bar .free-call:hover, .side-tool-bar .free-call .active .t-i-i{
+    background: #3db1ea;
+}
+.side-tool-bar .shop-cart:hover p, .side-tool-bar .hot-active:hover p, .side-tool-bar .free-call:hover p, .side-tool-bar .online-connect:hover .f-i p, .side-tool-bar .online-connect .active .f-i p, .side-tool-bar .s-phone .active .t-i-i p, .side-tool-bar .free-call .active .t-i-i p{
+    color: #fff;
+}
+.side-tool-bar .shop-cart .cart-num{
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    top: -12px;
+    left: -12px;
+    border-radius: 50%;
+    background: #ff6800;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+}
+.side-tool-bar .tool-bar{
+    width: 60px;
+    margin: 10px 0 0 0;
+    border: 1px solid #d1d1d1;
+}
+.side-tool-bar .tool-item{
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    float: left;
+}
+.side-tool-bar .tool-item .t-i-i{
+    width: 60px;
+    height: 60px;
+}
+.side-tool-bar .online-connect:hover .icon-connect, .side-tool-bar .online-connect .active .f-i .icon-connect{
+    background-position: -40px -30px;
+}
+.side-tool-bar .s-phone:hover .icon-phone, .side-tool-bar .s-phone .active .icon-phone{
+    background-position: -80px -30px;
+}
+.side-tool-bar .online-connect .active, .side-tool-bar .free-call .active{
+    margin-top: -1px;
+    border: 1px solid #fff;
+}
+.side-tool-bar .online-connect, .side-tool-bar .s-phone{
+    position: relative;
+}
+.side-tool-bar .online-connect .t-i{
+    width: 186px;
+    position: absolute
+}
+.side-tool-bar .s-phone .p-t-i{
+    width: 221px;
+    height: 60px;
+    position: absolute
+}
+.side-tool-bar .s-phone .p-t-i .p-t-i-i {
+    padding-left: 10px;
+    padding-right: 20px;
+    height: 60px;
+    background: #3db1ea;
+    color: #fff;
+    text-align: left;
+    display: none;
+    border-left: 1px solid #2c9ed6;
+}
+.side-tool-bar .s-phone .p-t-i .p-t-i-i h3{
+    font-size: 12px;
+    margin: 10px 0 0 0;
+}
+.side-tool-bar .s-phone .p-t-i .p-t-i-i p{
+    font-size: 18px;
+    margin: 0;
+    color: #fff;
+}
+.side-tool-bar .f-s{
+    width: 120px;
+    height: 59px;
+    background: url(../images/side-arrow-r.png) #fff no-repeat left center;
+    border: 1px solid #2c9ed6;
+    padding-left: 4px;
+    display: none;
+}
+.side-tool-bar .f-s .t-i-i{
+    height: 59px;
+}
+.side-tool-bar .f-s .t-i-i:hover{
+    background: #f1faff;
+}
+.side-tool-bar .hot-active{
+    position: relative;
+}
+.side-tool-bar .hot-active:hover .icon-hot-active{
+    background-position: -120px -30px;
+}
+.side-tool-bar .banner{
+    position: absolute;
+    right: 60px;
+    top: -50px;
+    display: none;
+    z-index: 9
+}
+.side-tool-bar .banner img{
+    width: 200px;
+}
+.side-tool-bar .new-icon{
+    display: block;
+    width: 23px;
+    height: 19px;
+    background: url(../images/sidetoolbar.png) no-repeat 0 -60px;
+    position: absolute;
+    top: 0;
+    left: -5px;
+}
+.side-tool-bar .free-call{
+    position: relative;
+}
+.side-tool-bar .free-call .f-t-i{
+    width: 292px;
+    position: absolute;
+}
+.side-tool-bar .free-call .f-t-i-i{
+    width: 230px;
+    height: 58px;
+    border: 1px solid #2c9ed6;
+    display: none;
+    background: url(../images/side-arrow-r.png) #fff no-repeat left center;
+}
+.side-tool-bar .free-call .mobile-line{
+    padding: 5px;
+}
+.side-tool-bar .free-call .mobile-line input{
+    height: 18px;
+    line-height: 18px;
+    padding: 0 5px;
+    text-align: left;
+}
+.side-tool-bar .button{
+    width: 80px;
+    height: 12px;
+    line-height: 12px;
+    margin-left: 76px;
+    padding: 5px 10px;
+    background: #2c9ed6;
+    color: #fff;
+}
+.side-tool-bar .free-call:hover .icon-free-call, .side-tool-bar .free-call .active .icon-free-call{
+    background-position: -160px -30px;
+}
+
+.side-tool-bar .icon{
+    display: block;
+    width: 40px;
+    height: 30px;
+    background-image: url(../images/sidetoolbar.png);
+    background-repeat: no-repeat;
+}
+.icon-cart{background-position: 0 0}
+.icon-connect{background-position: -40px 0}
+.icon-phone{background-position: -80px 0}
+.icon-hot-active{background-position: -120px 0}
+.icon-free-call{background-position: -160px 0}
+.icon-to-top{background-position: -200px 0}
+.icon-qq{background-position: -80px -60px}
+.icon-online{background-position: -80px -90px}

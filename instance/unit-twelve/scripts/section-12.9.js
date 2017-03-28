@@ -15,7 +15,7 @@
             return element.substring(len)
         })
     }
-
+    
     /**
     * 兼容所有模块化规范，应用到所有环境
     */
