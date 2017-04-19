@@ -14,8 +14,8 @@
         $w.scroll(function(e){
             var sc = $w.scrollTop()
 
-            if(sc > 100) $ele.removeClass('none')
-            else $ele.addClass('none')
+            if(sc > 100) $ele.removeClass('go-top-none')
+            else $ele.addClass('go-top-none')
         })
         $ele.click(function(event) {
             $('body, html').animate({
@@ -57,12 +57,11 @@
         })
 
         // 热门活动
-        $hotActive.on('mouseenter', function(){
-            $hotActive.find('.new-icon').hide()
-            $hotActive.find('.banner').show()
-        }).on('mouseleave', function() {
-            $hotActive.find('.new-icon').show()
-            $hotActive.find('.banner').hide()
+        publicToogleFn({
+            $ele: $hotActive,
+            hideNew: true,
+            sonClass: '.h-a-i',
+            toogleClass: '.h-a-i-i'
         })
 
         // 免费回呼
@@ -77,6 +76,7 @@
          * 公共伸缩函数
          * @param obj {object}
          * @param obj.$ele {object} 最外层jquey对象
+         * @param obj.hideNew {boolean} 隐藏提示图标
          * @param obj.sonClass {string} 子元素
          * @param obj.toogleClass {string} 显示隐藏元素
          * $param obj.needhide {boolean} 是否用隐藏
@@ -87,6 +87,7 @@
                 left = $toogleClass.outerWidth();
 
             $sonClass.on('mouseenter', function(){
+                obj.hideNew && $sonClass.find('.new-icon').hide()
                 $toogleClass.show()
                 $sonClass.stop().animate({
                     left: -left
@@ -99,6 +100,7 @@
                     if(obj.needhide !== false){
                         $toogleClass.hide()
                     }
+                    obj.hideNew && $sonClass.find('.new-icon').show()
                 })
             })
         }

@@ -2,12 +2,13 @@
     font-family: 'Microsoft Yahei';
     position: fixed;
     right: 0;
+    z-index: 9999;
     top: 50%;
     margin-top: -200px;
     font-size: 12px;
     text-align: center;
 }
-.side-tool-bar .none{
+.side-tool-bar .none, .go-top-none{
     display: none !important;
 }
 .side-tool-bar .blue-border{
@@ -35,17 +36,18 @@
     border: 1px solid #ff6800;
     position: relative;
     cursor: pointer;
+    background: #fff;
 }
 .side-tool-bar .shop-cart:hover .icon-cart{
     background-position: 0 -30px;
 }
-.side-tool-bar .shop-cart:hover, .side-tool-bar .hot-active:hover{
+.side-tool-bar .shop-cart:hover, .side-tool-bar .hot-active .active .h-a-f-i{
     background: #ff6800;
 }
 .side-tool-bar .online-connect:hover .f-i, .side-tool-bar .online-connect .active .f-i, .side-tool-bar .s-phone .active .t-i-i, .side-tool-bar .free-call:hover, .side-tool-bar .free-call .active .t-i-i{
     background: #3db1ea;
 }
-.side-tool-bar .shop-cart:hover p, .side-tool-bar .hot-active:hover p, .side-tool-bar .free-call:hover p, .side-tool-bar .online-connect:hover .f-i p, .side-tool-bar .online-connect .active .f-i p, .side-tool-bar .s-phone .active .t-i-i p, .side-tool-bar .free-call .active .t-i-i p{
+.side-tool-bar .shop-cart:hover p, .side-tool-bar .hot-active:hover p, .side-tool-bar .free-call:hover p, .side-tool-bar .online-connect:hover .f-i p, .side-tool-bar .online-connect .active .f-i p, .side-tool-bar .s-phone .active .t-i-i p, .side-tool-bar .free-call .active .t-i-i p, .side-tool-bar .hot-active .active .h-a-f-i p{
     color: #fff;
 }
 .side-tool-bar .shop-cart .cart-num{
@@ -65,6 +67,7 @@
     width: 60px;
     margin: 10px 0 0 0;
     border: 1px solid #d1d1d1;
+    background: #fff;
 }
 .side-tool-bar .tool-item{
     cursor: pointer;
@@ -82,9 +85,14 @@
 .side-tool-bar .s-phone:hover .icon-phone, .side-tool-bar .s-phone .active .icon-phone{
     background-position: -80px -30px;
 }
-.side-tool-bar .online-connect .active, .side-tool-bar .free-call .active{
+.side-tool-bar .online-connect .active, .side-tool-bar .s-phone .active{
     margin-top: -1px;
-    border: 1px solid #fff;
+}
+.side-tool-bar .online-connect .f-i{
+    border-bottom: 1px solid #d1d1d1;
+}
+.side-tool-bar .online-connect .active .f-i{
+    border-bottom: 1px solid #3db1ea;
 }
 .side-tool-bar .online-connect, .side-tool-bar .s-phone{
     position: relative;
@@ -97,6 +105,12 @@
     width: 221px;
     height: 60px;
     position: absolute
+}
+.side-tool-bar .s-phone .t-i-i{
+    border-bottom: 1px solid #d1d1d1;
+}
+.side-tool-bar .s-phone .active .t-i-i{
+    border-bottom: none;
 }
 .side-tool-bar .s-phone .p-t-i .p-t-i-i {
     padding-left: 10px;
@@ -133,8 +147,53 @@
 }
 .side-tool-bar .hot-active{
     position: relative;
+    border-bottom: 1px solid #d1d1d1;
 }
-.side-tool-bar .hot-active:hover .icon-hot-active{
+.side-tool-bar .hot-active .h-a-i{
+    width: 300px;
+    height: 60px;
+    position: absolute;
+}
+.side-tool-bar .hot-active .h-a-f-i{
+    width: 60px;
+    height: 60px;
+}
+.side-tool-bar .hot-active .active .h-a-f-i{
+    border-bottom: 2px solid #ff6800;
+}
+.side-tool-bar .hot-active .h-a-i-i{
+    width: 200px;
+    height: 60px;
+    border: 1px solid #d1d1d1;
+    background: #fff;
+}
+.side-tool-bar .hot-active .active .h-a-i-i{
+    border: 1px solid #ff6800;
+}
+.side-tool-bar .hot-active .h-a-i-i ul{
+    padding: 5px 20px;
+    margin: 0;
+}
+.side-tool-bar .hot-active .h-a-i-i ul li{
+    height: 25px;
+    line-height: 25px;
+    overflow: hidden;
+    text-align: left;
+    list-style-type: none;
+    padding-left: 10px;
+    background: url(../images/sidetoolbar.png) no-repeat -200px -70px;
+}
+.side-tool-bar .hot-active .h-a-i-i ul li a{
+    color: #666;
+}
+.side-tool-bar .hot-active .h-a-i-i ul li a:hover{
+    color: #2c9ed6;
+    text-decoration: underline;
+}
+.side-tool-bar .hot-active:hover .h-a-i, .side-tool-bar .hot-active .active{
+    margin-top: -1px;
+}
+.side-tool-bar .hot-active:hover .icon-hot-active, .side-tool-bar .hot-active .active .icon-hot-active{
     background-position: -120px -30px;
 }
 .side-tool-bar .banner{
@@ -146,6 +205,11 @@
 }
 .side-tool-bar .banner img{
     width: 200px;
+}
+.side-tool-bar .banner .zhankai{
+    background: url(../images/activity-orangeT4.png) 0 top no-repeat;
+    padding-top: 30px;
+    text-align: center;
 }
 .side-tool-bar .new-icon{
     display: block;
@@ -163,12 +227,23 @@
     width: 292px;
     position: absolute;
 }
+.side-tool-bar .free-call .f-t-i .t-i-i{
+    height: 62px;
+}
 .side-tool-bar .free-call .f-t-i-i{
     width: 230px;
-    height: 58px;
-    border: 1px solid #2c9ed6;
+    height: 60px;
+    border: none;
     display: none;
     background: url(../images/side-arrow-r.png) #fff no-repeat left center;
+}
+
+
+.side-tool-bar .free-call .f-t-i-i{
+    border: 1px solid #d1d1d1;
+}
+.side-tool-bar .free-call .active .f-t-i-i{
+    border: 1px solid #2c9ed6;
 }
 .side-tool-bar .free-call .mobile-line{
     padding: 5px;
@@ -191,13 +266,27 @@
 .side-tool-bar .free-call:hover .icon-free-call, .side-tool-bar .free-call .active .icon-free-call{
     background-position: -160px -30px;
 }
-
-.side-tool-bar .icon{
+.side-tool-bar a{
+    text-decoration: none;
+}
+.side-tool-bar .icon, .go-top .icon{
     display: block;
     width: 40px;
     height: 30px;
     background-image: url(../images/sidetoolbar.png);
     background-repeat: no-repeat;
+}
+.go-top{
+    width: 60px;
+    height: 60px;
+    background: url(../images/top2.png) no-repeat #e2e2e2 center center;
+    position: fixed;
+    float: left;
+    bottom: 70px;
+    right: 0;
+}
+.go-top:hover{
+    background-color: #9a9a9a;
 }
 .icon-cart{background-position: 0 0}
 .icon-connect{background-position: -40px 0}
