@@ -1,4 +1,4 @@
-/* 
+/*
 * @Author: ocean
 * @Date:   2015-06-28 19:33:40
 * @Last Modified by:   ocean
@@ -31,7 +31,7 @@ function alertmess(str){
             'text-align' : 'center',
             'padding' : '5px 10px'
         }).animate({'opacity' : 1});
-    
+
         setTimeout(function(){
             $('.mess').remove();
         }, 1500);
@@ -117,4 +117,18 @@ function resizeImg(bgImg) {
             height: winheight+'px'
         });
     }
+}
+
+/**
+ * canvas 功能检测
+ */
+function isCanvasSupported(){
+    var elem = document.createElement('canvas')
+    return !!(elem.getContext && elem.getContext('2d'))
+}
+/**
+ * navigator.geolocation 功能检测
+ */
+function isGeolocationSupported(){
+    return navigator.geolocation
 }

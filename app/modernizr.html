@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+
+
+
+    <script src="/bower_components/modernizr/dist/modernizr-build.js" charset="utf-8"></script>
+
+    <script type="text/javascript">
+        console.log(Modernizr);
+
+        for (var i in Modernizr) {
+            var v = !Modernizr[i]
+            if (v) {
+                console.log(i, !v);
+            }
+        }
+    </script>
+</body>
+
+</html>

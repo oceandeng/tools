@@ -1,4 +1,4 @@
-/* 
+/*
 * @Author: ocean
 * @Date:   2015-06-29 10:14:28
 * @Last Modified by:   ocean_deng
@@ -6,16 +6,16 @@
 */
 
 'use strict';
-var ua = window.navigator.userAgent.toLowerCase();
+var UA = window.navigator.userAgent.toLowerCase();
 
 var oTools = {
     charset: 'utf-8',
     // 版本检测
-	isAndroid: /android/i.test(ua),
-	isIOS: /iphone|ipad|ipod/i.test(ua),
-	isWechat: /MicroMessenger/i.test(ua),
+	isAndroid: /android/i.test(UA),
+	isIOS: /iphone|ipad|ipod/i.test(UA),
+	isWechat: /MicroMessenger/i.test(UA),
     // 检测是否支持 touch 事件
-    clickEvent: "ontouchstart" in document.documentElement ? "tap" : "click",
+    clickEvent: "ontouchstart" in document ? "tap" : "click",
     ranNum: Math.ceil(Math.random() * 1e10),
     timeNum: Date.now(),
 
@@ -125,14 +125,10 @@ var oTools = {
     },
     // 判断是否是空对象
     isObjectEmpty: function(obj){
-        for (i in obj){
+        for (var i in obj){
             return false
         }
         return true;
-    },
-    isEmptyArray: function(arr){
-        arr.splice(0, arr.length);
-        return arr;
     },
     // 字符串长度，中英文都是1个字符
     strlength: function(str) {
@@ -234,72 +230,10 @@ var OO = {
     }
 };
 
-//html5 动画
-// window.requestAnimationFrame = (function() {
-//     return window.requestAnimationFrame ||
-//         window.webkitRequestAnimationFrame ||
-//         window.mozRequestAnimationFrame ||
-//         window.oRequestAnimationFrame ||
-//         // if all else fails, use setTimeout
-//         function(callback) {
-//             return window.setTimeout(callback, 1000 / 60); // shoot for 60 fps
-//         };
-// })();
-
-// window.cancelAnimationFrame = (function() {
-//     return window.cancelAnimationFrame ||
-//         window.webkitCancelAnimationFrame ||
-//         window.mozCancelAnimationFrame ||
-//         window.oCancelAnimationFrame ||
-//         function(id) {
-//             window.clearTimeout(id);
-//         };
-// })();
-
-
-/* requestAnimationFrame.js
- * by zhangxinxu 2013-09-30
-*/
-(function() {
-    var lastTime = 0;
-    var vendors = ['webkit', 'moz'];
-    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] ||    // name has changed in Webkit
-                                      window[vendors[x] + 'CancelRequestAnimationFrame'];
-    }
-
-    if (!window.requestAnimationFrame) {
-        window.requestAnimationFrame = function(callback, element) {
-            var currTime = new Date().getTime();
-            var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
-            var id = window.setTimeout(function() {
-                callback(currTime + timeToCall);
-            }, timeToCall);
-            lastTime = currTime + timeToCall;
-            return id;
-        };
-    }
-    if (!window.cancelAnimationFrame) {
-        window.cancelAnimationFrame = function(id) {
-            clearTimeout(id);
-        };
-    }
-})();
-
 // html5 audio
 window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext;
 
 // 页面data-href跳转事件
-// $(function(){
-//     var dataHrefEle = $("*[data-href]");
-//     dataHrefEle.each(function(k, v){
-//         var $_this = $(this);
-//         $_this.on(oTools.clickEvent, function(){
-//             location.href = $_this.attr('data-href');
-//         });
-//     })
-// });
 $(function(){
     $(document).on(oTools.clickEvent, '*[data-href]', function(){
         var $_this = $(this);
