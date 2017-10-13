@@ -14,6 +14,7 @@ var oTools = {
 	isAndroid: /android/i.test(UA),
 	isIOS: /iphone|ipad|ipod/i.test(UA),
 	isWechat: /MicroMessenger/i.test(UA),
+    touchDevice: !!("ontouchstart" in document),
     // 检测是否支持 touch 事件
     clickEvent: "ontouchstart" in document ? "tap" : "click",
     ranNum: Math.ceil(Math.random() * 1e10),
