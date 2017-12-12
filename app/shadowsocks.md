@@ -1,8 +1,7 @@
-Congratulations, Shadowsocks-go install completed!
-Your Server IP:  104.131.116.127
-Your Server Port:  8989
-Your Password:  ********
-Your Local Port:  1080
+Congratulations, Shadowsocks-go server install completed!
+Your Server IP        :  47.74.155.204
+Your Server Port      :  8989
+Your Password         :  ********
 Your Encryption Method:  aes-256-cfb
 
 Welcome to visit:https://teddysun.com/392.html
